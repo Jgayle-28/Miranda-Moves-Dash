@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://j123:j123@miranda-dashboard-e9qu5.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "secret"
+}
