@@ -11,7 +11,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  TOGGLE_MODAL
 } from '../types';
 
 const AuthState = props => {
@@ -20,7 +21,8 @@ const AuthState = props => {
     isAuthenticated: null,
     loading: true,
     user: null,
-    error: null
+    error: null,
+    modalOpen: false
   };
 
   const [state, dispatch] = useReducer(authReducer, initalState);
@@ -91,6 +93,10 @@ const AuthState = props => {
   // Clear errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
+  // Toggle Modal open and close
+  const toggleModal = modalStatus =>
+    dispatch({ type: TOGGLE_MODAL, payload: modalStatus });
+
   return (
     <AuthContext.Provider
       value={{
@@ -99,11 +105,13 @@ const AuthState = props => {
         loading: state.loading,
         user: state.user,
         error: state.error,
+        modalOpen: state.modalOpen,
         registerUser,
         loadUser,
         loginUser,
         logoutUser,
-        clearErrors
+        clearErrors,
+        toggleModal
       }}
     >
       {props.children}

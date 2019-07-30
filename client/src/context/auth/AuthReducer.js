@@ -6,7 +6,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  TOGGLE_MODAL
 } from '../types';
 
 export default (state, action) => {
@@ -15,7 +16,7 @@ export default (state, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        laoding: false,
+        loading: false,
         user: action.payload
       };
 
@@ -47,6 +48,12 @@ export default (state, action) => {
       return {
         ...state,
         error: null
+      };
+
+    case TOGGLE_MODAL:
+      return {
+        ...state,
+        modalOpen: action.payload
       };
 
     default:

@@ -5,11 +5,15 @@ const ContactSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users'
   },
-  firstname: {
+  contact_type: {
     type: String,
     required: true
   },
-  lastname: {
+  first_name: {
+    type: String,
+    required: true
+  },
+  last_name: {
     type: String
   },
   email: {
@@ -19,21 +23,36 @@ const ContactSchema = mongoose.Schema({
   phone: {
     type: String
   },
-  phonetype: {
+  phone_type: {
     type: String
   },
-  phoneext: {
+  phone_ext: {
     type: String
   },
-  referedby: {
+  refered_by: {
     type: String
   },
-  movedate: {
+  move_date: {
     type: Date
   },
-  contactcomments: {
+  contact_comments: {
     type: String
   },
+  estimate_time: {
+    type: String
+  },
+  estimate_date: {
+    type: Date
+  },
+  target_movedate: {
+    type:Date,
+  },
+  pu_address: {
+    type: String
+  },
+  do_address: {
+    type: String
+  }
   // begin estimate info
   // moveinfo: {
   //   from: {

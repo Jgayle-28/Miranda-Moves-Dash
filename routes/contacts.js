@@ -29,7 +29,7 @@ router.post(
   [
     auth,
     [
-      check('firstname', 'Name is required')
+      check('first_name', 'Name is required')
         .not()
         .isEmpty(),
       check('email', 'Email is required')
@@ -47,29 +47,41 @@ router.post(
 
     // if there are no errors
     const {
-      firstname,
-      lastname,
+      opportunity_type,
+      first_name,
+      last_name,
       email,
       phone,
-      phonetype,
-      phoneext,
-      referedby,
-      movedate,
-      contactcomments
+      phone_type,
+      phone_ext,
+      refered_by,
+      move_date,
+      contact_comments,
+      estimate_time,
+      estimate_date,
+      target_movedate,
+      pu_address,
+      do_address
     } = req.body; //destructure from the body of the request
 
     try {
       // Create a new contact
       const newContact = new Contact({
-        firstname,
-        lastname,
+        opportunity_type,
+        first_name,
+        last_name,
         email,
         phone,
-        phonetype,
-        phoneext,
-        referedby,
-        movedate,
-        contactcomments,
+        phone_type,
+        phone_ext,
+        refered_by,
+        move_date,
+        contact_comments,
+        estimate_time,
+        estimate_date,
+        target_movedate,
+        pu_address,
+        do_address,
         user: req.user.id
       });
 
@@ -90,28 +102,40 @@ router.post(
 //@access Private
 router.put('/:id', auth, async (req, res) => {
   const {
-    firstname,
-    lastname,
+    opportunity_type,
+    first_name,
+    last_name,
     email,
     phone,
-    phonetype,
-    phoneext,
-    referedby,
-    movedate,
-    contactcomments
+    phone_type,
+    phone_ext,
+    refered_by,
+    move_date,
+    contact_comments,
+    estimate_time,
+    estimate_date,
+    target_movedate,
+    pu_address,
+    do_address
   } = req.body; //destructure from the body of the request
 
   // Build a contact object
   const contactFields = {};
-  if (firstname) contactFields.firstname = firstname;
-  if (lastname) contactFields.lastname = lastname;
+  if (opportunity_type) contactFields.opportunity_type = opportunity_type;
+  if (first_name) contactFields.first_name = first_name;
+  if (last_name) contactFields.last_name = last_name;
   if (email) contactFields.email = email;
   if (phone) contactFields.phone = phone;
-  if (phonetype) contactFields.phonetype = phonetype;
-  if (phoneext) contactFields.phoneext = phoneext;
-  if (referedby) contactFields.referedby = referedby;
-  if (movedate) contactFields.movedate = movedate;
-  if (contactcomments) contactFields.contactcomments = contactcomments;
+  if (phone_type) contactFields.phone_type = phone_type;
+  if (phone_ext) contactFields.phone_ext = phone_ext;
+  if (refered_by) contactFields.referedby = refered_by;
+  if (move_date) contactFields.moved_ate = moved_ate;
+  if (contact_comments) contactFields.contact_comments = contact_comments;
+  if (estimate_time) contactFields.estimate_time = estimate_time;
+  if (estimate_date) contactFields.estimate_date = estimate_date;
+  if (target_movedate) contactFields.target_movedate = target_movedate;
+  if (pu_address) contactFields.pu_address = pu_address;
+  if (do_address) contactFields.do_address = do_address;
 
   try {
     // find the contact by id

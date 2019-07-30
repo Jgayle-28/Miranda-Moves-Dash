@@ -23,3 +23,5 @@ export const LOGOUT = 'LOGOUT';
 export const CONTACT_ERROR = 'CONTACT_ERROR';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const AUTH_ERROR = 'AUTH_ERROR';
+// UTILITIES
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';

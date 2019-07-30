@@ -1,6 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/AuthContext';
 import AlertContext from '../../context/alert/AlertContext';
+import CustomInput from '../../components/components/CustomInput/CustomInput.jsx';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Email from '@material-ui/icons/Email';
+import Lock from '@material-ui/icons/Lock';
+import Icon from '@material-ui/core/Icon';
+import loginPageStyle from '../../assets/jss/material-dashboard-pro-react/views/loginPageStyle.jsx';
 
 const Login = props => {
   // bring in the context
@@ -49,31 +56,64 @@ const Login = props => {
     <>
       <div className="form-container">
         <h1>
-          Account <span className="text-primary">Login</span>
+          Account <span style={{ color: '#3F729B' }}>Login</span>
         </h1>
         <form onSubmit={onSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              name="email"
-              vlaue={email}
+            <CustomInput
+              navy
+              // error={this.state.emailBool}
+              // helpText={errors.email}
+              labelText="First Name"
+              id="firstname"
               onChange={onChange}
+              formControlProps={{
+                fullWidth: true
+              }}
+              inputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Email className={props.classes.inputAdornmentIcon} />
+                  </InputAdornment>
+                ),
+                type: 'email',
+                // placeholder: 'First Name',
+                name: 'email',
+                value: email,
+                onChange: onChange
+              }}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input
+            <CustomInput
+              navy
+              // error={this.state.passwordBool}
+              // helpText={errors.password}
               type="password"
-              name="password"
-              vlaue={password}
-              onChange={onChange}
+              labelText="Password"
+              id="password"
+              formControlProps={{
+                fullWidth: true
+              }}
+              inputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Lock className={props.classes.inputAdornmentIcon} />
+                  </InputAdornment>
+                ),
+                type: 'password',
+                placeholder: 'Password...',
+                name: 'password',
+                value: password,
+                onChange: onChange
+              }}
             />
           </div>
           <input
+            style={{ backgroundColor: '#78909c' }}
             type="submit"
             value="Login"
-            className="btn btn-primary btn-block"
+            className="btn  btn-block"
           />
         </form>
       </div>
@@ -81,4 +121,4 @@ const Login = props => {
   );
 };
 
-export default Login;
+export default withStyles(loginPageStyle)(Login);
