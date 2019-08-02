@@ -18,9 +18,9 @@ const Navbar = ({ title, icon }) => {
 
   const authLinks = (
     <>
-      <li style={{ marginRight: '.5rem' }}>
+      {/* <li style={{ marginRight: '.5rem' }}>
         <Link to="/altlayout">Alternate Layout</Link>
-      </li>
+      </li> */}
       {/*
       <li>
         <Link to="/">
@@ -68,7 +68,7 @@ Navbar.propTypes = {
   icon: PropTypes.string
 };
 Navbar.defaultProps = {
-  title: 'Move keeper',
+  title: 'Opportunity keeper',
   icon: 'fas fa-address-card'
 };
 

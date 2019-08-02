@@ -22,41 +22,59 @@ const ContactForm = () => {
       setContact(contactContext.current);
     } else {
       setContact({
-        firstname: '',
-        lastname: '',
+        opportunity_type: '',
+        first_name: '',
+        last_name: '',
         email: '',
         phone: '',
-        phoneext: '',
-        phonetype: '',
-        referedby: '',
-        movedate: '',
-        contactcomments: ''
+        phone_type: '',
+        phone_ext: '',
+        refered_by: '',
+        move_date: '',
+        contact_comments: '',
+        estimate_time: '',
+        estimate_date: '',
+        target_movedate: '',
+        pu_address: '',
+        do_address: ''
       });
     }
   }, [contactContext, contactContext.current]);
   const [selectedDate, handleDateChange] = useState(new Date());
   const [contact, setContact] = useState({
-    firstname: '',
-    lastname: '',
+    opportunity_type: '',
+    first_name: '',
+    last_name: '',
     email: '',
     phone: '',
-    phoneext: '',
-    phonetype: '',
-    referedby: '',
-    movedate: '',
-    contactcomments: ''
+    phone_type: '',
+    phone_ext: '',
+    refered_by: '',
+    move_date: '',
+    contact_comments: '',
+    estimate_time: '',
+    estimate_date: '',
+    target_movedate: '',
+    pu_address: '',
+    do_address: ''
   });
 
   const {
-    firstname,
-    lastname,
+    opportunity_type,
+    first_name,
+    last_name,
     email,
     phone,
-    phonetype,
-    phoneext,
-    referedby,
-    movedate,
-    contactcomments
+    phone_type,
+    phone_ext,
+    refered_by,
+    move_date,
+    contact_comments,
+    estimate_time,
+    estimate_date,
+    target_movedate,
+    pu_address,
+    do_address
   } = contact;
 
   const onChange = e =>
@@ -65,8 +83,8 @@ const ContactForm = () => {
   const onSubmit = e => {
     e.preventDefault();
     if (contactContext.current === null) {
-      if (contact.movedate === '') {
-        contact.movedate = selectedDate;
+      if (contact.move_date === '') {
+        contact.move_date = selectedDate;
       }
 
       contactContext.addContact(contact);
@@ -78,15 +96,21 @@ const ContactForm = () => {
     }
 
     setContact({
-      firstname: '',
-      lastname: '',
+      opportunity_type: '',
+      first_name: '',
+      last_name: '',
       email: '',
       phone: '',
-      phoneext: '',
-      phonetype: '',
-      referedby: '',
-      movedate: '',
-      contactcomments: ''
+      phone_type: '',
+      phone_ext: '',
+      refered_by: '',
+      move_date: '',
+      contact_comments: '',
+      estimate_time: '',
+      estimate_date: '',
+      target_movedate: '',
+      pu_address: '',
+      do_address: ''
     });
   };
 
@@ -122,7 +146,9 @@ const ContactForm = () => {
               contactContext.current ? 'fas fa-user-edit' : 'fas fa-user-plus'
             }
           />{' '}
-          {contactContext.current ? ' Edit Contact' : ' Add New Contact'}
+          {contactContext.current
+            ? ' Edit Opportunity'
+            : ' Add New Opportunity'}
         </h2>
         <div className="grid-2">
           <div>
@@ -131,7 +157,7 @@ const ContactForm = () => {
               // error={this.state.emailBool}
               // helpText={errors.email}
               labelText="First Name"
-              id="firstname"
+              id="first_name"
               onChange={onChange}
               formControlProps={{
                 fullWidth: true
@@ -144,8 +170,8 @@ const ContactForm = () => {
                 // ),
                 type: 'text',
                 // placeholder: 'First Name',
-                name: 'firstname',
-                value: firstname,
+                name: 'first_name',
+                value: first_name,
                 onChange: onChange
               }}
             />
@@ -155,7 +181,7 @@ const ContactForm = () => {
               // error={this.state.emailBool}
               // helpText={errors.email}
               labelText="Last Name"
-              id="lastname"
+              id="last_name"
               onChange={onChange}
               formControlProps={{
                 fullWidth: true
@@ -168,8 +194,8 @@ const ContactForm = () => {
                 // ),
                 type: 'text',
                 // placeholder: 'First Name',
-                name: 'lastname',
-                value: lastname,
+                name: 'last_name',
+                value: last_name,
                 onChange: onChange
               }}
             />
@@ -201,7 +227,7 @@ const ContactForm = () => {
               // error={this.state.emailBool}
               // helpText={errors.email}
               labelText="Refered By"
-              id="refered by"
+              id="refered_by"
               onChange={onChange}
               formControlProps={{
                 fullWidth: true
@@ -214,8 +240,8 @@ const ContactForm = () => {
                 // ),
                 type: 'text',
                 // placeholder: 'First Name',
-                name: 'referedby',
-                value: referedby,
+                name: 'refered_by',
+                value: refered_by,
                 onChange: onChange
               }}
             />
@@ -249,9 +275,9 @@ const ContactForm = () => {
               fullWidth
               onChange={onChange}
               menuItems={type_list}
-              selectedValue={phonetype}
+              selectedValue={phone_type}
               firstItem={'Select Phone Type'}
-              name="phonetype"
+              name="phone_type"
               label={'Select Phone Type'}
             />
             <CustomInput
@@ -259,7 +285,7 @@ const ContactForm = () => {
               // error={this.state.emailBool}
               // helpText={errors.email}
               labelText="Phone Extension"
-              id="phoneext"
+              id="phone_ext"
               onChange={onChange}
               formControlProps={{
                 fullWidth: true
@@ -272,8 +298,8 @@ const ContactForm = () => {
                 // ),
                 type: 'text',
                 // placeholder: 'First Name',
-                name: 'phoneext',
-                value: phoneext,
+                name: 'phone_ext',
+                value: phone_ext,
                 onChange: onChange
               }}
             />
@@ -298,7 +324,7 @@ const ContactForm = () => {
             // error={this.state.emailBool}
             // helpText={errors.email}
             labelText="Customer Comments"
-            id="contactcomments"
+            id="contact_comments"
             onChange={onChange}
             formControlProps={{
               fullWidth: true
@@ -312,8 +338,8 @@ const ContactForm = () => {
               type: 'text',
               multiline: true,
               rows: 2,
-              name: 'contactcomments',
-              value: contactcomments,
+              name: 'contact_comments',
+              value: contact_comments,
               onChange: onChange
             }}
           />
@@ -400,7 +426,9 @@ const ContactForm = () => {
             style={{ backgroundColor: '#78909c', color: '#fff' }}
             type="submit"
             value={
-              contactContext.current ? ' Update Contact' : ' Add New Contact'
+              contactContext.current
+                ? ' Update Opportunity'
+                : ' Add New Opportunity'
             }
             className="btn btn-block"
           />

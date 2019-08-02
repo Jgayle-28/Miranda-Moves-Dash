@@ -3,9 +3,12 @@ import Contacts from '../contacts/Contacts';
 import ContactForm from '../contacts/ContactForm';
 import ContactFilter from '../contacts/ContactFilter';
 import AuthContext from '../../context/auth/AuthContext';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
 
-const Home = () => {
+const Home = props => {
   const authContext = useContext(AuthContext);
+  const { modalOpen, toggleModal } = authContext;
 
   useEffect(() => {
     authContext.loadUser();
@@ -13,15 +16,19 @@ const Home = () => {
   }, []);
   return (
     <>
-      <div className="grid-2">
-        <div>
+      {/* <ContactFilter /> */}
+      <Contacts />
+
+      {/* MODAL */}
+      <Dialog
+        open={modalOpen}
+        onClose={() => toggleModal(false)}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogContent>
           <ContactForm />
-        </div>
-        <div>
-          <ContactFilter />
-          <Contacts />
-        </div>
-      </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

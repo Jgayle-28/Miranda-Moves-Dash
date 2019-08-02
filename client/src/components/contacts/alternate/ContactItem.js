@@ -13,15 +13,21 @@ const ContactItem = ({ contact }) => {
 
   const {
     _id,
-    firstname,
-    lastname,
+    opportunity_type,
+    first_name,
+    last_name,
     email,
     phone,
-    phoneext,
-    phonetype,
-    referedby,
-    movedate,
-    contactcomments
+    phone_type,
+    phone_ext,
+    refered_by,
+    move_date,
+    contact_comments,
+    estimate_time,
+    estimate_date,
+    target_movedate,
+    pu_address,
+    do_address
   } = contact;
 
   const onDelete = () => {
@@ -37,8 +43,8 @@ const ContactItem = ({ contact }) => {
     <>
       <div className="card bg-light">
         <h3 style={{ color: '#3F729B' }} className="text-left">
-          {firstname.charAt(0).toUpperCase() + firstname.slice(1)}{' '}
-          {lastname.charAt(0).toUpperCase() + lastname.slice(1)}
+          {first_name.charAt(0).toUpperCase() + first_name.slice(1)}{' '}
+          {last_name.charAt(0).toUpperCase() + last_name.slice(1)}
         </h3>
         <div className="grid-3">
           <div className="">
@@ -50,30 +56,30 @@ const ContactItem = ({ contact }) => {
               )}
               {phone && (
                 <li>
-                  <i className="fas fa-phone" /> {phone} / Ext: {phoneext} /{' '}
-                  {phonetype.charAt(0).toUpperCase() + phonetype.slice(1)}
+                  <i className="fas fa-phone" /> {phone} / Ext: {phone_ext} /{' '}
+                  {phone_type.charAt(0).toUpperCase() + phone_type.slice(1)}
                   {/* {phoneext && ` * ${phoneext}`}/ {phonetype} */}
                 </li>
               )}
-              {referedby && (
+              {refered_by && (
                 <li>
-                  <i className="fas fa-user-friends" /> Refered by: {referedby}
+                  <i className="fas fa-user-friends" /> Refered by: {refered_by}
                 </li>
               )}
             </ul>
           </div>
           <div className="">
             <ul className="list" style={{ color: '#3E4551' }}>
-              {movedate && (
+              {move_date && (
                 <li>
                   <i className="fas fa-truck-moving" />{' '}
-                  <Moment format="MM/DD/YYYY">{moment.utc(movedate)}</Moment>
+                  <Moment format="MM/DD/YYYY">{moment.utc(move_date)}</Moment>
                   {/* {movedate} */}
                 </li>
               )}
-              {contactcomments && (
+              {contact_comments && (
                 <li>
-                  <i className="fas fa-comment" /> {contactcomments}
+                  <i className="fas fa-comment" /> {contact_comments}
                 </li>
               )}
             </ul>

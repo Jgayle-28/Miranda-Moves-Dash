@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import history from './history';
+
 import PrivateRoute from './components/routing/PrivateRoute';
 
 import ContactState from './context/contact/ContactState';
@@ -25,28 +27,25 @@ import './App.css';
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
-
 const App = props => {
   return (
     <>
       <AuthState>
         <ContactState>
           <AlertState>
-            <Router>
+            <Router history={history}>
               <Navbar />
-              <div className="container">
-                <Alerts />
-                <Switch>
-                  {/* PRIMARY LAYOUT ROUTE */}
-                  <PrivateRoute exact path="/altlayout" component={Home} />
-                  <PrivateRoute exact path="/" component={Home1} />
-                  <PrivateRoute exact path="/estimate" component={Estimate} />
-                  <Route exact path="/about" component={About} />
-                  {/* Register & Login */}
-                  <Route exact path="/register" component={Register} />
-                  <Route exact path="/login" component={Login} />
-                </Switch>
-              </div>
+              {/* <div className="container"> */}
+              <Alerts />
+              <Switch>
+                <PrivateRoute exact path="/" component={Home} />
+                <PrivateRoute exact path="/estimate" component={Estimate} />
+                <Route exact path="/about" component={About} />
+                {/* Register & Login */}
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
+              </Switch>
+              {/* </div> */}
               <ButtonNav props={props} />
             </Router>
           </AlertState>
