@@ -1,28 +1,13 @@
-/*!
-
-=========================================================
-* Material Dashboard PRO React - v1.7.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-pro-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import Button from '../CustomButtons/Button.jsx';
 import Card from '../Card/Card.jsx';
+import GridContainer from '../Grid/GridContainer.jsx';
+import GridItem from '../Grid/GridItem.jsx';
 
 import wizardStyle from '../../../assets/jss/material-dashboard-pro-react/components/wizardStyle.jsx';
 
@@ -91,6 +76,7 @@ class Wizard extends React.Component {
                 ].sendState()
               }
             });
+            console.log('all states', { ...this.allStates });
           }
           if (
             this[this.props.steps[i].stepId].isValidated !== undefined &&
@@ -128,14 +114,17 @@ class Wizard extends React.Component {
         this[this.props.steps[this.state.currentStep].stepId].sendState !==
         undefined
       ) {
-        this.setState({
-          allStates: {
-            ...this.state.allStates,
-            [this.props.steps[this.state.currentStep].stepId]: this[
-              this.props.steps[this.state.currentStep].stepId
-            ].sendState()
-          }
-        });
+        this.setState(
+          {
+            allStates: {
+              ...this.state.allStates,
+              [this.props.steps[this.state.currentStep].stepId]: this[
+                this.props.steps[this.state.currentStep].stepId
+              ].sendState()
+            }
+          },
+          () => console.log('all states', this.state.allStates)
+        );
       }
       var key = this.state.currentStep + 1;
       this.setState({
@@ -152,14 +141,17 @@ class Wizard extends React.Component {
       this[this.props.steps[this.state.currentStep].stepId].sendState !==
       undefined
     ) {
-      this.setState({
-        allStates: {
-          ...this.state.allStates,
-          [this.props.steps[this.state.currentStep].stepId]: this[
-            this.props.steps[this.state.currentStep].stepId
-          ].sendState()
-        }
-      });
+      this.setState(
+        {
+          allStates: {
+            ...this.state.allStates,
+            [this.props.steps[this.state.currentStep].stepId]: this[
+              this.props.steps[this.state.currentStep].stepId
+            ].sendState()
+          }
+        },
+        () => console.log('all states', this.state.allStates)
+      );
     }
     var key = this.state.currentStep - 1;
     if (key >= 0) {
@@ -173,6 +165,7 @@ class Wizard extends React.Component {
     }
   }
   finishButtonClick() {
+    console.log(this.state.allStates);
     if (
       (this.props.validate === false &&
         this.props.finishButtonClick !== undefined) ||
@@ -197,6 +190,7 @@ class Wizard extends React.Component {
         },
         () => {
           this.props.finishButtonClick(this.state.allStates);
+          console.log('all states', this.state.allStates);
         }
       );
     }
@@ -249,93 +243,97 @@ class Wizard extends React.Component {
   render() {
     const { classes, title, subtitle, color, steps } = this.props;
     return (
-      <div className={classes.wizardContainer} ref={this.wizard}>
-        <Card className={classes.card}>
-          <div className={classes.wizardHeader}>
-            <h3 className={classes.title}>{title}</h3>
-            <h5 className={classes.subtitle}>{subtitle}</h5>
-          </div>
-          <div className={classes.wizardNavigation}>
-            <ul className={classes.nav}>
-              {steps.map((prop, key) => {
-                return (
-                  <li
-                    className={classes.steps}
-                    key={key}
-                    style={{ width: this.state.width }}
-                  >
-                    <a
-                      href="#pablo"
-                      className={classes.stepsAnchor}
-                      onClick={e => {
-                        e.preventDefault();
-                        this.navigationStepChange(key);
-                      }}
-                    >
-                      {prop.stepName}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-            <div
-              className={classes.movingTab + ' ' + classes[color]}
-              style={this.state.movingTabStyle}
-            >
-              {steps[this.state.currentStep].stepName}
-            </div>
-          </div>
-          <div className={classes.content}>
-            {steps.map((prop, key) => {
-              const stepContentClasses = cx({
-                [classes.stepContentActive]: this.state.currentStep === key,
-                [classes.stepContent]: this.state.currentStep !== key
-              });
-              return (
-                <div className={stepContentClasses} key={key}>
-                  <prop.stepComponent
-                    innerRef={node => (this[prop.stepId] = node)}
-                    allStates={this.state.allStates}
-                  />
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={12}>
+          <div className={classes.wizardContainer} ref={this.wizard}>
+            <Card className={classes.card}>
+              <div className={classes.wizardHeader}>
+                <h3 className={classes.title}>{title}</h3>
+                {/* <h5 className={classes.subtitle}>{subtitle}</h5> */}
+              </div>
+              <div className={classes.wizardNavigation}>
+                <ul className={classes.nav}>
+                  {steps.map((prop, key) => {
+                    return (
+                      <li
+                        className={classes.steps}
+                        key={key}
+                        style={{ width: this.state.width }}
+                      >
+                        <a
+                          href="#pablo"
+                          className={classes.stepsAnchor}
+                          onClick={e => {
+                            e.preventDefault();
+                            this.navigationStepChange(key);
+                          }}
+                        >
+                          {prop.stepName}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <div
+                  className={classes.movingTab + ' ' + classes[color]}
+                  style={this.state.movingTabStyle}
+                >
+                  {steps[this.state.currentStep].stepName}
                 </div>
-              );
-            })}
+              </div>
+              <div className={classes.content}>
+                {steps.map((prop, key) => {
+                  const stepContentClasses = cx({
+                    [classes.stepContentActive]: this.state.currentStep === key,
+                    [classes.stepContent]: this.state.currentStep !== key
+                  });
+                  return (
+                    <div className={stepContentClasses} key={key}>
+                      <prop.stepComponent
+                        innerRef={node => (this[prop.stepId] = node)}
+                        allStates={this.state.allStates}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+              <div className={classes.footer}>
+                <div className={classes.left}>
+                  {this.state.previousButton ? (
+                    <Button
+                      className={this.props.previousButtonClasses}
+                      onClick={() => this.previousButtonClick()}
+                    >
+                      {this.props.previousButtonText}
+                    </Button>
+                  ) : null}
+                </div>
+                <div className={classes.right}>
+                  {this.state.nextButton ? (
+                    <Button
+                      color="navy"
+                      className={this.props.nextButtonClasses}
+                      onClick={() => this.nextButtonClick()}
+                    >
+                      {this.props.nextButtonText}
+                    </Button>
+                  ) : null}
+                  {this.state.finishButton ? (
+                    <Button
+                      color="navy"
+                      className={this.finishButtonClasses}
+                      onClick={() => this.finishButtonClick()}
+                    >
+                      {this.props.finishButtonText}
+                    </Button>
+                  ) : null}
+                </div>
+                <div className={classes.clearfix} />
+              </div>
+            </Card>
           </div>
-          <div className={classes.footer}>
-            <div className={classes.left}>
-              {this.state.previousButton ? (
-                <Button
-                  className={this.props.previousButtonClasses}
-                  onClick={() => this.previousButtonClick()}
-                >
-                  {this.props.previousButtonText}
-                </Button>
-              ) : null}
-            </div>
-            <div className={classes.right}>
-              {this.state.nextButton ? (
-                <Button
-                  color="rose"
-                  className={this.props.nextButtonClasses}
-                  onClick={() => this.nextButtonClick()}
-                >
-                  {this.props.nextButtonText}
-                </Button>
-              ) : null}
-              {this.state.finishButton ? (
-                <Button
-                  color="rose"
-                  className={this.finishButtonClasses}
-                  onClick={() => this.finishButtonClick()}
-                >
-                  {this.props.finishButtonText}
-                </Button>
-              ) : null}
-            </div>
-            <div className={classes.clearfix} />
-          </div>
-        </Card>
-      </div>
+        </GridItem>
+      </GridContainer>
     );
   }
 }
@@ -343,7 +341,7 @@ class Wizard extends React.Component {
 Wizard.defaultProps = {
   color: 'rose',
   title: 'Here should go your title',
-  subtitle: 'And this would be your subtitle',
+  // subtitle: 'And this would be your subtitle',
   previousButtonText: 'Previous',
   previousButtonClasses: '',
   nextButtonClasses: '',
@@ -367,7 +365,8 @@ Wizard.propTypes = {
     'danger',
     'success',
     'info',
-    'rose'
+    'rose',
+    'navy'
   ]),
   title: PropTypes.string,
   subtitle: PropTypes.string,

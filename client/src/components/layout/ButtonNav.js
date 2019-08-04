@@ -13,9 +13,9 @@ const ButtonNav = props => {
       {isAuthenticated ? (
         <Fab
           // actionButtonStyles={actionButtonStyles}
-          position={{ bottom: 20, right: 20 }}
+          position={{ bottom: 10, right: 10 }}
           mainButtonStyles={{
-            backgroundColor: '#3F729B',
+            backgroundColor: '#01579b',
             width: 60,
             height: 60,
             borderRadius: 100

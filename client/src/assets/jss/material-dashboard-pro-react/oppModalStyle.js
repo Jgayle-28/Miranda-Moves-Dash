@@ -1,10 +1,10 @@
 import { grayColor } from '../../../assets/jss/material-dashboard-pro-react.jsx';
 
-const modalStyle = theme => ({
+const oppModalStyle = theme => ({
   modalRoot: {
-    overflow: 'auto',
-    alignItems: 'unset',
-    justifyContent: 'unset'
+    // overflow: 'auto',
+    // alignItems: 'unset',
+    // justifyContent: 'unset'
   },
   modal: {
     // [theme.breakpoints.up('sm')]: {
@@ -53,7 +53,7 @@ const modalStyle = theme => ({
   },
   modalBody: {
     // width: 'fit-content',
-    paddingTop: '24px',
+    // paddingTop: '24px',
     paddingRight: '24px',
     paddingBottom: '16px',
     paddingLeft: '24px',
@@ -94,4 +94,4 @@ const modalStyle = theme => ({
   }
 });
 
-export default modalStyle;
+export default oppModalStyle;

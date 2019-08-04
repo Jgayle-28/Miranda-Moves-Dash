@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import CustomInput from '../../components/components/CustomInput/CustomInput.jsx';
 import CustomSelect from '../../components/components/Selects/CustomSelect.jsx';
+import GridContainer from '../../components/components/Grid/GridContainer.jsx';
+import GridItem from '../../components/components/Grid/GridItem.jsx';
 
 import {
   MuiPickersUtilsProvider,
@@ -12,7 +14,7 @@ import 'date-fns';
 import ContactContext from '../../context/contact/ContactContext';
 import AuthContext from '../../context/auth/AuthContext';
 
-const ContactForm = () => {
+const ContactForm = props => {
   const contactContext = useContext(ContactContext);
   const authContext = useContext(AuthContext);
   const { toggleModal } = authContext;
@@ -77,6 +79,10 @@ const ContactForm = () => {
     do_address
   } = contact;
 
+  const sendState = () => {
+    return contact;
+  };
+
   const onChange = e =>
     setContact({ ...contact, [e.target.name]: e.target.value });
 
@@ -123,8 +129,12 @@ const ContactForm = () => {
     { label: 'Home', value: 'Home' },
     { label: 'Work', value: 'Work' }
   ];
-
+  console.log('finalize all state', props.allStates);
   return (
+    // Transfer all inputs to the correct forms
+    // Get the data from stepper using props.allState
+    // create a new object called 'contact' using the data from the form
+    // sennd the data to data  base using addContact(contact)
     <>
       {/* <div
         style={{
@@ -139,17 +149,9 @@ const ContactForm = () => {
           onClick={() => toggleModal(false)}
         />
       </div> */}
+      {/* <GridContainer justify="center">
+        <GridItem xs={12} sm={12}> */}
       <form onSubmit={onSubmit} style={{ margin: '1.5rem', zIndex: 99999 }}>
-        <h2 style={{ color: '#3F729B' }} className="">
-          <i
-            className={
-              contactContext.current ? 'fas fa-user-edit' : 'fas fa-user-plus'
-            }
-          />{' '}
-          {contactContext.current
-            ? ' Edit Opportunity'
-            : ' Add New Opportunity'}
-        </h2>
         <div className="grid-2">
           <div>
             <CustomInput
@@ -421,7 +423,7 @@ const ContactForm = () => {
           value={contactcomments}
           onChange={onChange}
         /> */}
-        <div>
+        {/* <div>
           <input
             style={{ backgroundColor: '#78909c', color: '#fff' }}
             type="submit"
@@ -432,7 +434,7 @@ const ContactForm = () => {
             }
             className="btn btn-block"
           />
-        </div>
+        </div> */}
         {/* {contactContext.current && (
           <div>
             <button className="bnt btn-light btn-block" onClick={clearAll}>
@@ -441,6 +443,8 @@ const ContactForm = () => {
           </div>
         )} */}
       </form>
+      {/* </GridItem>
+      </GridContainer> */}
     </>
   );
 };

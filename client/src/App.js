@@ -16,7 +16,7 @@ import ButtonNav from './components/layout/ButtonNav';
 import Alerts from './components/layout/Alerts';
 
 import Home from './components/pages/Home';
-import Home1 from './components/pages/Home1';
+// import Home1 from './components/pages/Home1';
 import About from './components/pages/About';
 import Estimate from './components/Estimate/Estimate';
 
@@ -33,7 +33,7 @@ const App = props => {
       <AuthState>
         <ContactState>
           <AlertState>
-            <Router history={history}>
+            <Router>
               <Navbar />
               {/* <div className="container"> */}
               <Alerts />
