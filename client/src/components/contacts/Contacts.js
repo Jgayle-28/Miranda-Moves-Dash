@@ -1,23 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
-import history from '../../history';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
 import GridContainer from '../../components/components/Grid/GridContainer.jsx';
 import GridItem from '../../components/components/Grid/GridItem.jsx';
 import Card from '../../components/components/Card/Card.jsx';
 import CardBody from '../../components/components/Card/CardBody.jsx';
-import CardIcon from '../../components/components/Card/CardIcon.jsx';
-import CardHeader from '../../components/components/Card/CardHeader.jsx';
-import Button from '../../components/components/CustomButtons/Button.jsx';
 import ContactContext from '../../context/contact/ContactContext';
 import AuthContext from '../../context/auth/AuthContext';
-import MaterialTable, { MTableToolbar } from 'material-table';
+import MaterialTable from 'material-table';
 import Spinner from '../utils/Spinner';
 import ListAlt from '@material-ui/icons/ListAlt';
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.jsx';
-import { datePickerDefaultProps } from '@material-ui/pickers/constants/prop-types';
+import moment from 'moment';
 
 const styles = {
   cardIconTitle: {
@@ -33,7 +27,6 @@ const Contacts = ({ props }) => {
   const {
     contacts,
     getContacts,
-    filtered,
     deleteContact,
     clearCurrent,
     setCurrent,
@@ -59,7 +52,7 @@ const Contacts = ({ props }) => {
     <>
       {contacts !== null && !loading ? (
         <GridContainer justify="center">
-          <GridItem xs={11}>
+          <GridItem xs={12}>
             <Card>
               <CardBody>
                 <MaterialTable
@@ -155,8 +148,14 @@ const Contacts = ({ props }) => {
                       editable: 'never'
                     },
                     {
-                      title: 'Target Move Date',
+                      title: 'Move Date',
                       field: 'move_date',
+                      type: 'datetime',
+                      editable: 'never'
+                    },
+                    {
+                      title: 'Move Time',
+                      field: 'move_time',
                       type: 'datetime',
                       editable: 'never'
                     }

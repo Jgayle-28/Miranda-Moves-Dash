@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Contacts from '../contacts/Contacts';
-import ContactFilter from '../contacts/ContactFilter';
 import AuthContext from '../../context/auth/AuthContext';
 import ContactContext from '../../context/contact/ContactContext';
 import Dialog from '@material-ui/core/Dialog';
@@ -19,7 +18,6 @@ const Home = props => {
   const contactContext = useContext(ContactContext);
   const authContext = useContext(AuthContext);
   const { modalOpen, toggleModal } = authContext;
-  const { current } = contactContext;
 
   useEffect(() => {
     authContext.loadUser();
@@ -34,7 +32,7 @@ const Home = props => {
       <Dialog
         maxWidth="md"
         scroll="body"
-        color
+        // color
         open={modalOpen}
         // onClose={() => toggleModal(false)}
         aria-labelledby="form-dialog-title"
@@ -78,7 +76,7 @@ const Home = props => {
               }
             ]}
             title={
-              <h2 style={{ color: '#01579b' }} className="">
+              <span style={{ color: '#01579b' }} className="">
                 <i
                   className={
                     contactContext.current
@@ -89,7 +87,7 @@ const Home = props => {
                 {contactContext.current
                   ? ' Edit Opportunity'
                   : ' Add New Opportunity'}
-              </h2>
+              </span>
             }
             finishButtonClick={e => alert(e)}
           />

@@ -58,7 +58,6 @@ class OppDetailForm extends React.Component {
   }
 
   sendState() {
-    console.log('step1 state ', this.state);
     return this.state;
   }
   // function that returns true if value is email, false otherwise
@@ -94,6 +93,12 @@ class OppDetailForm extends React.Component {
         break;
       default:
         break;
+    }
+    // Changes format of phone number before setting state
+    if (event.target.name === 'phone') {
+      event.target.value = event.target.value
+        .replace(/[^\d]+/g, '')
+        .replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     }
     this.setState({ [stateName]: event.target.value });
   }
@@ -220,7 +225,6 @@ class OppDetailForm extends React.Component {
                   <Email className={classes.inputAdornmentIcon} />
                 </InputAdornment>
               ),
-              autoComplete: false,
               type: 'email',
               name: 'email',
               value: email,
@@ -238,7 +242,6 @@ class OppDetailForm extends React.Component {
               fullWidth: true
             }}
             inputProps={{
-              autoComplete: false,
               type: 'text',
               name: 'refered_by',
               value: refered_by,
@@ -290,7 +293,6 @@ class OppDetailForm extends React.Component {
               fullWidth: true
             }}
             inputProps={{
-              autoComplete: false,
               type: 'text',
               name: 'phone_ext',
               value: phone_ext,

@@ -114,17 +114,14 @@ class Wizard extends React.Component {
         this[this.props.steps[this.state.currentStep].stepId].sendState !==
         undefined
       ) {
-        this.setState(
-          {
-            allStates: {
-              ...this.state.allStates,
-              [this.props.steps[this.state.currentStep].stepId]: this[
-                this.props.steps[this.state.currentStep].stepId
-              ].sendState()
-            }
-          },
-          () => console.log('all states', this.state.allStates)
-        );
+        this.setState({
+          allStates: {
+            ...this.state.allStates,
+            [this.props.steps[this.state.currentStep].stepId]: this[
+              this.props.steps[this.state.currentStep].stepId
+            ].sendState()
+          }
+        });
       }
       var key = this.state.currentStep + 1;
       this.setState({
@@ -141,17 +138,14 @@ class Wizard extends React.Component {
       this[this.props.steps[this.state.currentStep].stepId].sendState !==
       undefined
     ) {
-      this.setState(
-        {
-          allStates: {
-            ...this.state.allStates,
-            [this.props.steps[this.state.currentStep].stepId]: this[
-              this.props.steps[this.state.currentStep].stepId
-            ].sendState()
-          }
-        },
-        () => console.log('all states', this.state.allStates)
-      );
+      this.setState({
+        allStates: {
+          ...this.state.allStates,
+          [this.props.steps[this.state.currentStep].stepId]: this[
+            this.props.steps[this.state.currentStep].stepId
+          ].sendState()
+        }
+      });
     }
     var key = this.state.currentStep - 1;
     if (key >= 0) {
@@ -190,7 +184,6 @@ class Wizard extends React.Component {
         },
         () => {
           this.props.finishButtonClick(this.state.allStates);
-          console.log('all states', this.state.allStates);
         }
       );
     }
@@ -241,7 +234,7 @@ class Wizard extends React.Component {
     this.setState({ movingTabStyle: movingTabStyle });
   }
   render() {
-    const { classes, title, subtitle, color, steps } = this.props;
+    const { classes, title, color, steps } = this.props;
     return (
       <GridContainer justify="center">
         <GridItem xs={12} sm={12}>
@@ -318,7 +311,7 @@ class Wizard extends React.Component {
                       {this.props.nextButtonText}
                     </Button>
                   ) : null}
-                  {this.state.finishButton ? (
+                  {/* {this.state.finishButton ? (
                     <Button
                       color="navy"
                       className={this.finishButtonClasses}
@@ -326,7 +319,7 @@ class Wizard extends React.Component {
                     >
                       {this.props.finishButtonText}
                     </Button>
-                  ) : null}
+                  ) : null} */}
                 </div>
                 <div className={classes.clearfix} />
               </div>
@@ -368,7 +361,7 @@ Wizard.propTypes = {
     'rose',
     'navy'
   ]),
-  title: PropTypes.string,
+  // title: PropTypes.string,
   subtitle: PropTypes.string,
   previousButtonClasses: PropTypes.string,
   previousButtonText: PropTypes.string,

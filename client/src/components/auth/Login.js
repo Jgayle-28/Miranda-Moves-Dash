@@ -6,7 +6,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Email from '@material-ui/icons/Email';
 import Lock from '@material-ui/icons/Lock';
-import Icon from '@material-ui/core/Icon';
 import loginPageStyle from '../../assets/jss/material-dashboard-pro-react/views/loginPageStyle.jsx';
 
 const Login = props => {

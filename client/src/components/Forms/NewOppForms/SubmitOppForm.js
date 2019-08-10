@@ -2,9 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ContactContext from '../../../context/contact/ContactContext';
 import AuthContext from '../../../context/auth/AuthContext';
-import GridContainer from '../../components/Grid/GridContainer.jsx';
-import GridItem from '../../components/Grid/GridItem.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
+import moment from 'moment';
 
 const SubmitForm = props => {
   const contactContext = useContext(ContactContext);
@@ -25,6 +24,7 @@ const SubmitForm = props => {
         phone_ext: '',
         refered_by: '',
         move_date: '',
+        move_time: '',
         contact_comments: '',
         estimate_time: '',
         estimate_date: '',
@@ -44,6 +44,7 @@ const SubmitForm = props => {
     phone_ext: '',
     refered_by: '',
     move_date: '',
+    move_time: '',
     contact_comments: '',
     estimate_time: '',
     estimate_date: '',
@@ -52,8 +53,8 @@ const SubmitForm = props => {
     do_address: ''
   });
 
-  const onChange = e =>
-    setContact({ ...contact, [e.target.name]: e.target.value });
+  // const onChange = e =>
+  //   setContact({ ...contact, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
@@ -73,13 +74,13 @@ const SubmitForm = props => {
       phone_ext: opportunity_details.phone_ext,
       refered_by: opportunity_details.refered_by,
       move_date: move_details.move_date,
+      move_time: move_details.move_time,
       contact_comments: move_details.contact_comments,
       pu_address: move_details.pu_address,
       do_address: move_details.do_address,
       estimate_time: estimate_details.estimate_time,
       estimate_date: estimate_details.estimate_date
     };
-    console.log(contact);
 
     if (contactContext.current === null) {
       contactContext.addContact(contact);
@@ -91,11 +92,10 @@ const SubmitForm = props => {
     }
   };
 
-  const clearAll = () => {
-    contactContext.clearCurrent();
-  };
+  // const clearAll = () => {
+  //   contactContext.clearCurrent();
+  // };
 
-  console.log('finalize all state', props.allStates);
   return (
     <>
       <Button color="navy" onClick={onSubmit}>
@@ -105,6 +105,6 @@ const SubmitForm = props => {
   );
 };
 SubmitForm.propTypes = {
-  contact: PropTypes.object.isRequired
+  allStates: PropTypes.object.isRequired
 };
 export default SubmitForm;

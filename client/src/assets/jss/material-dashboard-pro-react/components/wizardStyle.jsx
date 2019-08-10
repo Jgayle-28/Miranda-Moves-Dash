@@ -14,7 +14,8 @@ import {
 
 const wizardStyle = {
   wizardContainer: {
-    width: '100%'
+    width: '100%',
+    paddingBottom: '15px'
   },
   card: {
     display: 'inline-block',
@@ -169,7 +170,8 @@ const wizardStyle = {
       ', 0.4)'
   },
   footer: {
-    padding: '0 15px'
+    padding: '0 15px',
+    marginBottom: '20px'
   },
   left: {
     float: 'left!important'

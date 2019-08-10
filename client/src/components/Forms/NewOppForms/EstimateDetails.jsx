@@ -8,7 +8,6 @@ import {
 import DateFnsUtils from '@date-io/date-fns';
 import 'date-fns';
 // core components
-import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
 import GridItem from '../../components/Grid/GridItem.jsx';
 import PropTypes from 'prop-types';
@@ -17,6 +16,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import customSelectStyle from '../../../assets/jss/material-dashboard-pro-react/customSelectStyle.jsx';
 import customCheckboxRadioSwitch from '../../../assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.jsx';
+import moment from 'moment';
 const style = {
   infoText: {
     fontWeight: '300',
@@ -39,12 +39,11 @@ class MoveDetailForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      estimate_date: new Date(),
-      estimate_time: new Date()
+      estimate_date: null,
+      estimate_time: null
     };
   }
   sendState() {
-    console.log('step3 state ', this.state);
     return this.state;
   }
   isValidated() {
@@ -62,7 +61,6 @@ class MoveDetailForm extends React.Component {
     });
   };
   render() {
-    const { classes } = this.props;
     const { estimate_date, estimate_time } = this.state;
     return (
       <>
@@ -76,7 +74,9 @@ class MoveDetailForm extends React.Component {
                 id="mui-pickers-date"
                 label="Estimate Date"
                 value={estimate_date}
-                onChange={date => this.handleDateChange(date)}
+                onChange={date =>
+                  this.handleDateChange(moment(date).format('MM/DD/YYYY'))
+                }
                 format="MM/dd/yyyy"
                 KeyboardButtonProps={{
                   'aria-label': 'change date'
@@ -88,28 +88,17 @@ class MoveDetailForm extends React.Component {
           <GridItem xs={12} sm={6}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardTimePicker
+                autoOk={true}
+                margin="normal"
                 label="Estimate Time"
                 mask="__:__ _M"
+                inputValue={estimate_time}
                 value={estimate_time}
-                onChange={time => this.handleTimeChange(time)}
+                onChange={time =>
+                  this.handleTimeChange(moment(time).format('hh:mm A'))
+                }
               />
             </MuiPickersUtilsProvider>
-            {/* <CustomInput
-              navy
-              id="estimate_time"
-              labelText={<span>Estimate Time</span>}
-              onChange={this.onChange}
-              formControlProps={{
-                fullWidth: true
-              }}
-              inputProps={{
-                autoComplete: false,
-                type: 'text',
-                name: 'estimate_time',
-                value: estimate_time,
-                onChange: this.onChange
-              }}
-            /> */}
           </GridItem>
         </GridContainer>
       </>
