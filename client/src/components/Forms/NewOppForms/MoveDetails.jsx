@@ -16,11 +16,8 @@ import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import customSelectStyle from '../../../assets/jss/material-dashboard-pro-react/customSelectStyle.jsx';
 import customCheckboxRadioSwitch from '../../../assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.jsx';
 import moment from 'moment';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
-} from 'react-places-autocomplete';
-import PuAddressInput from './components/PuAddressInput';
+import './geo.css';
+import Geosuggest, { Suggest } from 'react-geosuggest';
 
 const style = {
   infoText: {
@@ -68,15 +65,14 @@ class MoveDetailForm extends React.Component {
       [e.target.name]: e.target.value
     });
   };
-  handleChange = pu_address => {
-    this.setState({ pu_address });
-  };
 
-  handleSelect = pu_address => {
-    geocodeByAddress(pu_address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error));
+  onPuSuggestSelect = suggest => {
+    let address = suggest.description.slice(0, -5);
+    this.setState({ pu_address: address });
+  };
+  onDoSuggestSelect = suggest => {
+    let address = suggest.description.slice(0, -5);
+    this.setState({ do_address: address });
   };
 
   render() {
@@ -87,12 +83,18 @@ class MoveDetailForm extends React.Component {
       do_address,
       contact_comments
     } = this.state;
+    const google = window.google;
     return (
       <>
         <GridContainer justify="center" alignContent="center">
           {/* Row 1 */}
           <GridItem xs={12} sm={6}>
-            <PuAddressInput />
+            <Geosuggest
+              placeholder="Choose Pickup Address"
+              onSuggestSelect={this.onPuSuggestSelect}
+              location={new google.maps.LatLng(33.409035, -111.9873811)}
+              radius={20}
+            />
             {/* <CustomInput
               navy
               id="pu_address"
@@ -108,52 +110,16 @@ class MoveDetailForm extends React.Component {
                 onChange: this.onChange
               }}
             /> */}
+            <div style={{ marginTop: '2.2rem' }}>
+              <Geosuggest
+                placeholder="Choose Dropoff Address"
+                onSuggestSelect={this.onDoSuggestSelect}
+                location={new google.maps.LatLng(33.409035, -111.9873811)}
+                radius={20}
+              />
+            </div>
 
-            {/* <PlacesAutocomplete
-              value={this.state.pu_address}
-              onChange={this.handleChange}
-              onSelect={this.handleSelect}
-            >
-              {({
-                getInputProps,
-                suggestions,
-                getSuggestionItemProps,
-                loading
-              }) => (
-                <div>
-                  <input
-                    {...getInputProps({
-                      placeholder: 'Search Places ...',
-                      className: 'location-search-input'
-                    })}
-                  />
-                  <div className="autocomplete-dropdown-container">
-                    {loading && <div>Loading...</div>}
-                    {suggestions.map(suggestion => {
-                      const className = suggestion.active
-                        ? 'suggestion-item--active'
-                        : 'suggestion-item';
-                      // inline style for demonstration purpose
-                      const style = suggestion.active
-                        ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                        : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                      return (
-                        <div
-                          {...getSuggestionItemProps(suggestion, {
-                            className,
-                            style
-                          })}
-                        >
-                          <span>{suggestion.description}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-            </PlacesAutocomplete> */}
-
-            <CustomInput
+            {/* <CustomInput
               navy
               id="do_address"
               labelText={<span>Drop Off Address</span>}
@@ -167,7 +133,7 @@ class MoveDetailForm extends React.Component {
                 value: do_address,
                 onChange: this.onChange
               }}
-            />
+            /> */}
           </GridItem>
           {/* Row 2 */}
           <GridItem xs={12} sm={6}>
