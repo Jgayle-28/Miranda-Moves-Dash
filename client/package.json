@@ -13,6 +13,8 @@
     "chartist": "0.10.1",
     "date-fns": "^2.0.0-beta.3",
     "history": "4.7.2",
+    "jspdf": "^1.5.3",
+    "jspdf-autotable": "^3.2.2",
     "material-table": "^1.40.0",
     "moment": "^2.24.0",
     "node-sass": "4.11.0",

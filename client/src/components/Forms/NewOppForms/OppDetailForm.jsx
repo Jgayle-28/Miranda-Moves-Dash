@@ -13,6 +13,7 @@ import GridContainer from '../../components/Grid/GridContainer.jsx';
 import GridItem from '../../components/Grid/GridItem.jsx';
 import CustomSelect from '../../../components/components/Selects/CustomSelect.jsx';
 import CustomInput from '../../components/CustomInput/CustomInput.jsx';
+import ContactContext from '../../../context/contact/ContactContext';
 
 const style = {
   infoText: {
@@ -31,7 +32,7 @@ const opp_list = [
   { label: 'Residential Move', value: 'Residential Move' },
   { label: 'Designer', value: 'Designer' },
   { label: 'Store Front', value: 'Store Front' },
-  { label: 'Store Front', value: 'Store Front' }
+  { label: 'Product Distribution', value: 'Product Distribution' }
 ];
 const phone_list = [
   { label: 'Mobile', value: 'Mobile' },
@@ -55,6 +56,24 @@ class OppDetailForm extends React.Component {
       last_nameState: '',
       phoneState: ''
     };
+  }
+  static contextType = ContactContext;
+
+  componentDidMount() {
+    const contacts = this.context;
+    if (contacts.current !== null) {
+      this.setState({
+        _id: contacts.current._id,
+        opportunity_type: contacts.current.opportunity_type,
+        first_name: contacts.current.first_name,
+        last_name: contacts.current.last_name,
+        email: contacts.current.email,
+        phone: contacts.current.phone,
+        phone_type: contacts.current.phone_type,
+        phone_ext: contacts.current.phone_ext,
+        refered_by: contacts.current.refered_by
+      });
+    }
   }
 
   sendState() {
@@ -163,7 +182,8 @@ class OppDetailForm extends React.Component {
             }
             id="first_name"
             formControlProps={{
-              fullWidth: true
+              fullWidth: true,
+              required: true
             }}
             inputProps={{
               onChange: event => this.change(event, 'first_name', 'length', 3),
@@ -175,6 +195,7 @@ class OppDetailForm extends React.Component {
                   <Face className={classes.inputAdornmentIcon} />
                 </InputAdornment>
               ),
+              required: true,
               type: 'text',
               name: 'first_name',
               value: first_name
@@ -191,7 +212,8 @@ class OppDetailForm extends React.Component {
             }
             id="last_name"
             formControlProps={{
-              fullWidth: true
+              fullWidth: true,
+              required: true
             }}
             inputProps={{
               onChange: event => this.change(event, 'last_name', 'length', 3),
@@ -203,6 +225,7 @@ class OppDetailForm extends React.Component {
                   <RecordVoiceOver className={classes.inputAdornmentIcon} />
                 </InputAdornment>
               ),
+              required: true,
               type: 'text',
               name: 'last_name',
               value: last_name
@@ -214,7 +237,8 @@ class OppDetailForm extends React.Component {
             labelText={<span>Email</span>}
             onChange={this.onChange}
             formControlProps={{
-              fullWidth: true
+              fullWidth: true,
+              required: true
             }}
             inputProps={{
               endAdornment: (
@@ -225,6 +249,7 @@ class OppDetailForm extends React.Component {
                   <Email className={classes.inputAdornmentIcon} />
                 </InputAdornment>
               ),
+              required: true,
               type: 'email',
               name: 'email',
               value: email,
@@ -259,7 +284,8 @@ class OppDetailForm extends React.Component {
             }
             id="phone"
             formControlProps={{
-              fullWidth: true
+              fullWidth: true,
+              required: true
             }}
             inputProps={{
               onChange: event => this.change(event, 'phone', 'length', 10),
@@ -271,6 +297,7 @@ class OppDetailForm extends React.Component {
                   <Phone className={classes.inputAdornmentIcon} />
                 </InputAdornment>
               ),
+              required: true,
               type: 'text',
               name: 'phone',
               value: phone

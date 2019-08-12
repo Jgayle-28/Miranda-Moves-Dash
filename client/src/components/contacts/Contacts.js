@@ -11,6 +11,9 @@ import MaterialTable from 'material-table';
 import Spinner from '../utils/Spinner';
 import ListAlt from '@material-ui/icons/ListAlt';
 import { cardTitle } from '../../assets/jss/material-dashboard-pro-react.jsx';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import MirandaLogo from '../../assets/img/logos/newPdf_log.jpg';
 import moment from 'moment';
 
 const styles = {
@@ -21,7 +24,8 @@ const styles = {
   }
 };
 
-const Contacts = ({ props }) => {
+// const Contacts = ({ props }) => {
+const Contacts = props => {
   const contactConext = useContext(ContactContext);
   const authContext = useContext(AuthContext);
   const {
@@ -39,6 +43,7 @@ const Contacts = ({ props }) => {
 
   const onEditClick = rowData => {
     setCurrent(rowData);
+    console.log('setCurrent from Table', rowData);
     toggleModal(true);
   };
   const onDelete = rowData => {
@@ -46,8 +51,119 @@ const Contacts = ({ props }) => {
     // Clears contact being held in current state
     clearCurrent(rowData);
   };
+  const generatePdf = rowData => {
+    console.log(rowData);
+    var doc = new jsPDF();
+
+    const logo = MirandaLogo;
+    doc.addImage(logo, 'JPEG', 15, 6, 38, 12);
+    doc.setFontSize(8);
+    doc.text('Phone: (899) 480-4117', 137, 8);
+    doc.text('Email: customerservice@mirandadelivery.com', 137, 13);
+
+    doc.autoTable({
+      body: [
+        [
+          {
+            content: `Estimate Date: ${
+              rowData.estimate_date !== null ? rowData.estimate_date : ''
+            }`,
+            styles: { halign: 'left' }
+          },
+          {
+            content: `Estimate Time: ${
+              rowData.estimate_time !== null ? rowData.estimate_time : ''
+            }`,
+            styles: { halign: 'center' }
+          }
+        ]
+      ],
+      startY: 25
+    });
+
+    doc.autoTable({
+      headStyles: { fillColor: [5, 48, 83] },
+
+      startY: 35,
+      tableWidth: 'auto',
+      head: [
+        [
+          {
+            content: `${rowData.first_name} ${rowData.last_name}'s Details`,
+            colSpan: 5,
+            styles: { halign: 'center' }
+          }
+        ]
+      ],
+      body: [
+        ['Customer name:', `${rowData.first_name} ${rowData.last_name}`],
+        ['Phone Number:', `${rowData.phone}`],
+        ['Email:', `${rowData.email}`],
+        ['Pickup Address:', `${rowData.pu_address}`],
+        ['Dropoff Address:', `${rowData.do_address}`],
+        [
+          'Target Move Date:',
+          `${rowData.move_date !== null ? rowData.move_date : ''}`
+        ],
+        ['Actual Move Date:']
+      ]
+    });
+
+    doc.autoTable({
+      headStyles: { fillColor: [5, 48, 83] },
+
+      startY: 100,
+      head: [
+        [
+          {
+            content: 'Inventory',
+            colSpan: 2,
+            // rowSpan: 2,
+            styles: { halign: 'center' }
+          }
+        ]
+      ]
+    });
+
+    doc.autoTable({
+      headStyles: { fillColor: [5, 48, 83] },
+
+      startY: 235,
+      head: [
+        [
+          {
+            content: 'Comments',
+            colSpan: 2,
+            // rowSpan: 2,
+            styles: { halign: 'center' }
+          }
+        ]
+      ],
+      body: [
+        [
+          {
+            content: `${rowData.contact_comments}`,
+            styles: { halign: 'center' }
+          }
+        ]
+        // [`${rowData.contact_comments}`]
+      ]
+    });
+
+    doc.save(`${rowData.first_name}_${rowData.last_name}'s_estimate.pdf`);
+  };
+  const Description = () => {
+    return <Description />;
+  };
+  const createEstimate = opportunity => {
+    props.history.push({
+      pathname: '/estimate',
+      state: { user: opportunity }
+    });
+  };
 
   console.log('contacts: ', contacts);
+  console.log('props.history', props.history);
   return (
     <>
       {contacts !== null && !loading ? (
@@ -76,34 +192,20 @@ const Contacts = ({ props }) => {
                       }
                     },
                     {
-                      icon: () => (
-                        <Link to="/estimate" style={{ borderRadius: '50%' }}>
-                          <ListAlt />
-                        </Link>
-                      ),
+                      icon: 'cloud_download',
+                      iconProps: { color: 'inherit', fontSize: 'small' },
+                      tooltip: 'Download Estimate Pdf',
+                      onClick: (e, rowData) => {
+                        generatePdf(rowData);
+                      }
+                    },
+                    {
+                      icon: 'list_alt',
                       iconProps: { color: 'primary', fontSize: 'small' },
-                      tooltip: 'Create Estimate'
-                      // onClick: (e, rowData) => {
-                      //   history.push('/estimate');
-                      // }
+                      tooltip: 'Create Estimate',
+                      onClick: (e, rowData) => createEstimate(rowData)
                     }
                   ]}
-                  //   components={{
-                  //     Action: props => (
-                  //       <Button
-                  //         onClick={event =>
-                  //           props.action.onClick(event, props.data)
-                  //         }
-                  //         color="primary"
-                  //         variant="contained"
-                  //         style={{ textTransform: 'none' }}
-                  //         size="small"
-                  //       >
-                  //         My Button
-                  //       </Button>
-                  //     )
-                  //   }
-                  // }
                   columns={[
                     {
                       title: 'First Name',
@@ -162,63 +264,9 @@ const Contacts = ({ props }) => {
                   ]}
                   options={{
                     exportButton: true,
-                    // filtering: true
                     grouping: true
                   }}
                 />
-                {/* <MaterialTable
-                  columns={[
-                    { title: 'Adı', field: 'contact_comments' },
-                    { title: 'Soyadı', field: 'date' },
-                    { title: 'Soyadı', field: 'do_address' },
-                    { title: 'Soyadı', field: 'email' },
-                    { title: 'Soyadı', field: 'estimate_date' },
-                    { title: 'Soyadı', field: 'estimate_time' },
-                    { title: 'Soyadı', field: 'first_name' },
-                    { title: 'Soyadı', field: 'last_name' },
-                    { title: 'Soyadı', field: 'move_date' },
-                    { title: 'Soyadı', field: 'opportunity_type' },
-                    { title: 'Soyadı', field: 'phone' },
-                    { title: 'Soyadı', field: 'phone_ext' },
-                    { title: 'Soyadı', field: 'phone_type' },
-                    { title: 'Soyadı', field: 'pu_address' },
-                    { title: 'Soyadı', field: 'refered_by' },
-                    { title: 'Soyadı', field: 'target_movedate' },
-                    { title: 'Soyadı', field: 'user' },
-                    { title: 'Soyadı', field: '_id' }
-                  ]}
-                  data={[
-                    {
-                      contact_comments: 'fasdfdasdfsasdfasd',
-                      date: '2019-08-02T04:15:44.307Z',
-                      do_address: '',
-                      email: 'mgayle28@gmail.com',
-                      estimate_date: null,
-                      estimate_time: '',
-                      first_name: 'Mandy',
-                      last_name: 'gayle',
-                      move_date: '2019-08-16T04:15:00.000Z',
-                      opportunity_type: '',
-                      phone: '7609122655',
-                      phone_ext: '777',
-                      phone_type: 'Mobile',
-                      pu_address: '',
-                      refered_by: 'Mandy gayle',
-                      target_movedate: null,
-                      user: '5d3b75cc5615c1828eb5842d',
-                      _id: '5d43b8f0b11b163a90b0a902'
-                    }
-                  ]}
-                  // data={[
-                  //   {
-                  //     name: 'Mehmet',
-                  //     surname: 'Baran',
-                  //     birthYear: 1987,
-                  //     birthCity: 63
-                  //   }
-                  // ]}
-                  title="Demo Title"
-                /> */}
               </CardBody>
             </Card>
           </GridItem>

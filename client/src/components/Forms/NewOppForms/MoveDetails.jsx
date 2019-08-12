@@ -17,7 +17,8 @@ import customSelectStyle from '../../../assets/jss/material-dashboard-pro-react/
 import customCheckboxRadioSwitch from '../../../assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.jsx';
 import moment from 'moment';
 import './geo.css';
-import Geosuggest, { Suggest } from 'react-geosuggest';
+import Geosuggest from 'react-geosuggest';
+import ContactContext from '../../../context/contact/ContactContext';
 
 const style = {
   infoText: {
@@ -48,6 +49,20 @@ class MoveDetailForm extends React.Component {
       contact_comments: ''
     };
   }
+  static contextType = ContactContext;
+
+  componentDidMount() {
+    const contacts = this.context;
+    if (contacts.current !== null) {
+      this.setState({
+        move_date: contacts.current.move_date,
+        move_time: contacts.current.move_time,
+        pu_address: contacts.current.pu_address,
+        do_address: contacts.current.do_address,
+        contact_comments: contacts.current.contact_comments
+      });
+    }
+  }
   sendState() {
     return this.state;
   }
@@ -67,11 +82,11 @@ class MoveDetailForm extends React.Component {
   };
 
   onPuSuggestSelect = suggest => {
-    let address = suggest.description.slice(0, -5);
+    let address = suggest.gmaps.formatted_address.slice(0, -5);
     this.setState({ pu_address: address });
   };
   onDoSuggestSelect = suggest => {
-    let address = suggest.description.slice(0, -5);
+    let address = suggest.gmaps.formatted_address.slice(0, -5);
     this.setState({ do_address: address });
   };
 

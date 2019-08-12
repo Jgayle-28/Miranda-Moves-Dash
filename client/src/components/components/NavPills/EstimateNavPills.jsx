@@ -11,8 +11,8 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 
 // core components
-import GridContainer from '../../components/Grid/GridContainer.jsx';
-import GridItem from '../../components/Grid/GridItem.jsx';
+import GridContainer from '../Grid/GridContainer.jsx';
+import GridItem from '../Grid/GridItem.jsx';
 
 import navPillsStyle from '../../../assets/jss/material-dashboard-pro-react/components/navPillsStyle.jsx';
 
@@ -75,6 +75,7 @@ class NavPills extends React.Component {
                 label: classes.label,
                 selected: classes[color]
               }}
+              style={{ borderBottom: '1px solid #6EBAC3' }}
             />
           );
         })}
@@ -100,8 +101,18 @@ class NavPills extends React.Component {
     );
     return horizontal !== undefined ? (
       <GridContainer>
-        <GridItem {...horizontal.tabsGrid}>{tabButtons}</GridItem>
-        <GridItem {...horizontal.contentGrid}>{tabContent}</GridItem>
+        <GridItem
+          style={{ maxHeight: '550px', overflow: 'auto' }}
+          {...horizontal.tabsGrid}
+        >
+          {tabButtons}
+        </GridItem>
+        <GridItem
+          style={{ maxHeight: '550px', overflow: 'auto' }}
+          {...horizontal.contentGrid}
+        >
+          {tabContent}
+        </GridItem>
       </GridContainer>
     ) : (
       <div>
@@ -134,7 +145,8 @@ NavPills.propTypes = {
     'danger',
     'success',
     'info',
-    'rose'
+    'rose',
+    'navy'
   ]),
   direction: PropTypes.string,
   horizontal: PropTypes.shape({

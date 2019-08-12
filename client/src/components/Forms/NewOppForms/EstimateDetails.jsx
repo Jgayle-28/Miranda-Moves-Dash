@@ -17,6 +17,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import customSelectStyle from '../../../assets/jss/material-dashboard-pro-react/customSelectStyle.jsx';
 import customCheckboxRadioSwitch from '../../../assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.jsx';
 import moment from 'moment';
+import ContactContext from '../../../context/contact/ContactContext';
+
 const style = {
   infoText: {
     fontWeight: '300',
@@ -42,6 +44,17 @@ class MoveDetailForm extends React.Component {
       estimate_date: null,
       estimate_time: null
     };
+  }
+  static contextType = ContactContext;
+
+  componentDidMount() {
+    const contacts = this.context;
+    if (contacts.current !== null) {
+      this.setState({
+        estimate_date: contacts.current.estimate_date,
+        estimate_time: contacts.current.estimate_time
+      });
+    }
   }
   sendState() {
     return this.state;

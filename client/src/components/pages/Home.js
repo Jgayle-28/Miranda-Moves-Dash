@@ -27,7 +27,7 @@ const Home = props => {
   return (
     <>
       {/* <ContactFilter /> */}
-      <Contacts />
+      <Contacts {...props} />
       {/* MODAL */}
       <Dialog
         maxWidth="md"
@@ -51,7 +51,7 @@ const Home = props => {
         <DialogContent>
           <OpportunityStepper
             color="navy"
-            validate
+            // validate
             steps={[
               {
                 stepName: 'Opportunity Details',

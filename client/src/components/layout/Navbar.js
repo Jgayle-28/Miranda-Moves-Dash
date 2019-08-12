@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/AuthContext';
 import ContactContext from '../../context/contact/ContactContext';
+import logo_white from '../../assets/img/logos/logo_white.png';
 
 const Navbar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
@@ -55,8 +56,13 @@ const Navbar = ({ title, icon }) => {
     <>
       <div className="navbar bg-blue-grey">
         <h1>
-          <i className={icon} /> {/* */}
-          {title}
+          <img
+            src={logo_white}
+            alt="Miranda Delivery Service"
+            style={{ height: '50px', width: '185px' }}
+          />
+          {/* <i className={icon} /> 
+          {title} */}
         </h1>
         <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
       </div>

@@ -25,7 +25,7 @@
 .geosuggest__input:focus {
   outline: none;
   border: none;
-  border-bottom: 2px solid #01579b;
+  border-bottom: 2px solid #e0e0e0;
 }
 .geosuggest__suggests {
   position: absolute;
@@ -54,11 +54,11 @@
 geo suggest items
 **/
 .geosuggest__item {
-  font-size: 18px;
-  font-size: 1rem;
+  font-size: 12px;
   padding: 0.5em 0.65em;
   cursor: pointer;
   transition: all 0.3s ease;
+  border-bottom: 1px solid #000;
 }
 .geosuggest__item:hover,
 .geosuggest__item:focus {

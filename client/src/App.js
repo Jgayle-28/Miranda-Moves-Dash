@@ -31,7 +31,7 @@ const App = props => {
               {/* <div className="container"> */}
               <Alerts />
               <Switch>
-                <PrivateRoute exact path="/" component={Home} />
+                <PrivateRoute exact path="/" component={Home} {...props} />
                 <PrivateRoute exact path="/estimate" component={Estimate} />
                 <Route exact path="/about" component={About} />
                 {/* Register & Login */}
