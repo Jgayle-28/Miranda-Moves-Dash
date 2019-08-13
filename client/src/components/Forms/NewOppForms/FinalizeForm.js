@@ -44,11 +44,17 @@ class FinalizeForm extends React.Component {
             </GridItem>
 
             <GridItem xs={12} sm={4}>
-              <DisplayMoveDetails move_details={move_details} />
+              <DisplayMoveDetails
+                type={opportunity_details.opportunity_type}
+                move_details={move_details}
+              />
             </GridItem>
 
             <GridItem xs={12} sm={4}>
-              <DisplayEstimateDetails estimate_details={estimate_details} />
+              <DisplayEstimateDetails
+                type={opportunity_details.opportunity_type}
+                estimate_details={estimate_details}
+              />
             </GridItem>
           </GridContainer>
           <GridContainer

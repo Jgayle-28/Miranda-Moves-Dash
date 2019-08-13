@@ -4,12 +4,16 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridContainer from '../components/Grid/GridContainer.jsx';
 import GridItem from '../components/Grid/GridItem.jsx';
-import EstimateNavPills from '../components/NavPills/EstimateNavPills.jsx';
 // import Accordion from '../components/Accordion/Accordion.jsx';
 import Card from '../components/Card/Card.jsx';
 import CardHeader from '../components/Card/CardHeader.jsx';
 import CardBody from '../components/Card/CardBody.jsx';
-import Description from '@material-ui/icons/Description';
+import KeyboardBackspace from '@material-ui/icons/KeyboardBackspace';
+import Fab from '@material-ui/core/Fab';
+// Created Components
+import EstimateHeader from './EstimateHeader';
+import EstimateNavPills from '../components/NavPills/EstimateNavPills.jsx';
+import DisplayEstimateTotals from './DisplayEstimateTotals.js';
 
 class Estimate extends Component {
   constructor(props) {
@@ -28,55 +32,40 @@ class Estimate extends Component {
     const { user } = this.props.location.state;
     return (
       <>
+        <Fab
+          color="primary"
+          aria-label="Add"
+          // className={classes.fab}
+          style={{
+            backgroundColor: '#90A4AE',
+            color: 'white',
+            margin: '1rem',
+            zIndex: 9,
+            position: 'fixed',
+            top: '6rem',
+            left: '1.2rem'
+          }}
+          onClick={() => this.props.history.goBack()}
+        >
+          <KeyboardBackspace />
+        </Fab>
+        <GridContainer justify="center">
+          <EstimateHeader user={user} />
+        </GridContainer>
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={10}>
-            <Card raised>
-              <CardHeader
+            <Card>
+              {/* <CardHeader
                 color="navy"
                 style={{
                   marginBottom: '1rem',
                   display: 'flex',
                   alignItems: 'flex-end'
                 }}
-              >
-                <Description
-                  style={{ fontSize: '30px', padding: '0', margin: '0' }}
-                />
-                <p
-                  style={{
-                    fontWeight: '400',
-                    fontSize: '14px'
-                  }}
-                >
-                  {' '}
-                  <span
-                    style={{
-                      margin: '0 .5rem 1rem 1rem'
-                    }}
-                  >
-                    {user.first_name} {user.last_name}
-                  </span>{' '}
-                  //{' '}
-                  <span
-                    style={{
-                      margin: '0 .5rem 1rem'
-                    }}
-                  >
-                    {user.phone}
-                  </span>{' '}
-                  //{' '}
-                  <span
-                    style={{
-                      margin: '0 .5rem 1rem'
-                    }}
-                  >
-                    {user.email}
-                  </span>
-                </p>
-              </CardHeader>
-              <CardBody>
+              /> */}
+              <CardBody style={{ padding: 0 }}>
                 <EstimateNavPills
-                  color="navy"
+                  color="grey"
                   horizontal={{
                     tabsGrid: { xs: 12, sm: 12, md: 2 },
                     contentGrid: { xs: 12, sm: 12, md: 10 }
@@ -88,17 +77,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -111,17 +102,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -134,17 +127,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -157,17 +152,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -180,17 +177,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -203,17 +202,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -226,17 +227,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -249,17 +252,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -272,17 +277,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -295,17 +302,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -318,17 +327,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -341,17 +352,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -364,17 +377,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -387,17 +402,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -410,17 +427,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -433,17 +452,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -456,17 +477,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -479,17 +502,19 @@ class Estimate extends Component {
                       tabContent: (
                         <span>
                           <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
+                            Dramatically visualize customer directed
+                            convergence without revolutionary ROI.
+                            Collaboratively administrate empowered markets
+                            via plug-and-play networks. Dynamically
+                            procrastinate B2C users after installed base
+                            benefits.
                           </p>
                           <br />
                           <p>This is very nice.</p>
@@ -504,8 +529,8 @@ class Estimate extends Component {
         </GridContainer>
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={10}>
-            <Card>
-              <h1>Will display totals here</h1>
+            <Card plain>
+              <DisplayEstimateTotals />
             </Card>
           </GridItem>
         </GridContainer>

@@ -174,6 +174,7 @@ const behanceColor = '#1769ff';
 const dribbbleColor = '#ea4c89';
 const redditColor = '#ff4500';
 const navyColor = '#01579b';
+const greyColor = '#607D8B';
 
 const boxShadow = {
   boxShadow:
@@ -413,6 +414,7 @@ export {
   dribbbleColor,
   redditColor,
   navyColor,
+  greyColor,
   primaryBoxShadow,
   infoBoxShadow,
   successBoxShadow,

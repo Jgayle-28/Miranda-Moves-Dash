@@ -74,6 +74,9 @@ class OppDetailForm extends React.Component {
         refered_by: contacts.current.refered_by
       });
     }
+    // if (this.state.opportunity_type !== '') {
+    //   this.props.setOppType(this.state.opportunity_type);
+    // }
   }
 
   sendState() {
@@ -169,7 +172,11 @@ class OppDetailForm extends React.Component {
             selectedValue={opportunity_type}
             firstItem={'Select Opportunity Type'}
             name="opportunity_type"
-            label={'Select Opportunity Type'}
+            label={
+              <span>
+                Select Opportunity Type <small>(required)</small>
+              </span>
+            }
           />
           <CustomInput
             navy
@@ -234,7 +241,11 @@ class OppDetailForm extends React.Component {
           <CustomInput
             navy
             id="email"
-            labelText={<span>Email</span>}
+            labelText={
+              <span>
+                Email <small>(required)</small>
+              </span>
+            }
             onChange={this.onChange}
             formControlProps={{
               fullWidth: true,

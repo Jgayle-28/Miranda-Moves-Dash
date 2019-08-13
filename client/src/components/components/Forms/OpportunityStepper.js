@@ -52,6 +52,15 @@ class Wizard extends React.Component {
     this.updateWidth = this.updateWidth.bind(this);
   }
   wizard = React.createRef();
+  componentDidUpdate() {
+    if (Object.keys(this.state.allStates).length > 0) {
+      if (this.state.allStates.opportunity_details.opportunity_type !== '') {
+        this.props.setOppType(
+          this.state.allStates.opportunity_details.opportunity_type
+        );
+      }
+    }
+  }
   componentDidMount() {
     this.refreshAnimation(0);
     window.addEventListener('resize', this.updateWidth);
@@ -233,6 +242,7 @@ class Wizard extends React.Component {
     };
     this.setState({ movingTabStyle: movingTabStyle });
   }
+
   render() {
     const { classes, title, color, steps } = this.props;
     return (

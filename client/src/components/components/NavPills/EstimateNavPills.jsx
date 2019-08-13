@@ -13,8 +13,7 @@ import Tabs from '@material-ui/core/Tabs';
 // core components
 import GridContainer from '../Grid/GridContainer.jsx';
 import GridItem from '../Grid/GridItem.jsx';
-
-import navPillsStyle from '../../../assets/jss/material-dashboard-pro-react/components/navPillsStyle.jsx';
+import navPillsStyle from '../../../assets/jss/material-dashboard-pro-react/components/EsitmateNavPillsStyle.jsx';
 
 class NavPills extends React.Component {
   constructor(props) {
@@ -53,6 +52,7 @@ class NavPills extends React.Component {
         value={this.state.active}
         onChange={this.handleChange}
         centered={alignCenter}
+        style={{ padding: '0' }}
       >
         {tabs.map((prop, key) => {
           var icon = {};
@@ -75,7 +75,12 @@ class NavPills extends React.Component {
                 label: classes.label,
                 selected: classes[color]
               }}
-              style={{ borderBottom: '1px solid #6EBAC3' }}
+              style={{
+                borderBottom: '1px solid #78909C',
+                padding: '0',
+                display: 'flex',
+                flexDirection: 'row'
+              }}
             />
           );
         })}
@@ -100,20 +105,74 @@ class NavPills extends React.Component {
       </div>
     );
     return horizontal !== undefined ? (
-      <GridContainer>
-        <GridItem
-          style={{ maxHeight: '550px', overflow: 'auto' }}
-          {...horizontal.tabsGrid}
-        >
-          {tabButtons}
-        </GridItem>
-        <GridItem
-          style={{ maxHeight: '550px', overflow: 'auto' }}
-          {...horizontal.contentGrid}
-        >
-          {tabContent}
-        </GridItem>
-      </GridContainer>
+      <>
+        <GridContainer>
+          <GridItem
+            {...horizontal.tabsGrid}
+            style={{ padding: '0', margin: '0' }}
+          >
+            <div
+              style={{
+                textTransform: 'uppercase',
+                letterSpacing: '.5px',
+                fontWeight: 300,
+                width: '100%',
+                background: '#003A6C',
+                color: '#fff',
+                textAlign: 'center',
+                padding: '.5rem',
+                boxShadow:
+                  '0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0,0,0, 0.12), 0 8px 10px -5px rgba(0,0,0, 0.2)'
+              }}
+            >
+              Rooms
+            </div>
+          </GridItem>
+          <GridItem
+            style={{ maxHeight: '550px', overflow: 'auto' }}
+            {...horizontal.contentGrid}
+          >
+            <div
+              style={{
+                textTransform: 'uppercase',
+                letterSpacing: '.5px',
+                fontWeight: 300,
+                width: '100%',
+                background: '#003A6C',
+                color: '#fff',
+                textAlign: 'center',
+                padding: '.5rem',
+                boxShadow:
+                  '0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0,0,0, 0.12), 0 8px 10px -5px rgba(0,0,0, 0.2)'
+              }}
+            >
+              Item List
+            </div>
+          </GridItem>
+        </GridContainer>
+        <GridContainer>
+          <GridItem
+            style={{
+              maxHeight: '550px',
+              overflow: 'auto',
+              padding: '0',
+              margin: '0'
+            }}
+            {...horizontal.tabsGrid}
+          >
+            {tabButtons}
+          </GridItem>
+          <GridItem
+            style={{
+              maxHeight: '550px',
+              overflow: 'auto'
+            }}
+            {...horizontal.contentGrid}
+          >
+            {tabContent}
+          </GridItem>
+        </GridContainer>
+      </>
     ) : (
       <div>
         {tabButtons}
@@ -146,7 +205,8 @@ NavPills.propTypes = {
     'success',
     'info',
     'rose',
-    'navy'
+    'navy',
+    'grey'
   ]),
   direction: PropTypes.string,
   horizontal: PropTypes.shape({

@@ -98,19 +98,22 @@ class MoveDetailForm extends React.Component {
       do_address,
       contact_comments
     } = this.state;
-    const google = window.google;
-    return (
-      <>
-        <GridContainer justify="center" alignContent="center">
-          {/* Row 1 */}
-          <GridItem xs={12} sm={6}>
-            <Geosuggest
-              placeholder="Choose Pickup Address"
-              onSuggestSelect={this.onPuSuggestSelect}
-              location={new google.maps.LatLng(33.409035, -111.9873811)}
-              radius={20}
-            />
-            {/* <CustomInput
+    const { allStates } = this.props;
+    if (Object.keys(allStates).length > 0) {
+      const { opportunity_details } = this.props.allStates;
+      const google = window.google;
+      return (
+        <>
+          <GridContainer justify="center" alignContent="center">
+            {/* Row 1 */}
+            <GridItem xs={12} sm={6}>
+              <Geosuggest
+                placeholder="Choose Pickup Address"
+                onSuggestSelect={this.onPuSuggestSelect}
+                location={new google.maps.LatLng(33.409035, -111.9873811)}
+                radius={20}
+              />
+              {/* <CustomInput
               navy
               id="pu_address"
               labelText={<span>Pickup Address</span>}
@@ -125,16 +128,16 @@ class MoveDetailForm extends React.Component {
                 onChange: this.onChange
               }}
             /> */}
-            <div style={{ marginTop: '2.2rem' }}>
-              <Geosuggest
-                placeholder="Choose Dropoff Address"
-                onSuggestSelect={this.onDoSuggestSelect}
-                location={new google.maps.LatLng(33.409035, -111.9873811)}
-                radius={20}
-              />
-            </div>
+              <div style={{ marginTop: '2.2rem' }}>
+                <Geosuggest
+                  placeholder="Choose Dropoff Address"
+                  onSuggestSelect={this.onDoSuggestSelect}
+                  location={new google.maps.LatLng(33.409035, -111.9873811)}
+                  radius={20}
+                />
+              </div>
 
-            {/* <CustomInput
+              {/* <CustomInput
               navy
               id="do_address"
               labelText={<span>Drop Off Address</span>}
@@ -149,58 +152,68 @@ class MoveDetailForm extends React.Component {
                 onChange: this.onChange
               }}
             /> */}
-          </GridItem>
-          {/* Row 2 */}
-          <GridItem xs={12} sm={6}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardDatePicker
-                margin="normal"
-                clearable
-                label="Move Date"
-                value={move_date}
-                // placeholder="10/10/2018"
-                onChange={date =>
-                  this.handleDateChange(moment(date).format('MM/DD/YYYY'))
-                }
-                minDate={new Date()}
-                format="MM/dd/yyyy"
+            </GridItem>
+            {/* Row 2 */}
+            <GridItem xs={12} sm={6}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  clearable
+                  label={
+                    opportunity_details.opportunity_type === 'Residential Move'
+                      ? 'Move Date'
+                      : 'Delivery Date'
+                  }
+                  value={move_date}
+                  onChange={date =>
+                    this.handleDateChange(moment(date).format('MM/DD/YYYY'))
+                  }
+                  minDate={new Date()}
+                  format="MM/dd/yyyy"
+                />
+              </MuiPickersUtilsProvider>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardTimePicker
+                  autoOk={true}
+                  margin="normal"
+                  label={
+                    opportunity_details.opportunity_type === 'Residential Move'
+                      ? 'Move Time'
+                      : 'Delivery Time'
+                  }
+                  mask="__:__ _M"
+                  inputValue={move_time}
+                  value={move_time}
+                  onChange={time =>
+                    this.handleTimeChange(moment(time).format('hh:mm A'))
+                  }
+                />
+              </MuiPickersUtilsProvider>
+            </GridItem>
+            <GridItem xs={12} sm={12}>
+              <CustomInput
+                navy
+                labelText={<span>Comments</span>}
+                id="contact_comments"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  type: 'text',
+                  multiline: true,
+                  rows: 1,
+                  name: 'contact_comments',
+                  value: contact_comments,
+                  onChange: this.onChange
+                }}
               />
-            </MuiPickersUtilsProvider>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardTimePicker
-                autoOk={true}
-                margin="normal"
-                label="Move Time"
-                mask="__:__ _M"
-                inputValue={move_time}
-                value={move_time}
-                onChange={time =>
-                  this.handleTimeChange(moment(time).format('hh:mm A'))
-                }
-              />
-            </MuiPickersUtilsProvider>
-          </GridItem>
-          <GridItem xs={12} sm={12}>
-            <CustomInput
-              navy
-              labelText={<span>Opportunity Comments</span>}
-              id="contact_comments"
-              formControlProps={{
-                fullWidth: true
-              }}
-              inputProps={{
-                type: 'text',
-                multiline: true,
-                rows: 1,
-                name: 'contact_comments',
-                value: contact_comments,
-                onChange: this.onChange
-              }}
-            />
-          </GridItem>
-        </GridContainer>
-      </>
-    );
+            </GridItem>
+          </GridContainer>
+        </>
+      );
+    } else {
+      return null;
+    }
   }
 }
 

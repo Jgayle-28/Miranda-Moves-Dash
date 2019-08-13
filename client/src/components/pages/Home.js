@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Contacts from '../contacts/Contacts';
 import AuthContext from '../../context/auth/AuthContext';
@@ -18,12 +18,12 @@ const Home = props => {
   const contactContext = useContext(ContactContext);
   const authContext = useContext(AuthContext);
   const { modalOpen, toggleModal } = authContext;
+  const [opportunity_type, setOppType] = useState('Residential Move');
 
   useEffect(() => {
     authContext.loadUser();
     //eslint-diable-next-line
   }, []);
-
   return (
     <>
       {/* <ContactFilter /> */}
@@ -51,21 +51,30 @@ const Home = props => {
         <DialogContent>
           <OpportunityStepper
             color="navy"
+            setOppType={oppType => setOppType(oppType)}
             // validate
             steps={[
               {
                 stepName: 'Opportunity Details',
                 stepComponent: OppDetailForm,
+                // (
+                //   <OppDetailForm setOppType={() => setOppType()} />
+                // ),
                 stepId: 'opportunity_details'
               },
               {
-                stepName: 'Move Details',
+                stepName:
+                  opportunity_type === 'Residential Move'
+                    ? 'Move Details'
+                    : 'Delivery Details',
                 stepComponent: MoveDetails,
                 stepId: 'move_details'
               },
               {
-                stepName: 'Estimate Details',
-                // stepComponent: MoveDetails,
+                stepName:
+                  opportunity_type === 'Residential Move'
+                    ? 'Estimate Details'
+                    : 'Item(s) Detail',
                 stepComponent: EstimateDetails,
                 stepId: 'estimate_details'
               },

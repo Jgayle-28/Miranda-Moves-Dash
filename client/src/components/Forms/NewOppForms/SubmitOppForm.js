@@ -31,7 +31,8 @@ const SubmitForm = props => {
         estimate_date: '',
         target_movedate: '',
         pu_address: '',
-        do_address: ''
+        do_address: '',
+        items: []
       });
     }
   }, [contactContext, contactContext.current]);
@@ -51,7 +52,8 @@ const SubmitForm = props => {
     estimate_date: '',
     target_movedate: '',
     pu_address: '',
-    do_address: ''
+    do_address: '',
+    items: []
   });
 
   // const onChange = e =>
@@ -81,7 +83,8 @@ const SubmitForm = props => {
         pu_address: move_details.pu_address,
         do_address: move_details.do_address,
         estimate_time: estimate_details.estimate_time,
-        estimate_date: estimate_details.estimate_date
+        estimate_date: estimate_details.estimate_date,
+        items: estimate_details.items
       };
 
       contactContext.addContact(contact);
@@ -104,7 +107,8 @@ const SubmitForm = props => {
         pu_address: move_details.pu_address,
         do_address: move_details.do_address,
         estimate_time: estimate_details.estimate_time,
-        estimate_date: estimate_details.estimate_date
+        estimate_date: estimate_details.estimate_date,
+        items: estimate_details.items
       };
       console.log(' update contact:', contact);
       contactContext.updateContact(contact);
@@ -120,7 +124,7 @@ const SubmitForm = props => {
   return (
     <>
       <Button color="navy" onClick={onSubmit}>
-        {ContactContext.current === null ? 'Add New Contact' : 'Update Contact'}
+        {contactContext.current ? 'Update Opportunity' : 'Add New Opportunity'}
       </Button>
     </>
   );

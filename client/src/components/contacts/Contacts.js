@@ -52,105 +52,217 @@ const Contacts = props => {
     clearCurrent(rowData);
   };
   const generatePdf = rowData => {
-    console.log(rowData);
-    var doc = new jsPDF();
+    if (rowData.opportunity_type === 'Residential Move') {
+      console.log(rowData);
+      var doc = new jsPDF();
 
-    const logo = MirandaLogo;
-    doc.addImage(logo, 'JPEG', 15, 6, 38, 12);
-    doc.setFontSize(8);
-    doc.text('Phone: (899) 480-4117', 137, 8);
-    doc.text('Email: customerservice@mirandadelivery.com', 137, 13);
+      const logo = MirandaLogo;
+      doc.addImage(logo, 'JPEG', 15, 6, 38, 12);
+      doc.setFontSize(8);
+      doc.text('Phone: (899) 480-4117', 137, 8);
+      doc.text('Email: customerservice@mirandadelivery.com', 137, 13);
 
-    doc.autoTable({
-      body: [
-        [
-          {
-            content: `Estimate Date: ${
-              rowData.estimate_date !== null ? rowData.estimate_date : ''
-            }`,
-            styles: { halign: 'left' }
-          },
-          {
-            content: `Estimate Time: ${
-              rowData.estimate_time !== null ? rowData.estimate_time : ''
-            }`,
-            styles: { halign: 'center' }
-          }
-        ]
-      ],
-      startY: 25
-    });
-
-    doc.autoTable({
-      headStyles: { fillColor: [5, 48, 83] },
-
-      startY: 35,
-      tableWidth: 'auto',
-      head: [
-        [
-          {
-            content: `${rowData.first_name} ${rowData.last_name}'s Details`,
-            colSpan: 5,
-            styles: { halign: 'center' }
-          }
-        ]
-      ],
-      body: [
-        ['Customer name:', `${rowData.first_name} ${rowData.last_name}`],
-        ['Phone Number:', `${rowData.phone}`],
-        ['Email:', `${rowData.email}`],
-        ['Pickup Address:', `${rowData.pu_address}`],
-        ['Dropoff Address:', `${rowData.do_address}`],
-        [
-          'Target Move Date:',
-          `${rowData.move_date !== null ? rowData.move_date : ''}`
+      doc.autoTable({
+        body: [
+          [
+            {
+              content: `Estimate Date: ${
+                rowData.estimate_date !== null ? rowData.estimate_date : ''
+              }`,
+              styles: { halign: 'left' }
+            },
+            {
+              content: `Estimate Time: ${
+                rowData.estimate_time !== null ? rowData.estimate_time : ''
+              }`,
+              styles: { halign: 'center' }
+            }
+          ]
         ],
-        ['Actual Move Date:']
-      ]
-    });
+        startY: 25
+      });
 
-    doc.autoTable({
-      headStyles: { fillColor: [5, 48, 83] },
+      doc.autoTable({
+        headStyles: { fillColor: [5, 48, 83] },
 
-      startY: 100,
-      head: [
-        [
-          {
-            content: 'Inventory',
-            colSpan: 2,
-            // rowSpan: 2,
-            styles: { halign: 'center' }
-          }
+        startY: 35,
+        tableWidth: 'auto',
+        head: [
+          [
+            {
+              content: `${rowData.first_name} ${rowData.last_name}'s Details`,
+              colSpan: 5,
+              styles: { halign: 'center' }
+            }
+          ]
+        ],
+        body: [
+          ['Customer name:', `${rowData.first_name} ${rowData.last_name}`],
+          ['Phone Number:', `${rowData.phone}`],
+          ['Email:', `${rowData.email}`],
+          ['Pickup Address:', `${rowData.pu_address}`],
+          ['Dropoff Address:', `${rowData.do_address}`],
+          [
+            'Target Move Date:',
+            `${rowData.move_date !== null ? rowData.move_date : ''}`
+          ],
+          ['Actual Move Date:']
         ]
-      ]
-    });
+      });
 
-    doc.autoTable({
-      headStyles: { fillColor: [5, 48, 83] },
+      doc.autoTable({
+        headStyles: { fillColor: [5, 48, 83] },
 
-      startY: 235,
-      head: [
-        [
-          {
-            content: 'Comments',
-            colSpan: 2,
-            // rowSpan: 2,
-            styles: { halign: 'center' }
-          }
+        startY: 100,
+        head: [
+          [
+            {
+              content: 'Inventory',
+              colSpan: 2,
+              // rowSpan: 2,
+              styles: { halign: 'center' }
+            }
+          ]
         ]
-      ],
-      body: [
-        [
-          {
-            content: `${rowData.contact_comments}`,
-            styles: { halign: 'center' }
-          }
-        ]
-        // [`${rowData.contact_comments}`]
-      ]
-    });
+      });
 
-    doc.save(`${rowData.first_name}_${rowData.last_name}'s_estimate.pdf`);
+      doc.autoTable({
+        headStyles: { fillColor: [5, 48, 83] },
+
+        startY: 235,
+        head: [
+          [
+            {
+              content: 'Comments',
+              colSpan: 2,
+              // rowSpan: 2,
+              styles: { halign: 'center' }
+            }
+          ]
+        ],
+        body: [
+          [
+            {
+              content: `${rowData.contact_comments}`,
+              styles: { halign: 'center' }
+            }
+          ]
+          // [`${rowData.contact_comments}`]
+        ]
+      });
+
+      doc.save(`${rowData.first_name}_${rowData.last_name}'s_estimate.pdf`);
+    }
+    // For every opportunity type besides res move
+    else {
+      console.log(rowData);
+      var doc = new jsPDF();
+
+      const logo = MirandaLogo;
+      doc.addImage(logo, 'JPEG', 15, 6, 38, 12);
+      doc.setFontSize(8);
+      doc.text('Phone: (899) 480-4117', 137, 8);
+      doc.text('Email: customerservice@mirandadelivery.com', 137, 13);
+
+      // doc.autoTable({
+      //   body: [
+      //     [
+      //       {
+      //         content: `Delivery Date: ${
+      //           rowData.estimate_date !== null
+      //             ? rowData.estimate_date
+      //             : ''
+      //         }`,
+      //         styles: { halign: 'left' }
+      //       },
+      //       {
+      //         content: `Delivery Time: ${
+      //           rowData.estimate_time !== null
+      //             ? rowData.estimate_time
+      //             : ''
+      //         }`,
+      //         styles: { halign: 'center' }
+      //       }
+      //     ]
+      //   ],
+      //   startY: 25
+      // });
+
+      doc.autoTable({
+        headStyles: { fillColor: [5, 48, 83] },
+
+        startY: 35,
+        tableWidth: 'auto',
+        head: [
+          [
+            {
+              content: `${rowData.first_name} ${rowData.last_name}'s Details`,
+              colSpan: 5,
+              styles: { halign: 'center' }
+            }
+          ]
+        ],
+        body: [
+          ['Customer name:', `${rowData.first_name} ${rowData.last_name}`],
+          ['Phone Number:', `${rowData.phone}`],
+          ['Email:', `${rowData.email}`],
+          ['Pickup Address:', `${rowData.pu_address}`],
+          ['Dropoff Address:', `${rowData.do_address}`],
+          [
+            'Delivery Date:',
+            `${rowData.move_date !== null ? rowData.move_date : ''}`
+          ],
+          [
+            'Delivery Time:',
+            `${rowData.move_time !== null ? rowData.time : ''}`
+          ]
+        ]
+      });
+      // map through passed in items and create body cells for each
+      let body = rowData.items.map((i, item) => [item, i + 1]);
+      doc.autoTable({
+        headStyles: { fillColor: [5, 48, 83] },
+
+        startY: 100,
+        head: [
+          [
+            {
+              content: 'Item(s) Inventory',
+              colSpan: 2,
+              styles: { halign: 'center' }
+            }
+          ]
+        ],
+        body: body
+      });
+
+      doc.autoTable({
+        headStyles: { fillColor: [5, 48, 83] },
+
+        startY: 235,
+        head: [
+          [
+            {
+              content: 'Comments',
+              colSpan: 2,
+              // rowSpan: 2,
+              styles: { halign: 'center' }
+            }
+          ]
+        ],
+        body: [
+          [
+            {
+              content: `${rowData.contact_comments}`,
+              styles: { halign: 'center' }
+            }
+          ]
+          // [`${rowData.contact_comments}`]
+        ]
+      });
+
+      doc.save(`${rowData.first_name}_${rowData.last_name}'s.pdf`);
+    }
   };
   const Description = () => {
     return <Description />;
