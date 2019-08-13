@@ -45,7 +45,9 @@ const DisplayEstimateDetail = ({ type, estimate_details }) => {
         </h3>
 
         {estimate_details.items.map((item, i) => (
-          <li key={i}>{item}</li>
+          <li key={i} id={i}>
+            {item.item_qty} - {item.item}
+          </li>
         ))}
       </>
     );

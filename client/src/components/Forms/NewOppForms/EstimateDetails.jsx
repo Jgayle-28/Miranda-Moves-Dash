@@ -20,6 +20,7 @@ import customCheckboxRadioSwitch from '../../../assets/jss/material-dashboard-pr
 import moment from 'moment';
 import ContactContext from '../../../context/contact/ContactContext';
 import CustomInput from '../../components/CustomInput/CustomInput.jsx';
+import uuid from 'uuid';
 
 const style = {
   infoText: {
@@ -47,6 +48,7 @@ class MoveDetailForm extends React.Component {
       estimate_time: null,
       opportunity_type: '',
       item: '',
+      item_qty: '',
       items: []
     };
   }
@@ -94,11 +96,16 @@ class MoveDetailForm extends React.Component {
   };
   addItem = () => {
     let itemArr = [...this.state.items];
-    itemArr.push(this.state.item);
+    let itemObj = {
+      item_qty: this.state.item_qty,
+      item: this.state.item
+    };
+    itemArr.push(itemObj);
     console.log(itemArr);
     this.setState({
       items: itemArr,
-      item: ''
+      item: '',
+      item_qty: ''
     });
   };
   render() {
@@ -172,6 +179,20 @@ class MoveDetailForm extends React.Component {
                   value: this.state.item
                 }}
               />
+              <CustomInput
+                navy
+                labelText={<span>Add Item Quantity</span>}
+                id="item_qty"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: this.onChange,
+                  type: 'text',
+                  name: 'item_qty',
+                  value: this.state.item_qty
+                }}
+              />
               <Button color="navy" onClick={this.addItem}>
                 Add Item
               </Button>
@@ -181,7 +202,9 @@ class MoveDetailForm extends React.Component {
                 Items to be picked up / delivered
               </h3>
               {this.state.items.map((item, i) => (
-                <li key={i}>{item}</li>
+                <li key={i} id={i}>
+                  {item.item_qty} - {item.item}
+                </li>
               ))}
             </GridItem>
           </GridContainer>

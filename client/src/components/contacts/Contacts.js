@@ -214,12 +214,16 @@ const Contacts = props => {
           ],
           [
             'Delivery Time:',
-            `${rowData.move_time !== null ? rowData.time : ''}`
+            `${rowData.move_time !== null ? rowData.move_time : ''}`
           ]
         ]
       });
       // map through passed in items and create body cells for each
-      let body = rowData.items.map((i, item) => [item, i + 1]);
+      let body = rowData.items.map((itemObj, i) => [
+        itemObj.item_qty,
+        itemObj.item
+      ]);
+      console.log(body);
       doc.autoTable({
         headStyles: { fillColor: [5, 48, 83] },
 
