@@ -13,12 +13,20 @@ import 'date-fns';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
 import GridItem from '../../components/Grid/GridItem.jsx';
 import CustomInput from '../../components/CustomInput/CustomInput.jsx';
+import CustomSelect from '../../../components/components/Selects/CustomSelect.jsx';
 import customSelectStyle from '../../../assets/jss/material-dashboard-pro-react/customSelectStyle.jsx';
 import customCheckboxRadioSwitch from '../../../assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.jsx';
 import moment from 'moment';
 import './geo.css';
 import Geosuggest from 'react-geosuggest';
 import ContactContext from '../../../context/contact/ContactContext';
+
+const pay_types = [
+  { label: 'COD', value: 'COD' },
+  { label: 'TBB', value: 'TBB' },
+  { label: 'Trade', value: 'Trade' },
+  { label: 'Other', value: 'Other' }
+];
 
 const style = {
   infoText: {
@@ -143,7 +151,7 @@ class MoveDetailForm extends React.Component {
                   radius={20}
                 />
               </div>
-              <CustomInput
+              {/* <CustomInput
                 navy
                 labelText={<span>Payment Type</span>}
                 id="payment_type"
@@ -156,6 +164,15 @@ class MoveDetailForm extends React.Component {
                   value: payment_type,
                   onChange: this.onChange
                 }}
+              /> */}
+              <CustomSelect
+                fullWidth
+                onChange={this.onChange}
+                menuItems={pay_types}
+                selectedValue={payment_type}
+                firstItem={'Select Opportunity Type'}
+                name="payment_type"
+                label={<span>Select Payment Type</span>}
               />
             </GridItem>
             {/* Row 2 */}
@@ -194,20 +211,22 @@ class MoveDetailForm extends React.Component {
                   }
                 />
               </MuiPickersUtilsProvider>
-              <CustomInput
-                navy
-                labelText={<span>Bill To</span>}
-                id="bill_to"
-                formControlProps={{
-                  fullWidth: true
-                }}
-                inputProps={{
-                  type: 'text',
-                  name: 'bill_to',
-                  value: bill_to,
-                  onChange: this.onChange
-                }}
-              />
+              <div style={{ marginTop: '.5rem' }}>
+                <CustomInput
+                  navy
+                  labelText={<span>Bill To</span>}
+                  id="bill_to"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                  inputProps={{
+                    type: 'text',
+                    name: 'bill_to',
+                    value: bill_to,
+                    onChange: this.onChange
+                  }}
+                />
+              </div>
             </GridItem>
             <GridItem xs={12} sm={12}>
               <CustomInput

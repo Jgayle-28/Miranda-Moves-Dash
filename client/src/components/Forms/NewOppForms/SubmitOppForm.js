@@ -100,6 +100,7 @@ const SubmitForm = props => {
       console.log(contact);
     } else {
       const contact = {
+        _id: opportunity_details._id,
         opportunity_type: opportunity_details.opportunity_type,
         first_name: opportunity_details.first_name,
         last_name: opportunity_details.last_name,
@@ -125,11 +126,7 @@ const SubmitForm = props => {
       toggleModal(false);
     }
   };
-
-  // const clearAll = () => {
-  //   contactContext.clearCurrent();
-  // };
-
+  // console.log('update info', props.allStates);
   return (
     <>
       <Button color="navy" onClick={onSubmit}>
@@ -142,46 +139,3 @@ SubmitForm.propTypes = {
   allStates: PropTypes.object.isRequired
 };
 export default SubmitForm;
-
-// useEffect(() => {
-//   if (contactContext.current !== null) {
-//     setContact(contactContext.current);
-//   } else {
-//     setContact({
-//       opportunity_type: '',
-//       first_name: '',
-//       last_name: '',
-//       email: '',
-//       phone: '',
-//       phone_type: '',
-//       phone_ext: '',
-//       refered_by: '',
-//       move_date: '',
-//       move_time: '',
-//       contact_comments: '',
-//       estimate_time: '',
-//       estimate_date: '',
-//       target_movedate: '',
-//       pu_address: '',
-//       do_address: ''
-//     });
-//   }
-// }, [contactContext, contactContext.current]);
-// const [contact, setContact] = useState({
-//   opportunity_type: '',
-//   first_name: '',
-//   last_name: '',
-//   email: '',
-//   phone: '',
-//   phone_type: '',
-//   phone_ext: '',
-//   refered_by: '',
-//   move_date: '',
-//   move_time: '',
-//   contact_comments: '',
-//   estimate_time: '',
-//   estimate_date: '',
-//   target_movedate: '',
-//   pu_address: '',
-//   do_address: ''
-// });

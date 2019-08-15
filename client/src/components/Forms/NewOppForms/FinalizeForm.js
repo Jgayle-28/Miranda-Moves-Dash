@@ -11,9 +11,14 @@ class FinalizeForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      contact: null,
-      finalized: null
+      // contact: null,
+      finalized: true
     };
+  }
+  componentDidUpdate() {
+    // if (this.state.allStates !== this.props.allStates) {
+    //   this.setState({ allStates: this.props.allStates });
+    // }
   }
   sendState() {
     return this.state;
@@ -31,7 +36,6 @@ class FinalizeForm extends React.Component {
         move_details,
         estimate_details
       } = this.props.allStates;
-      // const { first_name, last_name } = this.props.allStates.opportunity_details;
       return (
         <>
           <GridContainer

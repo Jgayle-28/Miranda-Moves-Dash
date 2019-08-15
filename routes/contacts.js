@@ -56,12 +56,17 @@ router.post(
       phone_ext,
       refered_by,
       move_date,
+      move_time,
       contact_comments,
       estimate_time,
       estimate_date,
       target_movedate,
       pu_address,
-      do_address
+      do_address,
+      items,
+      alt_phone,
+      payment_type,
+      bill_to
     } = req.body; //destructure from the body of the request
 
     try {
@@ -76,12 +81,17 @@ router.post(
         phone_ext,
         refered_by,
         move_date,
+        move_time,
         contact_comments,
         estimate_time,
         estimate_date,
         target_movedate,
         pu_address,
         do_address,
+        items,
+        alt_phone,
+        payment_type,
+        bill_to,
         user: req.user.id
       });
 
@@ -111,12 +121,17 @@ router.put('/:id', auth, async (req, res) => {
     phone_ext,
     refered_by,
     move_date,
+    move_time,
     contact_comments,
     estimate_time,
     estimate_date,
     target_movedate,
     pu_address,
-    do_address
+    do_address,
+    items,
+    alt_phone,
+    payment_type,
+    bill_to
   } = req.body; //destructure from the body of the request
 
   // Build a contact object
@@ -128,14 +143,19 @@ router.put('/:id', auth, async (req, res) => {
   if (phone) contactFields.phone = phone;
   if (phone_type) contactFields.phone_type = phone_type;
   if (phone_ext) contactFields.phone_ext = phone_ext;
-  if (refered_by) contactFields.referedby = refered_by;
-  if (move_date) contactFields.moved_ate = moved_ate;
+  if (refered_by) contactFields.refered_by = refered_by;
+  if (move_date) contactFields.move_date = move_date;
+  if (move_time) contactFields.move_time = move_time;
   if (contact_comments) contactFields.contact_comments = contact_comments;
   if (estimate_time) contactFields.estimate_time = estimate_time;
   if (estimate_date) contactFields.estimate_date = estimate_date;
   if (target_movedate) contactFields.target_movedate = target_movedate;
   if (pu_address) contactFields.pu_address = pu_address;
   if (do_address) contactFields.do_address = do_address;
+  if (items) contactFields.items = items;
+  if (alt_phone) contactFields.alt_phone = alt_phone;
+  if (payment_type) contactFields.payment_type = payment_type;
+  if (bill_to) contactFields.bill_to = bill_to;
 
   try {
     // find the contact by id

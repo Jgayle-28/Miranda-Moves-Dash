@@ -54,7 +54,7 @@ const Navbar = ({ title, icon }) => {
 
   return (
     <>
-      <div className="navbar bg-blue-grey">
+      <div className="navbar bg-blue-grey-dark">
         <h1>
           <img
             src={logo_white}

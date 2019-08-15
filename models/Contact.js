@@ -5,9 +5,8 @@ const ContactSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users'
   },
-  contact_type: {
-    type: String,
-    required: true
+  opportunity_type: {
+    type: String
   },
   first_name: {
     type: String,
@@ -33,7 +32,10 @@ const ContactSchema = mongoose.Schema({
     type: String
   },
   move_date: {
-    type: Date
+    type: String
+  },
+  move_time: {
+    type: String
   },
   contact_comments: {
     type: String
@@ -42,17 +44,39 @@ const ContactSchema = mongoose.Schema({
     type: String
   },
   estimate_date: {
-    type: Date
+    type: String
   },
   target_movedate: {
-    type:Date,
+    type: ''
   },
   pu_address: {
     type: String
   },
   do_address: {
     type: String
-  }
+  },
+  items: [
+    {
+      item_id: {
+        type: String
+      },
+      item: {
+        type: String
+      },
+      item_qty: {
+        type: String
+      }
+    }
+  ],
+  alt_phone: {
+    type: String
+  },
+  payment_type: {
+    type: String
+  },
+  bill_to: {
+    type: String
+  },
   // begin estimate info
   // moveinfo: {
   //   from: {

@@ -25,7 +25,7 @@
 .geosuggest__input:focus {
   outline: none;
   border: none;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid #01579b;
 }
 .geosuggest__suggests {
   position: absolute;

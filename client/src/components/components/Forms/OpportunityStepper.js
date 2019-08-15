@@ -42,7 +42,8 @@ class Wizard extends React.Component {
       movingTabStyle: {
         transition: 'transform 0s'
       },
-      allStates: {}
+      allStates: {},
+      hidePrevBtn: false
     };
     this.navigationStepChange = this.navigationStepChange.bind(this);
     this.refreshAnimation = this.refreshAnimation.bind(this);
@@ -53,6 +54,7 @@ class Wizard extends React.Component {
   }
   wizard = React.createRef();
   componentDidUpdate() {
+    // Set opportunity type for conditional rendering -> setOppType passed in from Contacts as prop
     if (Object.keys(this.state.allStates).length > 0) {
       if (this.state.allStates.opportunity_details.opportunity_type !== '') {
         this.props.setOppType(
@@ -244,6 +246,12 @@ class Wizard extends React.Component {
   }
 
   render() {
+    console.log('currentStep:', this.state.currentStep);
+    console.log('hidePrevBtn:', this.state.hidePrevBtn);
+    console.log(
+      'step id: ',
+      this[this.props.steps[this.state.currentStep].stepId]
+    );
     const { classes, title, color, steps } = this.props;
     return (
       <GridContainer justify="center">
@@ -302,13 +310,17 @@ class Wizard extends React.Component {
               </div>
               <div className={classes.footer}>
                 <div className={classes.left}>
-                  {this.state.previousButton ? (
-                    <Button
-                      className={this.props.previousButtonClasses}
-                      onClick={() => this.previousButtonClick()}
-                    >
-                      {this.props.previousButtonText}
-                    </Button>
+                  {this.state.currentStep <= 2 ? (
+                    <span>
+                      {this.state.previousButton ? (
+                        <Button
+                          className={this.props.previousButtonClasses}
+                          onClick={() => this.previousButtonClick()}
+                        >
+                          {this.props.previousButtonText}
+                        </Button>
+                      ) : null}
+                    </span>
                   ) : null}
                 </div>
                 <div className={classes.right}>

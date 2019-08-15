@@ -54,7 +54,9 @@ class OppDetailForm extends React.Component {
       refered_by: '',
       first_nameState: '',
       last_nameState: '',
-      phoneState: ''
+      emailState: '',
+      phoneState: '',
+      _id: ''
     };
   }
   static contextType = ContactContext;
@@ -75,6 +77,7 @@ class OppDetailForm extends React.Component {
         alt_phone: contacts.current.alt_phone
       });
     }
+
     // if (this.state.opportunity_type !== '') {
     //   this.props.setOppType(this.state.opportunity_type);
     // }
@@ -141,6 +144,9 @@ class OppDetailForm extends React.Component {
       }
       if (this.state.phoneState !== 'success') {
         this.setState({ phoneState: 'error' });
+      }
+      if (this.state.emailState !== 'success') {
+        this.setState({ emailState: 'error' });
       }
     }
     return false;
@@ -240,6 +246,8 @@ class OppDetailForm extends React.Component {
             }}
           />
           <CustomInput
+            success={this.state.emailState === 'success'}
+            error={this.state.emailState === 'error'}
             navy
             id="email"
             labelText={
@@ -247,7 +255,7 @@ class OppDetailForm extends React.Component {
                 Email <small>(required)</small>
               </span>
             }
-            onChange={this.onChange}
+            // onChange={this.onChange}
             formControlProps={{
               fullWidth: true,
               required: true
@@ -265,7 +273,7 @@ class OppDetailForm extends React.Component {
               type: 'email',
               name: 'email',
               value: email,
-              onChange: this.onChange
+              onChange: event => this.change(event, 'email', 'email')
             }}
           />
         </GridItem>

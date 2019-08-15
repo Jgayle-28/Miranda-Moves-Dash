@@ -57,9 +57,6 @@ const Home = props => {
               {
                 stepName: 'Opportunity Details',
                 stepComponent: OppDetailForm,
-                // (
-                //   <OppDetailForm setOppType={() => setOppType()} />
-                // ),
                 stepId: 'opportunity_details'
               },
               {

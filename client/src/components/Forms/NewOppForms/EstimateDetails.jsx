@@ -59,7 +59,8 @@ class MoveDetailForm extends React.Component {
     if (contacts.current !== null) {
       this.setState({
         estimate_date: contacts.current.estimate_date,
-        estimate_time: contacts.current.estimate_time
+        estimate_time: contacts.current.estimate_time,
+        items: contacts.current.items
       });
     }
   }
