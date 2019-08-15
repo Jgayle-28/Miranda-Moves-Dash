@@ -50,7 +50,7 @@ class OppDetailForm extends React.Component {
       email: '',
       phone: '',
       phone_type: '',
-      phone_ext: '',
+      alt_phone: '',
       refered_by: '',
       first_nameState: '',
       last_nameState: '',
@@ -71,7 +71,8 @@ class OppDetailForm extends React.Component {
         phone: contacts.current.phone,
         phone_type: contacts.current.phone_type,
         phone_ext: contacts.current.phone_ext,
-        refered_by: contacts.current.refered_by
+        refered_by: contacts.current.refered_by,
+        alt_phone: contacts.current.alt_phone
       });
     }
     // if (this.state.opportunity_type !== '') {
@@ -117,7 +118,7 @@ class OppDetailForm extends React.Component {
         break;
     }
     // Changes format of phone number before setting state
-    if (event.target.name === 'phone') {
+    if (event.target.name === 'phone' || event.target.name === 'alt_phone') {
       event.target.value = event.target.value
         .replace(/[^\d]+/g, '')
         .replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
@@ -158,7 +159,7 @@ class OppDetailForm extends React.Component {
       email,
       phone,
       phone_type,
-      phone_ext,
+      alt_phone,
       refered_by
     } = this.state;
     return (
@@ -325,16 +326,16 @@ class OppDetailForm extends React.Component {
           />
           <CustomInput
             navy
-            labelText={<span>Phone Ext</span>}
-            id="phone_ext"
+            labelText={<span>Alternate Phone Number</span>}
+            id="alt_phone"
             formControlProps={{
               fullWidth: true
             }}
             inputProps={{
               type: 'text',
-              name: 'phone_ext',
-              value: phone_ext,
-              onChange: this.onChange
+              name: 'alt_phone',
+              value: alt_phone,
+              onChange: event => this.change(event, 'alt_phone', 'length', 10)
             }}
           />
         </GridItem>

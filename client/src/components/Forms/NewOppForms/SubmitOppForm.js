@@ -32,7 +32,10 @@ const SubmitForm = props => {
         target_movedate: '',
         pu_address: '',
         do_address: '',
-        items: []
+        items: [],
+        alt_phone: '',
+        payment_type: '',
+        bill_to: ''
       });
     }
   }, [contactContext, contactContext.current]);
@@ -53,7 +56,10 @@ const SubmitForm = props => {
     target_movedate: '',
     pu_address: '',
     do_address: '',
-    items: []
+    items: [],
+    alt_phone: '',
+    payment_type: '',
+    bill_to: ''
   });
 
   // const onChange = e =>
@@ -75,13 +81,15 @@ const SubmitForm = props => {
         email: opportunity_details.email,
         phone: opportunity_details.phone,
         phone_type: opportunity_details.phone_type,
-        phone_ext: opportunity_details.phone_ext,
+        alt_phone: opportunity_details.alt_phone,
         refered_by: opportunity_details.refered_by,
         move_date: move_details.move_date,
         move_time: move_details.move_time,
         contact_comments: move_details.contact_comments,
         pu_address: move_details.pu_address,
         do_address: move_details.do_address,
+        payment_type: move_details.payment_type,
+        bill_to: move_details.bill_to,
         estimate_time: estimate_details.estimate_time,
         estimate_date: estimate_details.estimate_date,
         items: estimate_details.items
@@ -92,20 +100,21 @@ const SubmitForm = props => {
       console.log(contact);
     } else {
       const contact = {
-        _id: opportunity_details._id,
         opportunity_type: opportunity_details.opportunity_type,
         first_name: opportunity_details.first_name,
         last_name: opportunity_details.last_name,
         email: opportunity_details.email,
         phone: opportunity_details.phone,
         phone_type: opportunity_details.phone_type,
-        phone_ext: opportunity_details.phone_ext,
+        alt_phone: opportunity_details.alt_phone,
         refered_by: opportunity_details.refered_by,
         move_date: move_details.move_date,
         move_time: move_details.move_time,
         contact_comments: move_details.contact_comments,
         pu_address: move_details.pu_address,
         do_address: move_details.do_address,
+        payment_type: move_details.payment_type,
+        bill_to: move_details.bill_to,
         estimate_time: estimate_details.estimate_time,
         estimate_date: estimate_details.estimate_date,
         items: estimate_details.items

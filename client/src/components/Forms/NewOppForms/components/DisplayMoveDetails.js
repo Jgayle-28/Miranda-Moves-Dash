@@ -34,6 +34,7 @@ const DisplayMoveDetail = ({ type, move_details }) => {
           </p>
         )}
         <br />
+
         {move_details.move_time && (
           <p>
             <b>Move Time: </b> <small> {move_details.move_time}</small>
@@ -41,9 +42,25 @@ const DisplayMoveDetail = ({ type, move_details }) => {
         )}
         <br />
 
+        {move_details.payment_type && (
+          <p>
+            <b>Payment Type: </b>
+            <small> {move_details.payment_type}</small>
+          </p>
+        )}
+        <br />
+
+        {move_details.bill_to && (
+          <p>
+            <b>Bill To: </b> <small> {move_details.bill_to}</small>
+          </p>
+        )}
+        <br />
+
         {move_details.contact_comments && (
           <p>
-            <b>Comments: </b> <small> {move_details.contact_comments}</small>
+            <b>Comments: </b>
+            <small> {move_details.contact_comments}</small>
           </p>
         )}
         <br />

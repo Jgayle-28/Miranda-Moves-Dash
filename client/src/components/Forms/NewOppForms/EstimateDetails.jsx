@@ -108,6 +108,25 @@ class MoveDetailForm extends React.Component {
       item_qty: ''
     });
   };
+  onDeleteItem = e => {
+    console.log(e.target.value);
+    this.setState({
+      items: this.state.items.filter(item => item.item !== e.target.value.item)
+    });
+    // let itemsArr = [...this.state.items];
+    // let index = itemsArr.indexOf(e.target.value);
+    // if (index !== -1) {
+    //   itemsArr.splice(index, 1);
+    //   this.setState({ items: itemsArr });
+    // }
+    // let newItemList = this.state.items.filter(
+    //   el => el.item !== e.target.value.item
+    // );
+    // console.log(newItemList);
+    // this.setState(prevState => ({
+    //   items: prevState.items.filter(el => el !== e.target.value)
+    // }));
+  };
   render() {
     const { estimate_date, estimate_time } = this.state;
     const { allStates } = this.props;
@@ -202,8 +221,22 @@ class MoveDetailForm extends React.Component {
                 Items to be picked up / delivered
               </h3>
               {this.state.items.map((item, i) => (
-                <li key={i} id={i}>
+                <li
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                  key={i}
+                  id={i}
+                >
                   {item.item_qty} - {item.item}
+                  {/* <span
+                    style={{
+                      color: 'red',
+                      cursor: 'pointer',
+                      marginRight: '1rem'
+                    }}
+                    onClick={e => this.onDeleteItem(e)}
+                  >
+                    X
+                  </span> */}
                 </li>
               ))}
             </GridItem>

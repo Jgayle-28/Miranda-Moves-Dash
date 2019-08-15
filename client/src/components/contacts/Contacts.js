@@ -99,7 +99,10 @@ const Contacts = props => {
         body: [
           ['Customer name:', `${rowData.first_name} ${rowData.last_name}`],
           ['Phone Number:', `${rowData.phone}`],
+          ['Alternate Phone Number:', `${rowData.alt_phone}`],
           ['Email:', `${rowData.email}`],
+          ['Payment Type:', `${rowData.payment_type}`],
+          ['Bill To:', `${rowData.bill_to}`],
           ['Pickup Address:', `${rowData.pu_address}`],
           ['Dropoff Address:', `${rowData.do_address}`],
           [
@@ -113,7 +116,7 @@ const Contacts = props => {
       doc.autoTable({
         headStyles: { fillColor: [5, 48, 83] },
 
-        startY: 100,
+        startY: 118,
         head: [
           [
             {
@@ -205,7 +208,10 @@ const Contacts = props => {
         body: [
           ['Customer name:', `${rowData.first_name} ${rowData.last_name}`],
           ['Phone Number:', `${rowData.phone}`],
+          ['Alternate Phone Number:', `${rowData.alt_phone}`],
           ['Email:', `${rowData.email}`],
+          ['Payment Type:', `${rowData.payment_type}`],
+          ['Bill To:', `${rowData.bill_to}`],
           ['Pickup Address:', `${rowData.pu_address}`],
           ['Dropoff Address:', `${rowData.do_address}`],
           [
@@ -218,6 +224,8 @@ const Contacts = props => {
           ]
         ]
       });
+
+      // FOR ITEMS OF DESIGNER, PROD DIST, STORE FROM
       // map through passed in items and create body cells for each
       let body = rowData.items.map((itemObj, i) => [
         itemObj.item_qty,
@@ -227,7 +235,7 @@ const Contacts = props => {
       doc.autoTable({
         headStyles: { fillColor: [5, 48, 83] },
 
-        startY: 100,
+        startY: 118,
         head: [
           [
             {

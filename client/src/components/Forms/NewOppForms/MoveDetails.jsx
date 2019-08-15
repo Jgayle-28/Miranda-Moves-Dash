@@ -46,9 +46,12 @@ class MoveDetailForm extends React.Component {
       move_time: null,
       pu_address: '',
       do_address: '',
-      contact_comments: ''
+      contact_comments: '',
+      payment_type: '',
+      bill_to: ''
     };
   }
+  // Context
   static contextType = ContactContext;
 
   componentDidMount() {
@@ -59,7 +62,9 @@ class MoveDetailForm extends React.Component {
         move_time: contacts.current.move_time,
         pu_address: contacts.current.pu_address,
         do_address: contacts.current.do_address,
-        contact_comments: contacts.current.contact_comments
+        contact_comments: contacts.current.contact_comments,
+        payment_type: contacts.current.payment_type,
+        bill_to: contacts.current.bill_to
       });
     }
   }
@@ -96,7 +101,9 @@ class MoveDetailForm extends React.Component {
       move_time,
       pu_address,
       do_address,
-      contact_comments
+      contact_comments,
+      payment_type,
+      bill_to
     } = this.state;
     const { allStates } = this.props;
     if (Object.keys(allStates).length > 0) {
@@ -136,22 +143,20 @@ class MoveDetailForm extends React.Component {
                   radius={20}
                 />
               </div>
-
-              {/* <CustomInput
-              navy
-              id="do_address"
-              labelText={<span>Drop Off Address</span>}
-              onChange={this.onChange}
-              formControlProps={{
-                fullWidth: true
-              }}
-              inputProps={{
-                type: 'text',
-                name: 'do_address',
-                value: do_address,
-                onChange: this.onChange
-              }}
-            /> */}
+              <CustomInput
+                navy
+                labelText={<span>Payment Type</span>}
+                id="payment_type"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  type: 'text',
+                  name: 'payment_type',
+                  value: payment_type,
+                  onChange: this.onChange
+                }}
+              />
             </GridItem>
             {/* Row 2 */}
             <GridItem xs={12} sm={6}>
@@ -189,6 +194,20 @@ class MoveDetailForm extends React.Component {
                   }
                 />
               </MuiPickersUtilsProvider>
+              <CustomInput
+                navy
+                labelText={<span>Bill To</span>}
+                id="bill_to"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  type: 'text',
+                  name: 'bill_to',
+                  value: bill_to,
+                  onChange: this.onChange
+                }}
+              />
             </GridItem>
             <GridItem xs={12} sm={12}>
               <CustomInput

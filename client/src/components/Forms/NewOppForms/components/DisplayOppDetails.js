@@ -48,10 +48,10 @@ const DisplayOppDetail = ({ opportunity_details }) => {
       )}
       <br />
 
-      {opportunity_details.phone_ext && (
+      {opportunity_details.alt_phone && (
         <p>
-          <b>Phone Extension: </b>{' '}
-          <small> {opportunity_details.phone_ext}</small>
+          <b>Alternate Phone Number: </b>{' '}
+          <small> {opportunity_details.alt_phone}</small>
         </p>
       )}
       <br />
