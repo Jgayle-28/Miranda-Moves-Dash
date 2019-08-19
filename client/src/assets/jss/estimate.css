@@ -1,0 +1,57 @@
+/******* For Inventory *******/
+.estimate__item {
+  margin-top: -1px;
+  width: 100%;
+  padding: 5px 20px;
+  color: #546e7a;
+  border: 1px solid #b0bec5;
+  /* border-bottom: 0.5px; */
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+.estimate__item:first-child {
+  margin-top: 0;
+}
+.estimate__item-specs {
+  /* color: #0d47a1; */
+}
+.estimate__item:hover {
+  cursor: pointer;
+  color: #fff;
+  background: #b0bec5;
+}
+/******* For Display Estimate totals *******/
+.dashboard-table,
+.dashboard-table-header {
+  display: grid;
+  /* grid-template-columns: 400px 150px 150px 150px 150px; */
+  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  max-width: 1000px;
+  min-width: 700px;
+  margin: 0 auto;
+}
+
+.dashboard-table-header p {
+  margin-bottom: 0;
+  color: #fff;
+}
+.dashboard-table-header {
+  color: #fff;
+  background: #37474f;
+}
+.header-item {
+  padding: 15px 10px;
+  border-right: 1px solid #fff;
+}
+.header-item:last-child {
+  border-right: 0;
+}
+.table-item {
+  padding: 3px 10px;
+  border: 1px solid #37474f;
+  margin-left: -1px;
+}
+.table-item:first-child {
+  margin-left: 0;
+}

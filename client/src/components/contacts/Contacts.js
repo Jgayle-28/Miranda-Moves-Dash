@@ -302,7 +302,7 @@ const Contacts = props => {
                     {
                       icon: 'delete',
                       iconProps: { color: 'error', fontSize: 'small' },
-                      tooltip: 'Delete Contact',
+                      tooltip: 'Delete Opportunity',
                       onClick: (e, rowData) => {
                         onDelete(rowData);
                       }
@@ -310,7 +310,7 @@ const Contacts = props => {
                     {
                       icon: 'edit',
                       iconProps: { color: 'action', fontSize: 'small' },
-                      tooltip: 'Edit Contact',
+                      tooltip: 'Edit Opportunity',
                       onClick: (e, rowData) => {
                         onEditClick(rowData);
                       }
@@ -318,7 +318,7 @@ const Contacts = props => {
                     {
                       icon: 'cloud_download',
                       iconProps: { color: 'inherit', fontSize: 'small' },
-                      tooltip: 'Download Estimate Pdf',
+                      tooltip: 'Opportunity Pdf',
                       onClick: (e, rowData) => {
                         generatePdf(rowData);
                       }
@@ -326,7 +326,7 @@ const Contacts = props => {
                     {
                       icon: 'list_alt',
                       iconProps: { color: 'primary', fontSize: 'small' },
-                      tooltip: 'Create Estimate',
+                      tooltip: 'Estimate',
                       onClick: (e, rowData) => createEstimate(rowData)
                     }
                   ]}

@@ -141,12 +141,15 @@ class NavPills extends React.Component {
                 background: '#003A6C',
                 color: '#fff',
                 textAlign: 'center',
-                padding: '.5rem',
+                padding: '.5rem 20px',
                 boxShadow:
-                  '0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0,0,0, 0.12), 0 8px 10px -5px rgba(0,0,0, 0.2)'
+                  '0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0,0,0, 0.12), 0 8px 10px -5px rgba(0,0,0, 0.2)',
+                display: 'flex',
+                justifyContent: 'space-between'
               }}
             >
-              Item List
+              <span>Item List</span>
+              <span>Weight (LBS) / Volume (CFT)</span>
             </div>
           </GridItem>
         </GridContainer>

@@ -7,6 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import EstimateItemTable from './EstimateItemTable';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -86,21 +87,24 @@ export default function FullWidthTabs(props) {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
+          {/* to display items and totals in table */}
+          <EstimateItemTable />
+
           {/* {inventory &&
             inventory.map((item, i) => <li key={i}>{item.name}</li>)} */}
         </TabPanel>
-        {/***** UNCOMMENT TO CREATE TAB PANELS ******/}
-
-        {/* {inventory &&
+        {/***** ROOM PANELS ******/}
+        {inventory &&
           // map through inventory
           inventory.map((room, i) => (
-            // map through the rooms
+            // map through the rooms create a panel and table pass in items
             <TabPanel key={i} value={value} index={i + 1} dir={theme.direction}>
-              {room.items.map((item, i) => (
+              <EstimateItemTable items={room.items} />
+              {/* {room.items.map((item, i) => (
                 <li key={i}>{item.name}</li>
-              ))}
+              ))} */}
             </TabPanel>
-          ))} */}
+          ))}
 
         {/* <TabPanel value={value} index={2} dir={theme.direction}>
           Item Three

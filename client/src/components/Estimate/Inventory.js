@@ -4,6 +4,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridContainer from '../components/Grid/GridContainer.jsx';
 import GridItem from '../components/Grid/GridItem.jsx';
+import Snackbars from '../components/Snackbar/Snackbar.jsx';
+import AddAlert from '@material-ui/icons/AddAlert';
 // import Accordion from '../components/Accordion/Accordion.jsx';
 import Card from '../components/Card/Card.jsx';
 import CardHeader from '../components/Card/CardHeader.jsx';
@@ -20,24 +22,9 @@ class Estimate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inventory: [
-        // {
-        //   roomName: 'Family Room',
-        //   items: [
-        //     { name: 'chair', itemAmt: 4, volume: 30, weight: 50 },
-        //     { name: 'table', itemAmt: 1, volume: 30, weight: 50 },
-        //     { name: 'buffet', itemAmt: 1, volume: 30, weight: 50 }
-        //   ]
-        // },
-        // {
-        //   roomName: 'Dining Room',
-        //   items: [
-        //     { name: 'Couch', itemAmt: 4, volume: 30, weight: 50 },
-        //     { name: 'Love seat', itemAmt: 1, volume: 30, weight: 50 },
-        //     { name: 'Coffee table', itemAmt: 1, volume: 30, weight: 50 }
-        //   ]
-        // }
-      ]
+      inventory: [],
+      alert: false,
+      itemAdded: ''
     };
   }
   static propTypes = {
@@ -51,6 +38,14 @@ class Estimate extends Component {
   // checkItem = (obj, list) => {
   //   return list.some(elem => elem.name === obj.name);
   // };
+  // TODO make itemAdded an array and them map through each item and display notification
+  showNotification = () => {
+    if (!this.alert) {
+      this.setState({ alert: !this.state.alert });
+      // use this to make the notification autoclose
+      setTimeout(() => this.setState({ alert: !this.state.alert }), 1000);
+    }
+  };
 
   addItem = item => {
     let newInventory = [...this.state.inventory];
@@ -89,9 +84,16 @@ class Estimate extends Component {
         items: [item.item]
       };
       newInventory.push(newItem);
-      this.setState({ inventory: newInventory });
+      this.setState({
+        inventory: newInventory
+      });
       console.log('added new room to inventory: ', newInventory);
     }
+    // Set Alert for added item
+    this.setState({
+      itemAdded: item.item.name
+    });
+    this.showNotification();
 
     // console.log(itemInRoom);
     // // If item in inventory list add 1 to item amount then add to inventory
@@ -111,23 +113,15 @@ class Estimate extends Component {
     const { user } = this.props;
     return (
       <>
-        {/* <Fab
-          color="primary"
-          aria-label="Add"
-          // className={classes.fab}
-          style={{
-            backgroundColor: '#90A4AE',
-            color: 'white',
-            margin: '1rem',
-            zIndex: 9,
-            position: 'fixed',
-            top: '6rem',
-            left: '1.2rem'
-          }}
-          onClick={() => this.props.history.goBack()}
-        >
-          <KeyboardBackspace />
-        </Fab> */}
+        <Snackbars
+          place="tr"
+          color="success"
+          icon={AddAlert}
+          message={`${this.state.itemAdded} Added To Inventory`}
+          open={this.state.alert}
+          closeNotification={() => this.setState({ alert: false })}
+          close
+        />
         {/* <GridContainer justify="center">
           <EstimateHeader user={user} />
         </GridContainer> */}
