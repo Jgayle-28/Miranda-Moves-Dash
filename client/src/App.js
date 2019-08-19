@@ -11,7 +11,7 @@ import ButtonNav from './components/layout/ButtonNav';
 import Alerts from './components/layout/Alerts';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
-import Estimate from './components/Estimate/Estimate';
+import Estimate from './components/Estimate';
 
 import setAuthToken from './utils/setAuthToken';
 import './App.css';
