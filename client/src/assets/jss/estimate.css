@@ -25,13 +25,11 @@
 .dashboard-table,
 .dashboard-table-header {
   display: grid;
-  /* grid-template-columns: 400px 150px 150px 150px 150px; */
-  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
-  max-width: 1000px;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  max-width: 1100px;
   min-width: 700px;
   margin: 0 auto;
 }
-
 .dashboard-table-header p {
   margin-bottom: 0;
   color: #fff;
@@ -39,6 +37,12 @@
 .dashboard-table-header {
   color: #fff;
   background: #37474f;
+}
+.dahboard-table-subheader {
+  width: 100%;
+}
+.dahboard-table-subheader p {
+  margin: 0 auto;
 }
 .header-item {
   padding: 15px 10px;
@@ -49,9 +53,10 @@
 }
 .table-item {
   padding: 3px 10px;
-  border: 1px solid #37474f;
-  margin-left: -1px;
+  border-right: 1px solid #37474f;
+  border-bottom: 1px solid #37474f;
 }
+
 .table-item:first-child {
-  margin-left: 0;
+  border-left: 1px solid #37474f;
 }

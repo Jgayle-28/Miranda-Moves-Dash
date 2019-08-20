@@ -6,7 +6,7 @@ import Description from '@material-ui/icons/Description';
 const EstimateHeader = ({ user }) => {
   return (
     <>
-      <GridItem xs={12} sm={12} md={10}>
+      <GridItem xs={12} sm={12} md={11}>
         <Card
           color="info"
           style={{

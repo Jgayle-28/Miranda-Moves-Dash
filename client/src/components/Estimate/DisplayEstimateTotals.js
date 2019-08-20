@@ -8,6 +8,10 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import EstimateItemTable from './EstimateItemTable';
+import AllRoomsTable from './AllRoomsTable';
+import Chip from '@material-ui/core/Chip';
+import Avatar from '@material-ui/core/Avatar';
+import Badge from '../components/Badge/Badge.jsx';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,7 +46,17 @@ function a11yProps(index) {
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    width: '100%'
+    width: '100%',
+    maxHeight: 400,
+    overflow: 'auto'
+  },
+  chipRoot: {
+    display: 'flex',
+    // justifyContent: 'center',
+    flexWrap: 'wrap'
+  },
+  chip: {
+    margin: theme.spacing(1)
   }
 }));
 
@@ -87,11 +101,8 @@ export default function FullWidthTabs(props) {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          {/* to display items and totals in table */}
-          <EstimateItemTable />
-
-          {/* {inventory &&
-            inventory.map((item, i) => <li key={i}>{item.name}</li>)} */}
+          {/***** to display items and totals in table *****/}
+          <AllRoomsTable deleteItem={props.deleteItem} inventory={inventory} />
         </TabPanel>
         {/***** ROOM PANELS ******/}
         {inventory &&
@@ -99,76 +110,14 @@ export default function FullWidthTabs(props) {
           inventory.map((room, i) => (
             // map through the rooms create a panel and table pass in items
             <TabPanel key={i} value={value} index={i + 1} dir={theme.direction}>
-              <EstimateItemTable items={room.items} />
-              {/* {room.items.map((item, i) => (
-                <li key={i}>{item.name}</li>
-              ))} */}
+              <EstimateItemTable
+                roomName={room.roomName}
+                deleteItem={props.deleteItem}
+                items={room.items}
+              />
             </TabPanel>
           ))}
-
-        {/* <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
-        </TabPanel> */}
       </SwipeableViews>
     </div>
   );
 }
-
-// import React from 'react';
-// import BugReport from '@material-ui/icons/BugReport';
-// import Code from '@material-ui/icons/Code';
-// import Cloud from '@material-ui/icons/Cloud';
-// // core components
-// import Tabs from '../components/CustomTabs/CustomTabs.jsx';
-// import Tasks from '../components/Tasks/Tasks.jsx';
-// import { bugs, website, server } from '../../variables/general.jsx';
-
-// const DisplayEstimateTotals = () => {
-//   return (
-//     <>
-//       <Tabs
-//         title="Totals:"
-//         headerColor="info"
-//         // TODO map through rooms and create a tab for each
-//         // TODO const tabs = rooms.map ((room,i) => { tabName: room.roomName, tabContent: (<DisplayRoom ={room.roomData} />)})
-//         tabs={[
-//           {
-//             tabName: 'All Rooms',
-//             tabIcon: BugReport,
-//             tabContent: (
-//               <Tasks
-//                 checkedIndexes={[0, 3]}
-//                 tasksIndexes={[0, 1, 2, 3]}
-//                 tasks={bugs}
-//               />
-//             )
-//           },
-//           {
-//             tabName: 'Website',
-//             tabIcon: Code,
-//             tabContent: (
-//               <Tasks
-//                 checkedIndexes={[0]}
-//                 tasksIndexes={[0, 1]}
-//                 tasks={website}
-//               />
-//             )
-//           },
-//           {
-//             tabName: 'Server',
-//             tabIcon: Cloud,
-//             tabContent: (
-//               <Tasks
-//                 checkedIndexes={[1]}
-//                 tasksIndexes={[0, 1, 2]}
-//                 tasks={server}
-//               />
-//             )
-//           }
-//         ]}
-//       />
-//     </>
-//   );
-// };
-
-// export default DisplayEstimateTotals;

@@ -40,7 +40,7 @@ const Estimate = props => {
 
   return (
     <>
-      <Fab
+      {/* <Fab
         color="primary"
         aria-label="Add"
         // className={classes.fab}
@@ -56,12 +56,13 @@ const Estimate = props => {
         onClick={() => this.props.history.goBack()}
       >
         <KeyboardBackspace />
-      </Fab>
+      </Fab> */}
       <GridContainer justify="center">
+        {/***** ESTIMATE HEADER ******/}
         <EstimateHeader user={user} />
       </GridContainer>
       <GridContainer justify="center">
-        <GridItem xs={12} sm={12} md={10}>
+        <GridItem xs={12} sm={12} md={11}>
           <div className={classes.root}>
             <ExpansionPanel
               expanded={expanded === 'panel1'}
@@ -78,7 +79,7 @@ const Estimate = props => {
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                {/* Inventory component */}
+                {/***** INVENTORY COMPONENT ******/}
                 <Inventory user={user} />
               </ExpansionPanelDetails>
             </ExpansionPanel>

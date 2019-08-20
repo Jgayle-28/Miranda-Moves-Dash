@@ -129,7 +129,7 @@ class NavPills extends React.Component {
             </div>
           </GridItem>
           <GridItem
-            style={{ maxHeight: '550px', overflow: 'auto' }}
+            style={{ maxHeight: '350px', overflow: 'auto' }}
             {...horizontal.contentGrid}
           >
             <div
@@ -156,7 +156,7 @@ class NavPills extends React.Component {
         <GridContainer>
           <GridItem
             style={{
-              maxHeight: '550px',
+              maxHeight: '350px',
               overflow: 'auto',
               padding: '0',
               margin: '0'
@@ -167,7 +167,7 @@ class NavPills extends React.Component {
           </GridItem>
           <GridItem
             style={{
-              maxHeight: '550px',
+              maxHeight: '350px',
               overflow: 'auto'
             }}
             {...horizontal.contentGrid}

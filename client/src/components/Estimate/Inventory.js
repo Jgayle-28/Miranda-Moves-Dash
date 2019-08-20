@@ -6,7 +6,8 @@ import GridContainer from '../components/Grid/GridContainer.jsx';
 import GridItem from '../components/Grid/GridItem.jsx';
 import Snackbars from '../components/Snackbar/Snackbar.jsx';
 import AddAlert from '@material-ui/icons/AddAlert';
-// import Accordion from '../components/Accordion/Accordion.jsx';
+import Button from '../components/CustomButtons/Button.jsx';
+import CloudUpload from '@material-ui/icons/CloudUpload';
 import Card from '../components/Card/Card.jsx';
 import CardHeader from '../components/Card/CardHeader.jsx';
 import CardBody from '../components/Card/CardBody.jsx';
@@ -24,7 +25,8 @@ class Estimate extends Component {
     this.state = {
       inventory: [],
       alert: false,
-      itemAdded: ''
+      itemAdded: '',
+      itemDeleted: false
     };
   }
   static propTypes = {
@@ -45,6 +47,23 @@ class Estimate extends Component {
       // use this to make the notification autoclose
       setTimeout(() => this.setState({ alert: !this.state.alert }), 1000);
     }
+  };
+  deleteItem = (roomName, itemName) => {
+    let inventory = [...this.state.inventory];
+    // find current index room of passed in item then find the element
+    var roomToUpdate = inventory.filter(function(element) {
+      return element.roomName === roomName;
+    });
+    console.log('roomToUpdate deleteItem:', roomToUpdate);
+    // Get the room items
+    let roomItems = roomToUpdate[0].items;
+    console.log('roomItems:', roomItems);
+    // get the index of item in the room items array
+    var removeIndex = roomItems.map(item => item.name).indexOf(itemName);
+    // Remove the item from room items array
+    ~removeIndex && roomItems.splice(removeIndex, 1);
+    // Used only to update state and refresh
+    this.setState({ itemDeleted: !this.itemDeleted });
   };
 
   addItem = item => {
@@ -67,9 +86,16 @@ class Estimate extends Component {
       // checks to see if item is in room items
       let itemInRoom = roomItems.find(elem => elem.name === item.item.name);
       console.log('itemInRoom: ', itemInRoom);
-      // If item in room items add 1 to item amount then add to inventory
+      // If item in room items
       if (itemInRoom) {
+        // add 1 to amount
         itemInRoom.itemAmt += 1;
+        // update calculated volume
+        itemInRoom.calcVolume =
+          parseInt(itemInRoom.calcVolume) + parseInt(item.item.calcVolume);
+        // update calculated weight
+        itemInRoom.calcWeight =
+          parseInt(itemInRoom.calcWeight) + parseInt(item.item.calcWeight);
         console.log('updated room items: ', newInventory);
       } else {
         // If item is not in room items then add item to room
@@ -126,7 +152,7 @@ class Estimate extends Component {
           <EstimateHeader user={user} />
         </GridContainer> */}
         <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={10}>
+          <GridItem xs={12} sm={12} md={12}>
             <Card>
               <EstimateNavPills
                 color="grey"
@@ -413,19 +439,22 @@ class Estimate extends Component {
               />
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={12} md={10}>
+          <GridItem xs={12} sm={12} md={12}>
             <Card style={{ marginTop: 0 }}>
-              <DisplayEstimateTotals inventory={this.state.inventory} />
+              <DisplayEstimateTotals
+                deleteItem={this.deleteItem}
+                inventory={this.state.inventory}
+              />
             </Card>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={12}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Button color="success" size="sm">
+                <CloudUpload /> Save Estimate Inventory
+              </Button>
+            </div>
           </GridItem>
         </GridContainer>
-        {/* <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={10}>
-            <Card plain>
-              <DisplayEstimateTotals />
-            </Card>
-          </GridItem>
-        </GridContainer> */}
       </>
     );
   }

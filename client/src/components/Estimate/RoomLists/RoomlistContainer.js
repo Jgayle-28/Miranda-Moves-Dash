@@ -8,14 +8,6 @@ class RoomlistContainer extends Component {
     super(props);
     this.state = {};
   }
-  // addItem = e => {
-  //   console.log(e);
-  //   // console.log(e.currentTarget);
-  //   // console.log(e.target);
-  //   console.log(e.target.getAttribute('data-volume'));
-  //   console.log(e.target.getAttribute('data-weight'));
-  //   console.log(e.target.getAttribute('data-name'));
-  // };
 
   // TODO create function for onCLick that creates object to pass in to this.props.addItem
   onItemClick = e => {
@@ -30,7 +22,9 @@ class RoomlistContainer extends Component {
         name,
         itemAmt,
         volume,
-        weight
+        weight,
+        calcVolume: volume,
+        calcWeight: weight
       }
     };
     // from inventory component to add item to inventory component state
@@ -47,7 +41,9 @@ class RoomlistContainer extends Component {
             data-name="Amoire"
             onClick={e => this.onItemClick(e)}
           >
-            <span>Armoire</span>
+            <span data-weight="300" data-volume="30" data-name="Amoire">
+              Armoire
+            </span>
             <span style={{ color: '#0d47a1' }}>300 / 30</span>
           </li>
           <li
@@ -57,7 +53,13 @@ class RoomlistContainer extends Component {
             data-name="Air Conditioner"
             onClick={e => this.onItemClick(e)}
           >
-            <span>Air Conditioner</span>
+            <span
+              data-volume="15"
+              data-weight="105"
+              data-name="Air Conditioner"
+            >
+              Air Conditioner
+            </span>
             <span style={{ color: '#0d47a1' }}>300 / 30</span>
           </li>
           <li
