@@ -25,8 +25,9 @@ class Estimate extends Component {
     this.state = {
       inventory: [],
       alert: false,
+      deleteAlert: false,
       itemAdded: '',
-      itemDeleted: false
+      itemDeleted: ''
     };
   }
   static propTypes = {
@@ -48,6 +49,39 @@ class Estimate extends Component {
       setTimeout(() => this.setState({ alert: !this.state.alert }), 1000);
     }
   };
+  showDeleteNotification = () => {
+    if (!this.deleteAlert) {
+      this.setState({ deleteAlert: !this.state.deleteAlert });
+      // use this to make the notification autoclose
+      setTimeout(
+        () => this.setState({ deleteAlert: !this.state.deleteAlert }),
+        1000
+      );
+    }
+  };
+
+  updateItem = (roomName, itemName, amount) => {
+    console.log('amount:', amount);
+    console.log('itemName:', itemName);
+    console.log('roomname:', roomName);
+    let inventory = [...this.state.inventory];
+    // find current index room of passed in item then find the element
+    var roomToUpdate = inventory.filter(function(element) {
+      return element.roomName === roomName;
+    });
+    console.log('roomToUpdate updateItem:', roomToUpdate);
+    // Get the room items
+    let roomItems = roomToUpdate[0].items;
+    console.log('roomItems:', roomItems);
+    // checks to see if item is in room items
+    let itemInRoom = roomItems.find(elem => elem.name === itemName);
+    console.log('itemInRoom: ', itemInRoom);
+    // Update  amount , calculated volume, calculated weight
+    itemInRoom.itemAmt = amount;
+    itemInRoom.calcVolume = itemInRoom.volume * amount;
+    itemInRoom.calcWeight = itemInRoom.weight * amount;
+  };
+
   deleteItem = (roomName, itemName) => {
     let inventory = [...this.state.inventory];
     // find current index room of passed in item then find the element
@@ -63,7 +97,8 @@ class Estimate extends Component {
     // Remove the item from room items array
     ~removeIndex && roomItems.splice(removeIndex, 1);
     // Used only to update state and refresh
-    this.setState({ itemDeleted: !this.itemDeleted });
+    this.setState({ itemDeleted: itemName });
+    this.showDeleteNotification();
   };
 
   addItem = item => {
@@ -146,6 +181,15 @@ class Estimate extends Component {
           message={`${this.state.itemAdded} Added To Inventory`}
           open={this.state.alert}
           closeNotification={() => this.setState({ alert: false })}
+          close
+        />
+        <Snackbars
+          place="tr"
+          color="danger"
+          icon={AddAlert}
+          message={`${this.state.itemDeleted} Deleted From Inventory`}
+          open={this.state.deleteAlert}
+          closeNotification={() => this.setState({ deleteAlert: false })}
           close
         />
         {/* <GridContainer justify="center">
@@ -442,6 +486,7 @@ class Estimate extends Component {
           <GridItem xs={12} sm={12} md={12}>
             <Card style={{ marginTop: 0 }}>
               <DisplayEstimateTotals
+                updateItem={this.updateItem}
                 deleteItem={this.deleteItem}
                 inventory={this.state.inventory}
               />

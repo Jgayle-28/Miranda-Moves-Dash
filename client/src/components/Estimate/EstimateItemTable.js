@@ -43,7 +43,7 @@ const onDeleteClick = e => {
   this.props.deleteItem(e);
 };
 
-const EstimateItemTable = ({ items, deleteItem, roomName }) => {
+const EstimateItemTable = ({ roomName, items, deleteItem, updateItem }) => {
   // console.log('items in data table', items);
   const classes = useStyles();
 

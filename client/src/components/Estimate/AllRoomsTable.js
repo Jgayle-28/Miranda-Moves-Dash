@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Delete from '@material-ui/icons/Delete';
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
+import CustomInput from '../components/CustomInput/CustomInput.jsx';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -53,9 +54,17 @@ const onDeleteClick = e => {
   this.props.deleteItem(e);
 };
 
-const AllRoomsTable = ({ inventory, deleteItem }) => {
+const AllRoomsTable = ({ inventory, deleteItem, updateItem }) => {
+  const [itemAmtUpdate, setItemAmtUpdate] = useState(null);
   console.log('inventory in data table', inventory);
   const classes = useStyles();
+
+  const onChange = (e, roomName, itemName) => {
+    setItemAmtUpdate(e.target.value);
+    // console.log('updated amount', itemAmtUpdate);
+    updateItem(roomName, itemName, e.target.value);
+  };
+
   return (
     <>
       {/* Total Chips */}
@@ -99,17 +108,31 @@ const AllRoomsTable = ({ inventory, deleteItem }) => {
       {inventory &&
         inventory.map((room, i) => (
           <>
-            {/* <div key={i} class="dahboard-table-subheader">
-              <p>{room.roomName}</p>
-            </div> */}
-            {/* <div key={i} class="dashboard-table"> */}
             {room.items.map((item, i) => (
               <div key={i} class="dashboard-table">
                 <p className="table-item">
                   {item.name}
                   <small> ({room.roomName})</small>
                 </p>
-                <p className="table-item">{item.itemAmt}</p>
+                {/***** UNCOMMENT TO ADD INPUT *****/}
+                <p className="table-item">
+                  <CustomInput
+                    style={{ margin: 0, padding: 0 }}
+                    navy
+                    id="item_amt"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: e => onChange(e, room.roomName, item.name),
+                      type: 'text',
+                      name: 'itemAmt',
+                      value:
+                        itemAmtUpdate === null ? item.itemAmt : itemAmtUpdate
+                    }}
+                  />
+                </p>
+                {/* <p className="table-item">{item.itemAmt}</p> */}
                 <p className="table-item">{item.volume}</p>
                 <p className="table-item">{item.weight}</p>
                 <p className="table-item">{item.calcVolume}</p>

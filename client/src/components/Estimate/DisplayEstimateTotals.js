@@ -102,7 +102,11 @@ export default function FullWidthTabs(props) {
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
           {/***** to display items and totals in table *****/}
-          <AllRoomsTable deleteItem={props.deleteItem} inventory={inventory} />
+          <AllRoomsTable
+            updateItem={props.updateItem}
+            deleteItem={props.deleteItem}
+            inventory={inventory}
+          />
         </TabPanel>
         {/***** ROOM PANELS ******/}
         {inventory &&
@@ -111,6 +115,7 @@ export default function FullWidthTabs(props) {
             // map through the rooms create a panel and table pass in items
             <TabPanel key={i} value={value} index={i + 1} dir={theme.direction}>
               <EstimateItemTable
+                updateItem={props.updateItem}
                 roomName={room.roomName}
                 deleteItem={props.deleteItem}
                 items={room.items}
