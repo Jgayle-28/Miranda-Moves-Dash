@@ -66,7 +66,8 @@ router.post(
       items,
       alt_phone,
       payment_type,
-      bill_to
+      bill_to,
+      inventory
     } = req.body; //destructure from the body of the request
 
     try {
@@ -92,6 +93,7 @@ router.post(
         alt_phone,
         payment_type,
         bill_to,
+        inventory,
         user: req.user.id
       });
 
@@ -131,7 +133,8 @@ router.put('/:id', auth, async (req, res) => {
     items,
     alt_phone,
     payment_type,
-    bill_to
+    bill_to,
+    inventory
   } = req.body; //destructure from the body of the request
 
   // Build a contact object
@@ -156,6 +159,7 @@ router.put('/:id', auth, async (req, res) => {
   if (alt_phone) contactFields.alt_phone = alt_phone;
   if (payment_type) contactFields.payment_type = payment_type;
   if (bill_to) contactFields.bill_to = bill_to;
+  if (inventory) contactFields.inventory = inventory;
 
   try {
     // find the contact by id

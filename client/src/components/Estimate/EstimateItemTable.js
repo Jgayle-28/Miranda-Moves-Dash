@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Delete from '@material-ui/icons/Delete';
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
+import CustomInput from '../components/CustomInput/CustomInput.jsx';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,8 +45,15 @@ const onDeleteClick = e => {
 };
 
 const EstimateItemTable = ({ roomName, items, deleteItem, updateItem }) => {
+  const [itemAmtUpdate, setItemAmtUpdate] = useState(null);
   // console.log('items in data table', items);
   const classes = useStyles();
+
+  const onChange = (e, roomName, itemName) => {
+    setItemAmtUpdate(e.target.value);
+    // console.log('updated amount', itemAmtUpdate);
+    updateItem(roomName, itemName, e.target.value);
+  };
 
   return (
     <>
@@ -91,7 +99,23 @@ const EstimateItemTable = ({ roomName, items, deleteItem, updateItem }) => {
         items.map((item, i) => (
           <div key={i} class="dashboard-table">
             <p className="table-item">{item.name}</p>
-            <p className="table-item">{item.itemAmt}</p>
+            <p className="table-item">
+              <CustomInput
+                style={{ margin: 0, padding: 0 }}
+                navy
+                id="item_amt"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: e => onChange(e, roomName, item.name),
+                  type: 'text',
+                  name: 'itemAmt',
+                  value: itemAmtUpdate === null ? item.itemAmt : itemAmtUpdate
+                }}
+              />
+            </p>
+            {/* <p className="table-item">{item.itemAmt}</p> */}
             <p className="table-item">{item.volume}</p>
             <p className="table-item">{item.weight}</p>
             <p className="table-item">{item.calcVolume}</p>

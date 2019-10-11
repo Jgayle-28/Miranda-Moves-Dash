@@ -114,18 +114,20 @@ const AllRoomsTable = ({ inventory, deleteItem, updateItem }) => {
                   {item.name}
                   <small> ({room.roomName})</small>
                 </p>
-                {/***** UNCOMMENT TO ADD INPUT *****/}
                 <p className="table-item">
                   <CustomInput
-                    style={{ margin: 0, padding: 0 }}
                     navy
                     id="item_amt"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
+                      style: {
+                        padding: 0,
+                        margin: 0
+                      }
                     }}
                     inputProps={{
                       onChange: e => onChange(e, room.roomName, item.name),
-                      type: 'text',
+                      type: 'number',
                       name: 'itemAmt',
                       value:
                         itemAmtUpdate === null ? item.itemAmt : itemAmtUpdate

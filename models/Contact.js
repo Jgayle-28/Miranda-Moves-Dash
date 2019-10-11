@@ -78,6 +78,39 @@ const ContactSchema = mongoose.Schema({
     type: String
   },
   // begin estimate info
+  inventory: [
+    {
+      roomName: {
+        type: String
+      },
+      items: [
+        {
+          name: {
+            type: String
+          },
+          itemAmt: {
+            type: Number
+          },
+          volume: {
+            type: String
+          },
+          weight: {
+            type: String
+          },
+          calcVolume: {
+            type: Number
+          },
+          calcWeight: {
+            type: Number
+          }
+        }
+      ]
+    }
+  ],
+  date: {
+    type: Date,
+    default: Date.now
+  }
   // moveinfo: {
   //   from: {
   //     type: String,
@@ -109,10 +142,6 @@ const ContactSchema = mongoose.Schema({
   //     type: Number
   //   }
   // },
-  date: {
-    type: Date,
-    default: Date.now
-  }
 });
 
 module.exports = mongoose.model('contact', ContactSchema);

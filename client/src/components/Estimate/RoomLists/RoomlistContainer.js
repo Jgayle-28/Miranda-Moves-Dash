@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import '../../../assets/jss/estimate.css';
+import React, { Component } from "react";
+import "../../../assets/jss/estimate.css";
 
-// TODO create variables for each room type
+// TODO create room Item for each room type
 
 class RoomlistContainer extends Component {
   constructor(props) {
@@ -12,9 +12,9 @@ class RoomlistContainer extends Component {
   // TODO create function for onCLick that creates object to pass in to this.props.addItem
   onItemClick = e => {
     let room = this.props.room;
-    let volume = e.target.getAttribute('data-volume');
-    let weight = e.target.getAttribute('data-weight');
-    let name = e.target.getAttribute('data-name');
+    let volume = e.target.getAttribute("data-volume");
+    let weight = e.target.getAttribute("data-weight");
+    let name = e.target.getAttribute("data-name");
     let itemAmt = 1;
     let itemObj = {
       roomName: room,
@@ -31,46 +31,30 @@ class RoomlistContainer extends Component {
     this.props.addItem(itemObj);
   };
   render() {
+    console.log("Items", this.props.items);
     return (
       <>
         <ul>
-          <li
-            className="estimate__item"
-            data-weight="300"
-            data-volume="30"
-            data-name="Amoire"
-            onClick={e => this.onItemClick(e)}
-          >
-            <span data-weight="300" data-volume="30" data-name="Amoire">
-              Armoire
-            </span>
-            <span style={{ color: '#0d47a1' }}>300 / 30</span>
-          </li>
-          <li
-            className="estimate__item"
-            data-volume="15"
-            data-weight="105"
-            data-name="Air Conditioner"
-            onClick={e => this.onItemClick(e)}
-          >
-            <span
-              data-volume="15"
-              data-weight="105"
-              data-name="Air Conditioner"
+          {this.props.items.map((item, i) => (
+            <li
+              className="estimate__item"
+              data-weight={item.itemWeight}
+              data-volume={item.itemVolume}
+              data-name={item.itemName}
+              onClick={e => this.onItemClick(e)}
             >
-              Air Conditioner
-            </span>
-            <span style={{ color: '#0d47a1' }}>300 / 30</span>
-          </li>
-          <li
-            className="estimate__item"
-            data-volume="60"
-            data-weight="70"
-            data-name="Arcade Game"
-            onClick={e => this.onItemClick(e)}
-          >
-            Arcade Game
-          </li>
+              <span
+                data-weight={item.itemWeight}
+                data-volume={item.itemVolume}
+                data-name={item.itemName}
+              >
+                {item.itemName}
+              </span>
+              <span style={{ color: "#0d47a1" }}>
+                {item.itemWeight} / {item.itemVolume}
+              </span>
+            </li>
+          ))}
         </ul>
       </>
     );
