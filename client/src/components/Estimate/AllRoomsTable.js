@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import Delete from '@material-ui/icons/Delete';
-import Chip from '@material-ui/core/Chip';
-import Avatar from '@material-ui/core/Avatar';
-import { makeStyles } from '@material-ui/core/styles';
-import CustomInput from '../components/CustomInput/CustomInput.jsx';
+import React, { useState, useEffect } from "react";
+import Delete from "@material-ui/icons/Delete";
+import Chip from "@material-ui/core/Chip";
+import Avatar from "@material-ui/core/Avatar";
+import { makeStyles } from "@material-ui/core/styles";
+import CustomInput from "../components/CustomInput/CustomInput.jsx";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    display: "flex",
     // justifyContent: 'center',
-    flexWrap: 'wrap'
+    flexWrap: "wrap"
   },
   chip: {
     margin: theme.spacing(1)
@@ -50,13 +50,13 @@ const generateTotalItems = inventory => {
 };
 
 const onDeleteClick = e => {
-  console.log('on delete click e:', e);
+  console.log("on delete click e:", e);
   this.props.deleteItem(e);
 };
 
 const AllRoomsTable = ({ inventory, deleteItem, updateItem }) => {
   const [itemAmtUpdate, setItemAmtUpdate] = useState(null);
-  console.log('inventory in data table', inventory);
+  // console.log("inventory in data table", inventory);
   const classes = useStyles();
 
   const onChange = (e, roomName, itemName) => {
@@ -95,7 +95,7 @@ const AllRoomsTable = ({ inventory, deleteItem, updateItem }) => {
         />
       </div>
       {/* Header */}
-      <div class="dashboard-table-header">
+      <div className="dashboard-table-header">
         <p className="header-item">Item Description</p>
         <p className="header-item">Qty</p>
         <p className="header-item">Volume(CFT)</p>
@@ -109,7 +109,7 @@ const AllRoomsTable = ({ inventory, deleteItem, updateItem }) => {
         inventory.map((room, i) => (
           <>
             {room.items.map((item, i) => (
-              <div key={i} class="dashboard-table">
+              <div key={i} className="dashboard-table">
                 <p className="table-item">
                   {item.name}
                   <small> ({room.roomName})</small>
@@ -127,8 +127,8 @@ const AllRoomsTable = ({ inventory, deleteItem, updateItem }) => {
                     }}
                     inputProps={{
                       onChange: e => onChange(e, room.roomName, item.name),
-                      type: 'number',
-                      name: 'itemAmt',
+                      type: "number",
+                      name: "itemAmt",
                       value:
                         itemAmtUpdate === null ? item.itemAmt : itemAmtUpdate
                     }}
@@ -141,7 +141,7 @@ const AllRoomsTable = ({ inventory, deleteItem, updateItem }) => {
                 <p className="table-item">{item.calcWeight}</p>
                 <p
                   className="table-item"
-                  style={{ color: 'red', cursor: 'pointer' }}
+                  style={{ color: "red", cursor: "pointer" }}
                 >
                   <Delete
                     room={room.roomName}

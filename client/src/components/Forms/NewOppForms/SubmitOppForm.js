@@ -1,9 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import ContactContext from '../../../context/contact/ContactContext';
-import AuthContext from '../../../context/auth/AuthContext';
-import Button from '../../components/CustomButtons/Button.jsx';
-import moment from 'moment';
+import React, { useState, useContext, useEffect } from "react";
+import PropTypes from "prop-types";
+import ContactContext from "../../../context/contact/ContactContext";
+import AuthContext from "../../../context/auth/AuthContext";
+import Button from "../../components/CustomButtons/Button.jsx";
 
 const SubmitForm = props => {
   const contactContext = useContext(ContactContext);
@@ -16,50 +15,50 @@ const SubmitForm = props => {
       console.log(ContactContext.current);
     } else {
       setContact({
-        opportunity_type: '',
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone: '',
-        phone_type: '',
-        phone_ext: '',
-        refered_by: '',
-        move_date: '',
-        move_time: '',
-        contact_comments: '',
-        estimate_time: '',
-        estimate_date: '',
-        target_movedate: '',
-        pu_address: '',
-        do_address: '',
+        opportunity_type: "",
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
+        phone_type: "",
+        phone_ext: "",
+        refered_by: "",
+        move_date: "",
+        move_time: "",
+        contact_comments: "",
+        estimate_time: "",
+        estimate_date: "",
+        target_movedate: "",
+        pu_address: "",
+        do_address: "",
         items: [],
-        alt_phone: '',
-        payment_type: '',
-        bill_to: ''
+        alt_phone: "",
+        payment_type: "",
+        bill_to: ""
       });
     }
   }, [contactContext, contactContext.current]);
   const [contact, setContact] = useState({
-    opportunity_type: '',
-    first_name: '',
-    last_name: '',
-    email: '',
-    phone: '',
-    phone_type: '',
-    phone_ext: '',
-    refered_by: '',
-    move_date: '',
-    move_time: '',
-    contact_comments: '',
-    estimate_time: '',
-    estimate_date: '',
-    target_movedate: '',
-    pu_address: '',
-    do_address: '',
+    opportunity_type: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    phone_type: "",
+    phone_ext: "",
+    refered_by: "",
+    move_date: "",
+    move_time: "",
+    contact_comments: "",
+    estimate_time: "",
+    estimate_date: "",
+    target_movedate: "",
+    pu_address: "",
+    do_address: "",
     items: [],
-    alt_phone: '',
-    payment_type: '',
-    bill_to: ''
+    alt_phone: "",
+    payment_type: "",
+    bill_to: ""
   });
 
   // const onChange = e =>
@@ -120,7 +119,7 @@ const SubmitForm = props => {
         estimate_date: estimate_details.estimate_date,
         items: estimate_details.items
       };
-      console.log(' update contact:', contact);
+      console.log(" update contact:", contact);
       contactContext.updateContact(contact);
       contactContext.clearCurrent();
       toggleModal(false);
@@ -130,7 +129,7 @@ const SubmitForm = props => {
   return (
     <>
       <Button color="navy" onClick={onSubmit}>
-        {contactContext.current ? 'Update Opportunity' : 'Add New Opportunity'}
+        {contactContext.current ? "Update Opportunity" : "Add New Opportunity"}
       </Button>
     </>
   );

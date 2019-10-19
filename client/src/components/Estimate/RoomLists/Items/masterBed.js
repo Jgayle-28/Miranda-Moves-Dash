@@ -1,7 +1,7 @@
 export const masterBed = [
   {
     itemName: "Adjustable base (twin xl)",
-    itemWeight: "0",
+    itemWeight: "252",
     itemVolume: "36"
   },
   {
@@ -71,92 +71,92 @@ export const masterBed = [
   },
   {
     itemName: "Cabinet",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Carton 1.5 Cu Ft (CP)",
-    itemWeight: "0",
+    itemWeight: "14",
     itemVolume: "2"
   },
   {
     itemName: "Carton 1.5 Cu Ft (PBO)",
-    itemWeight: "0",
+    itemWeight: "14",
     itemVolume: "2"
   },
   {
     itemName: "Carton 3 Cu Ft (CP)",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
     itemName: "Carton 3 Cu Ft (PBO)",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
     itemName: "Carton 4.5 Cu Ft (CP)",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Carton 4.5 Cu Ft (PBO)",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Carton 6 Cu Ft (CP)",
-    itemWeight: "0",
+    itemWeight: "42",
     itemVolume: "6"
   },
   {
     itemName: "Carton 6 Cu Ft (PBO)",
-    itemWeight: "0",
+    itemWeight: "42",
     itemVolume: "6"
   },
   {
     itemName: "Carton Dishpack (CP)",
-    itemWeight: "0",
+    itemWeight: "42",
     itemVolume: "6"
   },
   {
     itemName: "Carton Dishpack (PBO)",
-    itemWeight: "0",
+    itemWeight: "42",
     itemVolume: "6"
   },
   {
     itemName: "Carton Lamp (CP)",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Carton Lamp (PBO)",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Carton Miror/Picture (CP)",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
     itemName: "Carton Miror/Picture (PBO)",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
     itemName: "Carton Wardrobe (CP)",
-    itemWeight: "0",
+    itemWeight: "98",
     itemVolume: "14"
   },
   {
     itemName: "Carton Wardrobe (PBO)",
-    itemWeight: "0",
+    itemWeight: "98",
     itemVolume: "14"
   },
   {
     itemName: "Chair - Arm",
-    itemWeight: "0",
+    itemWeight: "105",
     itemVolume: "15"
   },
   {
@@ -176,13 +176,8 @@ export const masterBed = [
   },
   {
     itemName: "Chest - Trunk",
-    itemWeight: "0",
+    itemWeight: "28",
     itemVolume: "4"
-  },
-  {
-    itemName: "Crib - Baby",
-    itemWeight: "70",
-    itemVolume: "10"
   },
   {
     itemName: "Crib - Baby",
@@ -226,12 +221,12 @@ export const masterBed = [
   },
   {
     itemName: "File Cabinet (2 drawer)",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Fireplace",
-    itemWeight: "0",
+    itemWeight: "105",
     itemVolume: "15"
   },
   {
@@ -246,22 +241,22 @@ export const masterBed = [
   },
   {
     itemName: "Grandfather Clock",
-    itemWeight: "0",
+    itemWeight: "140",
     itemVolume: "20"
   },
   {
     itemName: "Hamper",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
     itemName: "Ironing Board",
-    itemWeight: "0",
+    itemWeight: "28",
     itemVolume: "4"
   },
   {
     itemName: "Jewelry Chest",
-    itemWeight: "0",
+    itemWeight: "70",
     itemVolume: "10"
   },
   {
@@ -276,7 +271,7 @@ export const masterBed = [
   },
   {
     itemName: "Lamp",
-    itemWeight: "0",
+    itemWeight: "7",
     itemVolume: "1"
   },
   {
@@ -286,7 +281,7 @@ export const masterBed = [
   },
   {
     itemName: "Large Mirror",
-    itemWeight: "0",
+    itemWeight: "105",
     itemVolume: "15"
   },
   {
@@ -301,7 +296,7 @@ export const masterBed = [
   },
   {
     itemName: "Ottoman",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
@@ -316,18 +311,18 @@ export const masterBed = [
   },
   {
     itemName: "Plastic Bin (large)",
-    itemWeight: "0",
+    itemWeight: "42",
     itemVolume: "6"
   },
   {
     itemName: "Plastic Bin (medium/small)",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
     itemName: "Printer",
-    itemWeight: "0",
-    itemVolume: "5"
+    itemWeight: "28",
+    itemVolume: "4"
   },
   {
     itemName: "Rug - Roll/Pad (large)",
@@ -336,7 +331,7 @@ export const masterBed = [
   },
   {
     itemName: "Safe",
-    itemWeight: "0",
+    itemWeight: "420",
     itemVolume: "60"
   },
   {
@@ -380,6 +375,21 @@ export const masterBed = [
     itemVolume: "5"
   },
   {
+    itemName: "Picture Frame (large)",
+    itemWeight: "21",
+    itemVolume: "3"
+  },
+  {
+    itemName: "Picture Frame (medium)",
+    itemWeight: "14",
+    itemVolume: "2"
+  },
+  {
+    itemName: "Picture Frame (small)",
+    itemWeight: "7",
+    itemVolume: "1"
+  },
+  {
     itemName: "Table Lamp",
     itemWeight: "28",
     itemVolume: "4"
@@ -401,17 +411,17 @@ export const masterBed = [
   },
   {
     itemName: "Treadmill",
-    itemWeight: "0",
+    itemWeight: "210",
     itemVolume: "30"
   },
   {
     itemName: "Tree",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Trunk",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {

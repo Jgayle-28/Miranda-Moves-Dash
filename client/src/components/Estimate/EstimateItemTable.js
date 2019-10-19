@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import Delete from '@material-ui/icons/Delete';
-import Chip from '@material-ui/core/Chip';
-import Avatar from '@material-ui/core/Avatar';
-import { makeStyles } from '@material-ui/core/styles';
-import CustomInput from '../components/CustomInput/CustomInput.jsx';
+import React, { useState } from "react";
+import Delete from "@material-ui/icons/Delete";
+import Chip from "@material-ui/core/Chip";
+import Avatar from "@material-ui/core/Avatar";
+import { makeStyles } from "@material-ui/core/styles";
+import CustomInput from "../components/CustomInput/CustomInput.jsx";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    display: "flex",
     // justifyContent: 'center',
-    flexWrap: 'wrap'
+    flexWrap: "wrap"
   },
   chip: {
     margin: theme.spacing(1)
@@ -40,7 +40,7 @@ const generateTotalItems = items => {
   return totalItems;
 };
 const onDeleteClick = e => {
-  console.log('on delete click e:', e);
+  console.log("on delete click e:", e);
   this.props.deleteItem(e);
 };
 
@@ -85,7 +85,7 @@ const EstimateItemTable = ({ roomName, items, deleteItem, updateItem }) => {
         />
       </div>
       {/* Header */}
-      <div class="dashboard-table-header">
+      <div className="dashboard-table-header">
         <p className="header-item">Item Description</p>
         <p className="header-item">Qty</p>
         <p className="header-item">Volume(CFT)</p>
@@ -97,9 +97,9 @@ const EstimateItemTable = ({ roomName, items, deleteItem, updateItem }) => {
       {/* Room Items */}
       {items &&
         items.map((item, i) => (
-          <div key={i} class="dashboard-table">
+          <div key={i} className="dashboard-table">
             <p className="table-item">{item.name}</p>
-            <p className="table-item">
+            {/* <p className="table-item">
               <CustomInput
                 style={{ margin: 0, padding: 0 }}
                 navy
@@ -114,15 +114,15 @@ const EstimateItemTable = ({ roomName, items, deleteItem, updateItem }) => {
                   value: itemAmtUpdate === null ? item.itemAmt : itemAmtUpdate
                 }}
               />
-            </p>
-            {/* <p className="table-item">{item.itemAmt}</p> */}
+            </p> */}
+            <p className="table-item">{item.itemAmt}</p>
             <p className="table-item">{item.volume}</p>
             <p className="table-item">{item.weight}</p>
             <p className="table-item">{item.calcVolume}</p>
             <p className="table-item">{item.calcWeight}</p>
             <p
               className="table-item"
-              style={{ color: 'red', cursor: 'pointer' }}
+              style={{ color: "red", cursor: "pointer" }}
             >
               <Delete onClick={() => deleteItem(roomName, item.name)} />
             </p>

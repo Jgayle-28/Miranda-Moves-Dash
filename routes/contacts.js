@@ -1,15 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const auth = require('../middleware/auth');
-const { check, validationResult } = require('express-validator/check');
+const auth = require("../middleware/auth");
+const { check, validationResult } = require("express-validator/check");
 
-const User = require('../models/User');
-const Contact = require('../models/Contact');
+const User = require("../models/User");
+const Contact = require("../models/Contact");
 
 //@route  GET  api/contacts
 //@desc   Get all contacts
 //@access Private
-router.get('/', auth, async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const contacts = await Contact.find({ user: req.user.id }).sort({
       date: -1
@@ -17,7 +17,25 @@ router.get('/', auth, async (req, res) => {
     res.json(contacts);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send("Server Error");
+  }
+});
+
+//@route  GET  api/contacts/:id
+//@desc   Get contact by id
+//@access Private
+router.get("/:id", auth, async (req, res) => {
+  try {
+    // find the contact by id
+    const contact = await Contact.findById(req.params.id);
+
+    if (!contact) {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+    res.json(contact);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
@@ -25,14 +43,14 @@ router.get('/', auth, async (req, res) => {
 //@desc   Add new contact
 //@access Private
 router.post(
-  '/',
+  "/",
   [
     auth,
     [
-      check('first_name', 'Name is required')
+      check("first_name", "Name is required")
         .not()
         .isEmpty(),
-      check('email', 'Email is required')
+      check("email", "Email is required")
         .not()
         .isEmpty()
     ]
@@ -104,7 +122,7 @@ router.post(
       res.json(contact);
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server Error');
+      res.status(500).send("Server Error");
     }
   }
 );
@@ -112,7 +130,7 @@ router.post(
 //@route  PUT  api/contacts/:id
 //@desc   Update contact
 //@access Private
-router.put('/:id', auth, async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   const {
     opportunity_type,
     first_name,
@@ -167,12 +185,12 @@ router.put('/:id', auth, async (req, res) => {
 
     // if there is no contact
     if (!contact) {
-      return res.status(404).json({ msg: 'Contact not found' });
+      return res.status(404).json({ msg: "Contact not found" });
     }
 
     // if there is a contact make sure it is the users
     if (contact.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'Not authorized' });
+      return res.status(401).json({ msg: "Not authorized" });
     }
 
     // Update the contact
@@ -186,36 +204,36 @@ router.put('/:id', auth, async (req, res) => {
     res.json(contact);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send("Server Error");
   }
 });
 
 //@route  DELETE  api/contacts/:id
 //@desc   Delete contact
 //@access Private
-router.delete('/:id', auth, async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   try {
     // find the contact by id
     let contact = await Contact.findById(req.params.id);
 
     // if there is no contact
     if (!contact) {
-      return res.status(404).json({ msg: 'Contact not found' });
+      return res.status(404).json({ msg: "Contact not found" });
     }
 
     // if there is a contact make sure it is the users
     if (contact.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'Not authorized' });
+      return res.status(401).json({ msg: "Not authorized" });
     }
 
     // Delete the contact
     await Contact.findByIdAndRemove(req.params.id);
 
     // Send the updated contact
-    res.json({ msg: 'Contact Removed' });
+    res.json({ msg: "Contact Removed" });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send("Server Error");
   }
 });
 

@@ -15,10 +15,11 @@ import KeyboardBackspace from "@material-ui/icons/KeyboardBackspace";
 import Fab from "@material-ui/core/Fab";
 // Created Components
 import EstimateHeader from "./EstimateHeader";
-import EstimateNavPills from "../components/NavPills/EstimateNavPills.jsx";
+import InventoryNavPills from "../components/NavPills/InventoryNavPills.jsx";
 import DisplayEstimateTotals from "./DisplayEstimateTotals.js";
-import EstimateRoomlist from "./RoomLists/RoomlistContainer";
 import ContactContext from "../../context/contact/ContactContext";
+// Container to display Room Items
+import EstimateRoomlist from "./RoomLists/RoomlistContainer";
 // Room Items
 import { familyRoom } from "./RoomLists/Items/FamilyRoom";
 import { livingRoom } from "./RoomLists/Items/livingRoom";
@@ -26,6 +27,25 @@ import { diningRoom } from "./RoomLists/Items/diningRoom";
 import { kitchen } from "./RoomLists/Items/kitchen";
 import { masterBed } from "./RoomLists/Items/masterBed";
 import { office } from "./RoomLists/Items/office";
+import { bedRoom2 } from "./RoomLists/Items/bedRoom2";
+import { bedRoom3 } from "./RoomLists/Items/bedRoom3";
+import { bedRoom4 } from "./RoomLists/Items/bedRoom4";
+import { bedRoom5 } from "./RoomLists/Items/bedRoom5.js";
+import { garage } from "./RoomLists/Items/garage.js";
+import { yardPatio } from "./RoomLists/Items/yardPatio.js";
+import { laundryRoom } from "./RoomLists/Items/laundryRoom.js";
+import { musicInstuments } from "./RoomLists/Items/musicInstuments.js";
+import { sportsFitness } from "./RoomLists/Items/sportsFitness";
+import { boxesPbo } from "./RoomLists/Items/boxesPbo";
+import { boxesCp } from "./RoomLists/Items/boxesCp.js";
+import { basement } from "./RoomLists/Items/basement.js";
+import { bathroom } from "./RoomLists/Items/bathroom.js";
+import { reception } from "./RoomLists/Items/reception.js";
+import { conferenceRoom } from "./RoomLists/Items/conferenceRoom.js";
+import { waitingRoom } from "./RoomLists/Items/waitingRoom.js";
+import { breakRoom } from "./RoomLists/Items/breakRoom.js";
+import { bathRooms } from "./RoomLists/Items/bathRooms.js";
+import { entryWay } from "./RoomLists/Items/entryWay.js";
 
 class Estimate extends Component {
   constructor(props) {
@@ -48,15 +68,36 @@ class Estimate extends Component {
 
   componentDidMount() {
     const { user } = this.props;
-    console.log("contacts inventory in inventory:", user);
-    // if (typeof contacts.inventory !== 'undefined') {
+    const contacts = this.context;
+    // console.log("USER in inventory:", user);
     if (user.inventory.length !== 0) {
       this.setState({
         inventory: user.inventory
       });
     }
+    // Called to get the ivnentory for other components
+    this.props.updateInventory(this.state.inventory);
+
+    // contacts.getContact(user._id);
+    // if (contacts.focusContact !== null) {
+    //   if (contacts.focusContact.inventory !== this.state.inventory) {
+    //     this.setState({ inventory: contacts.focusContact.inventory });
+    //   }
+    // }
   }
-  // }
+  componentDidUpdate() {
+    // Called to get the ivnentory for other components - necessary here to update other components on render
+    this.props.updateInventory(this.state.inventory);
+
+    // const { user } = this.props;
+    // const contacts = this.context;
+    // contacts.getContact(user._id);
+    // if (contacts.focusContact !== null) {
+    //   if (contacts.focusContact.inventory !== this.state.inventory) {
+    //     this.setState({ inventory: contacts.focusContact.inventory });
+    //   }
+    // }
+  }
   //TODO Create sendState() function in estimate nave pills to send allStates data between all  rooms
   // TODO passin room name as a props to the component that matches the state in parent(this component)
   // TODO when the room is updated call function that adds it to the sate of this component
@@ -69,6 +110,7 @@ class Estimate extends Component {
       setTimeout(() => this.setState({ alert: !this.state.alert }), 1000);
     }
   };
+
   showDeleteNotification = () => {
     if (!this.deleteAlert) {
       this.setState({ deleteAlert: !this.state.deleteAlert });
@@ -79,6 +121,7 @@ class Estimate extends Component {
       );
     }
   };
+
   showInventoryNotification = () => {
     if (!this.inventoryAlert) {
       this.setState({ inventoryAlert: !this.state.deleteAlert });
@@ -114,6 +157,9 @@ class Estimate extends Component {
   };
 
   deleteItem = (roomName, itemName) => {
+    const { user } = this.props;
+    const contacts = this.context;
+
     let inventory = [...this.state.inventory];
     // find current index room of passed in item then find the element
     var roomToUpdate = inventory.filter(function(element) {
@@ -132,10 +178,19 @@ class Estimate extends Component {
       itemDeleted: itemName,
       deleteRefresh: !this.state.deleteRefresh
     });
+    const contact = {
+      _id: user._id,
+      inventory: this.state.inventory
+    };
+    contacts.updateContact(contact);
+    contacts.getContact(user._id);
     this.showDeleteNotification();
   };
 
   addItem = item => {
+    // const { user } = this.props;
+    // const contacts = this.context;
+
     let newInventory = [...this.state.inventory];
     // check if room exists in inventory
     let roomInInventory = newInventory.some(
@@ -188,6 +243,8 @@ class Estimate extends Component {
     this.setState({
       itemAdded: item.item.name
     });
+    // Called to get the ivnentory for other components
+    this.props.updateInventory(newInventory);
     this.showNotification();
   };
 
@@ -200,11 +257,13 @@ class Estimate extends Component {
       inventory: this.state.inventory
     };
     contacts.updateContact(contact);
+    contacts.getContact(user._id);
     this.showInventoryNotification();
   };
 
   render() {
-    console.log("Esitmate props", this.props.user);
+    // console.log("Esitmate props", this.props.user);
+    // console.log("Inventory", this.state.inventory);
     const { user } = this.props;
     return (
       <>
@@ -239,19 +298,27 @@ class Estimate extends Component {
           closeNotification={() => this.setState({ deleteAlert: false })}
           close
         />
-        {/* <GridContainer justify="center">
-          <EstimateHeader user={user} />
-        </GridContainer> */}
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={12}>
             <Card>
-              <EstimateNavPills
+              <InventoryNavPills
                 color="grey"
                 horizontal={{
                   tabsGrid: { xs: 12, sm: 12, md: 4 },
                   contentGrid: { xs: 12, sm: 12, md: 8 }
                 }}
                 tabs={[
+                  {
+                    tabButton: "Entryway",
+                    // tabIcon: Home,
+                    tabContent: (
+                      <EstimateRoomlist
+                        room="Entryway"
+                        addItem={this.addItem}
+                        items={entryWay}
+                      />
+                    )
+                  },
                   {
                     tabButton: "Family Room",
                     tabContent: (
@@ -286,7 +353,7 @@ class Estimate extends Component {
                     tabButton: "Kitchen",
                     tabContent: (
                       <EstimateRoomlist
-                        room="Dining Room"
+                        room="Kitchen"
                         addItem={this.addItem}
                         items={kitchen}
                       />
@@ -303,22 +370,12 @@ class Estimate extends Component {
                     )
                   },
                   {
-                    tabButton: "Office Room",
-                    tabContent: (
-                      <EstimateRoomlist
-                        room="Office Room"
-                        addItem={this.addItem}
-                        items={office}
-                      />
-                    )
-                  },
-                  {
                     tabButton: "Bedroom 2",
                     tabContent: (
                       <EstimateRoomlist
                         room="Bedroom 2"
                         addItem={this.addItem}
-                        items={livingRoom}
+                        items={bedRoom2}
                       />
                     )
                   },
@@ -328,7 +385,7 @@ class Estimate extends Component {
                       <EstimateRoomlist
                         room="Bedroom 3"
                         addItem={this.addItem}
-                        items={livingRoom}
+                        items={bedRoom3}
                       />
                     )
                   },
@@ -339,7 +396,7 @@ class Estimate extends Component {
                       <EstimateRoomlist
                         room="Bedroom 4"
                         addItem={this.addItem}
-                        items={livingRoom}
+                        items={bedRoom4}
                       />
                     )
                   },
@@ -350,7 +407,39 @@ class Estimate extends Component {
                       <EstimateRoomlist
                         room="Bedroom 5"
                         addItem={this.addItem}
-                        items={livingRoom}
+                        items={bedRoom5}
+                      />
+                    )
+                  },
+                  {
+                    tabButton: "Office",
+                    tabContent: (
+                      <EstimateRoomlist
+                        room="Office"
+                        addItem={this.addItem}
+                        items={office}
+                      />
+                    )
+                  },
+                  {
+                    tabButton: "Bathroom",
+                    // tabIcon: Home,
+                    tabContent: (
+                      <EstimateRoomlist
+                        room="Bathroom"
+                        addItem={this.addItem}
+                        items={bathroom}
+                      />
+                    )
+                  },
+                  {
+                    tabButton: "Laundry Room",
+                    // tabIcon: Home,
+                    tabContent: (
+                      <EstimateRoomlist
+                        room="Laundry Room"
+                        addItem={this.addItem}
+                        items={laundryRoom}
                       />
                     )
                   },
@@ -361,7 +450,7 @@ class Estimate extends Component {
                       <EstimateRoomlist
                         room="Garage"
                         addItem={this.addItem}
-                        items={livingRoom}
+                        items={garage}
                       />
                     )
                   },
@@ -369,184 +458,122 @@ class Estimate extends Component {
                     tabButton: "Yard / Patio",
                     // tabIcon: Home,
                     tabContent: (
-                      <span>
-                        <p>
-                          Collaboratively administrate empowered markets via
-                          plug-and-play networks. Dynamically procrastinate B2C
-                          users after installed base benefits.
-                        </p>
-                        <br />
-                        <p>
-                          Dramatically visualize customer directed convergence
-                          without revolutionary ROI. Collaboratively
-                          administrate empowered markets via plug-and-play
-                          networks. Dynamically procrastinate B2C users after
-                          installed base benefits.
-                        </p>
-                        <br />
-                        <p>This is very nice.</p>
-                      </span>
+                      <EstimateRoomlist
+                        room="Yard / Patio"
+                        addItem={this.addItem}
+                        items={yardPatio}
+                      />
+                    )
+                  },
+
+                  {
+                    tabButton: "Musical Instruments",
+                    // tabIcon: Home,
+                    tabContent: (
+                      <EstimateRoomlist
+                        room="Musical Instruments"
+                        addItem={this.addItem}
+                        items={musicInstuments}
+                      />
                     )
                   },
                   {
-                    tabButton: "Laundry Room",
+                    tabButton: "Sports and Fitness",
                     // tabIcon: Home,
                     tabContent: (
-                      <span>
-                        <p>
-                          Collaboratively administrate empowered markets via
-                          plug-and-play networks. Dynamically procrastinate B2C
-                          users after installed base benefits.
-                        </p>
-                        <br />
-                        <p>
-                          Dramatically visualize customer directed convergence
-                          without revolutionary ROI. Collaboratively
-                          administrate empowered markets via plug-and-play
-                          networks. Dynamically procrastinate B2C users after
-                          installed base benefits.
-                        </p>
-                        <br />
-                        <p>This is very nice.</p>
-                      </span>
+                      <EstimateRoomlist
+                        room="Sports and Fitness"
+                        addItem={this.addItem}
+                        items={sportsFitness}
+                      />
+                    )
+                  },
+                  {
+                    tabButton: "Boxes (Packed By Owner)",
+                    // tabIcon: Home,
+                    tabContent: (
+                      <EstimateRoomlist
+                        room="Boxes - Packed By Owner"
+                        addItem={this.addItem}
+                        items={boxesPbo}
+                      />
+                    )
+                  },
+                  {
+                    tabButton: "Boxes (Packed By Company)",
+                    // tabIcon: Home,
+                    tabContent: (
+                      <EstimateRoomlist
+                        room="Boxes - Packed By Company"
+                        addItem={this.addItem}
+                        items={boxesCp}
+                      />
                     )
                   },
                   {
                     tabButton: "Basement",
                     // tabIcon: Home,
                     tabContent: (
-                      <span>
-                        <p>
-                          Collaboratively administrate empowered markets via
-                          plug-and-play networks. Dynamically procrastinate B2C
-                          users after installed base benefits.
-                        </p>
-                        <br />
-                        <p>
-                          Dramatically visualize customer directed convergence
-                          without revolutionary ROI. Collaboratively
-                          administrate empowered markets via plug-and-play
-                          networks. Dynamically procrastinate B2C users after
-                          installed base benefits.
-                        </p>
-                        <br />
-                        <p>This is very nice.</p>
-                      </span>
-                    )
-                  },
-                  {
-                    tabButton: "Bathroom",
-                    // tabIcon: Home,
-                    tabContent: (
-                      <span>
-                        <p>
-                          Collaboratively administrate empowered markets via
-                          plug-and-play networks. Dynamically procrastinate B2C
-                          users after installed base benefits.
-                        </p>
-                        <br />
-                        <p>
-                          Dramatically visualize customer directed convergence
-                          without revolutionary ROI. Collaboratively
-                          administrate empowered markets via plug-and-play
-                          networks. Dynamically procrastinate B2C users after
-                          installed base benefits.
-                        </p>
-                        <br />
-                        <p>This is very nice.</p>
-                      </span>
+                      <EstimateRoomlist
+                        room="Basement"
+                        addItem={this.addItem}
+                        items={basement}
+                      />
                     )
                   },
                   {
                     tabButton: "Reception",
                     // tabIcon: Home,
                     tabContent: (
-                      <span>
-                        <p>
-                          Collaboratively administrate empowered markets via
-                          plug-and-play networks. Dynamically procrastinate B2C
-                          users after installed base benefits.
-                        </p>
-                        <br />
-                        <p>
-                          Dramatically visualize customer directed convergence
-                          without revolutionary ROI. Collaboratively
-                          administrate empowered markets via plug-and-play
-                          networks. Dynamically procrastinate B2C users after
-                          installed base benefits.
-                        </p>
-                        <br />
-                        <p>This is very nice.</p>
-                      </span>
+                      <EstimateRoomlist
+                        room="Reception"
+                        addItem={this.addItem}
+                        items={reception}
+                      />
                     )
                   },
                   {
                     tabButton: "Conference Room",
                     // tabIcon: Home,
                     tabContent: (
-                      <span>
-                        <p>
-                          Collaboratively administrate empowered markets via
-                          plug-and-play networks. Dynamically procrastinate B2C
-                          users after installed base benefits.
-                        </p>
-                        <br />
-                        <p>
-                          Dramatically visualize customer directed convergence
-                          without revolutionary ROI. Collaboratively
-                          administrate empowered markets via plug-and-play
-                          networks. Dynamically procrastinate B2C users after
-                          installed base benefits.
-                        </p>
-                        <br />
-                        <p>This is very nice.</p>
-                      </span>
+                      <EstimateRoomlist
+                        room="Conference Room"
+                        addItem={this.addItem}
+                        items={conferenceRoom}
+                      />
                     )
                   },
                   {
                     tabButton: "Waiting Room",
                     // tabIcon: Home,
                     tabContent: (
-                      <span>
-                        <p>
-                          Collaboratively administrate empowered markets via
-                          plug-and-play networks. Dynamically procrastinate B2C
-                          users after installed base benefits.
-                        </p>
-                        <br />
-                        <p>
-                          Dramatically visualize customer directed convergence
-                          without revolutionary ROI. Collaboratively
-                          administrate empowered markets via plug-and-play
-                          networks. Dynamically procrastinate B2C users after
-                          installed base benefits.
-                        </p>
-                        <br />
-                        <p>This is very nice.</p>
-                      </span>
+                      <EstimateRoomlist
+                        room="Waiting Room"
+                        addItem={this.addItem}
+                        items={waitingRoom}
+                      />
                     )
                   },
                   {
                     tabButton: "Break Room",
                     // tabIcon: Home,
                     tabContent: (
-                      <span>
-                        <p>
-                          Collaboratively administrate empowered markets via
-                          plug-and-play networks. Dynamically procrastinate B2C
-                          users after installed base benefits.
-                        </p>
-                        <br />
-                        <p>
-                          Dramatically visualize customer directed convergence
-                          without revolutionary ROI. Collaboratively
-                          administrate empowered markets via plug-and-play
-                          networks. Dynamically procrastinate B2C users after
-                          installed base benefits.
-                        </p>
-                        <br />
-                        <p>This is very nice.</p>
-                      </span>
+                      <EstimateRoomlist
+                        room="Break Room"
+                        addItem={this.addItem}
+                        items={breakRoom}
+                      />
+                    )
+                  },
+                  {
+                    tabButton: "Bath Room(s)",
+                    // tabIcon: Home,
+                    tabContent: (
+                      <EstimateRoomlist
+                        room="Bath Room(s)"
+                        addItem={this.addItem}
+                        items={bathRooms}
+                      />
                     )
                   }
                 ]}

@@ -31,7 +31,7 @@ class RoomlistContainer extends Component {
     this.props.addItem(itemObj);
   };
   render() {
-    console.log("Items", this.props.items);
+    // console.log("Items", this.props.items);
     return (
       <>
         <ul>

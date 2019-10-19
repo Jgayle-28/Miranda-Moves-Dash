@@ -1,7 +1,7 @@
-import React, { useReducer } from 'react';
-import axios from 'axios';
-import ContactContext from './ContactContext';
-import contactReducer from './ContactReducer';
+import React, { useReducer } from "react";
+import axios from "axios";
+import ContactContext from "./ContactContext";
+import contactReducer from "./ContactReducer";
 import {
   ADD_CONTACT,
   DELETE_CONTACT,
@@ -12,13 +12,15 @@ import {
   CLEAR_FILTER,
   CONTACT_ERROR,
   GET_CONTACTS,
+  GET_CONTACT,
   CLEAR_CONTACTS
-} from '../types';
+} from "../types";
 
 const ContactState = props => {
   const initalState = {
     contacts: null,
     current: null,
+    focusContact: null,
     filtered: null,
     error: null
   };
@@ -28,9 +30,24 @@ const ContactState = props => {
   // Get contacts
   const getContacts = async () => {
     try {
-      const res = await axios.get('/api/contacts');
+      const res = await axios.get("/api/contacts");
       dispatch({
         type: GET_CONTACTS,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
+  // Get contact By Id
+  const getContact = async id => {
+    try {
+      const res = await axios.get(`/api/contacts/${id}`);
+      dispatch({
+        type: GET_CONTACT,
         payload: res.data
       });
     } catch (err) {
@@ -44,11 +61,11 @@ const ContactState = props => {
   const addContact = async contact => {
     const config = {
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     };
     try {
-      const res = await axios.post('/api/contacts', contact, config);
+      const res = await axios.post("/api/contacts", contact, config);
       dispatch({
         type: ADD_CONTACT,
         payload: res.data
@@ -63,9 +80,10 @@ const ContactState = props => {
 
   // Update contact
   const updateContact = async contact => {
+    console.log("contact:", contact);
     const config = {
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     };
     try {
@@ -74,6 +92,7 @@ const ContactState = props => {
         contact,
         config
       );
+      console.log("res:", res);
       dispatch({
         type: UPDATE_CONTACT,
         payload: res.data
@@ -143,10 +162,12 @@ const ContactState = props => {
     <ContactContext.Provider
       value={{
         contacts: state.contacts,
+        focusContact: state.focusContact,
         current: state.current,
         filtered: state.filtered,
         error: state.error,
         getContacts,
+        getContact,
         addContact,
         deleteContact,
         clearContacts,

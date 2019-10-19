@@ -1,33 +1,8 @@
-export const diningRoom = [
+export const sportsFitness = [
   {
-    itemName: "Bakers Rack",
-    itemWeight: "105",
-    itemVolume: "15"
-  },
-  {
-    itemName: "Bar Stool",
-    itemWeight: "35",
-    itemVolume: "5"
-  },
-  {
-    itemName: "Bench Harvest",
-    itemWeight: "70",
-    itemVolume: "10"
-  },
-  {
-    itemName: "Bookcase",
-    itemWeight: "35",
-    itemVolume: "5"
-  },
-  {
-    itemName: "Buffet (base)",
-    itemWeight: "245",
-    itemVolume: "35"
-  },
-  {
-    itemName: "Buffet (base)",
-    itemWeight: "245",
-    itemVolume: "35"
+    itemName: "Arcade Game",
+    itemWeight: "420",
+    itemVolume: "60"
   },
   {
     itemName: "Carton 1.5 Cu Ft (CP)",
@@ -110,54 +85,49 @@ export const diningRoom = [
     itemVolume: "14"
   },
   {
-    itemName: "Dining Chair",
-    itemWeight: "35",
-    itemVolume: "5"
+    itemName: "Elliptical",
+    itemWeight: "245",
+    itemVolume: "35"
   },
   {
-    itemName: "Currio Cabinet",
-    itemWeight: "140",
-    itemVolume: "20"
+    itemName: "Exercise Bike",
+    itemWeight: "210",
+    itemVolume: "30"
   },
   {
-    itemName: "Dog Crate",
-    itemWeight: "49",
-    itemVolume: "7"
+    itemName: "Exercise Tire",
+    itemWeight: "336",
+    itemVolume: "48"
   },
   {
-    itemName: "Hutch (top)",
-    itemWeight: "140",
-    itemVolume: "20"
+    itemName: "Exercise Equipment",
+    itemWeight: "350",
+    itemVolume: "35"
   },
   {
-    itemName: "Hutch (top)",
-    itemWeight: "140",
-    itemVolume: "20"
-  },
-  {
-    itemName: "Lamp (floor)",
+    itemName: "Fan",
     itemWeight: "21",
     itemVolume: "3"
   },
   {
-    itemName: "Mirror",
-    itemWeight: "21",
-    itemVolume: "3"
+    itemName: "Fuse ball",
+    itemWeight: "420",
+    itemVolume: "60"
   },
   {
-    itemName: "Picture Frame (large)",
-    itemWeight: "21",
-    itemVolume: "3"
+    itemName: "Golf Bag (set)",
+    itemWeight: "420",
+    itemVolume: "60"
   },
   {
-    itemName: "Picture Frame (small)",
-    itemWeight: "7",
-    itemVolume: "1"
+    itemName: "Inversion Table",
+    itemWeight: "252",
+    itemVolume: "36"
   },
   {
-    itemName: "Plant (large)",
-    itemWeight: "35",
-    itemVolume: "5"
+    itemName: "Ping Pong Table",
+    itemWeight: "420",
+    itemVolume: "60"
   },
   {
     itemName: "Plastic Bin (large)",
@@ -170,19 +140,19 @@ export const diningRoom = [
     itemVolume: "3"
   },
   {
-    itemName: "Rug - Roll/Pad (large)",
-    itemWeight: "70",
-    itemVolume: "10"
+    itemName: "Pool Table",
+    itemWeight: "700",
+    itemVolume: "100"
   },
   {
-    itemName: "Rug - Roll/Pad (small)",
-    itemWeight: "21",
-    itemVolume: "3"
-  },
-  {
-    itemName: "Server",
+    itemName: "Punching Dummy",
     itemWeight: "140",
     itemVolume: "20"
+  },
+  {
+    itemName: "Sauna",
+    itemWeight: "2450",
+    itemVolume: "350"
   },
   {
     itemName: "Console Table (large)",
@@ -195,23 +165,23 @@ export const diningRoom = [
     itemVolume: "10"
   },
   {
-    itemName: "Dining Table",
-    itemWeight: "210",
-    itemVolume: "30"
-  },
-  {
-    itemName: "Night/Side Table (small)",
+    itemName: "Tennis Racket",
     itemWeight: "35",
     itemVolume: "5"
   },
   {
-    itemName: "Table Lamp",
-    itemWeight: "28",
-    itemVolume: "4"
+    itemName: "Treadmill",
+    itemWeight: "245",
+    itemVolume: "35"
   },
   {
-    itemName: "Tree",
-    itemWeight: "70",
-    itemVolume: "10"
+    itemName: "Treadmill",
+    itemWeight: "140",
+    itemVolume: "20"
+  },
+  {
+    itemName: "Weights",
+    itemWeight: "350",
+    itemVolume: "50"
   }
 ];

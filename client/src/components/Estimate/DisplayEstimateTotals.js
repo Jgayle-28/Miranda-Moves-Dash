@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import SwipeableViews from 'react-swipeable-views';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import EstimateItemTable from './EstimateItemTable';
-import AllRoomsTable from './AllRoomsTable';
-import Chip from '@material-ui/core/Chip';
-import Avatar from '@material-ui/core/Avatar';
-import Badge from '../components/Badge/Badge.jsx';
+import React from "react";
+import PropTypes from "prop-types";
+import SwipeableViews from "react-swipeable-views";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import EstimateItemTable from "./EstimateItemTable";
+import AllRoomsTable from "./AllRoomsTable";
+import Chip from "@material-ui/core/Chip";
+import Avatar from "@material-ui/core/Avatar";
+import Badge from "../components/Badge/Badge.jsx";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -39,21 +39,21 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`
+    "aria-controls": `full-width-tabpanel-${index}`
   };
 }
 
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    width: '100%',
+    width: "100%",
     maxHeight: 400,
-    overflow: 'auto'
+    overflow: "auto"
   },
   chipRoot: {
-    display: 'flex',
+    display: "flex",
     // justifyContent: 'center',
-    flexWrap: 'wrap'
+    flexWrap: "wrap"
   },
   chip: {
     margin: theme.spacing(1)
@@ -96,7 +96,7 @@ export default function FullWidthTabs(props) {
         </Tabs>
       </AppBar>
       <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
         onChangeIndex={handleChangeIndex}
       >
@@ -114,12 +114,14 @@ export default function FullWidthTabs(props) {
           inventory.map((room, i) => (
             // map through the rooms create a panel and table pass in items
             <TabPanel key={i} value={value} index={i + 1} dir={theme.direction}>
-              <EstimateItemTable
-                updateItem={props.updateItem}
-                roomName={room.roomName}
-                deleteItem={props.deleteItem}
-                items={room.items}
-              />
+              <div style={{ maxHieght: 500, overflow: "auto" }}>
+                <EstimateItemTable
+                  updateItem={props.updateItem}
+                  roomName={room.roomName}
+                  deleteItem={props.deleteItem}
+                  items={room.items}
+                />
+              </div>
             </TabPanel>
           ))}
       </SwipeableViews>

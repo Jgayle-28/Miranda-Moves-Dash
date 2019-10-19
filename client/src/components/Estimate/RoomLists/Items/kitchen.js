@@ -6,12 +6,12 @@ export const kitchen = [
   },
   {
     itemName: "Bakers Rack",
-    itemWeight: "0",
+    itemWeight: "105",
     itemVolume: "15"
   },
   {
     itemName: "Bench (harvest)",
-    itemWeight: "0",
+    itemWeight: "105",
     itemVolume: "15"
   },
   {
@@ -21,87 +21,87 @@ export const kitchen = [
   },
   {
     itemName: "Carton 1.5 Cu Ft (CP)",
-    itemWeight: "0",
+    itemWeight: "14",
     itemVolume: "2"
   },
   {
     itemName: "Carton 1.5 Cu Ft (PBO)",
-    itemWeight: "0",
+    itemWeight: "14",
     itemVolume: "2"
   },
   {
     itemName: "Carton 3 Cu Ft (CP)",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
     itemName: "Carton 3 Cu Ft (PBO)",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
     itemName: "Carton 4.5 Cu Ft (CP)",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Carton 4.5 Cu Ft (PBO)",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Carton 6 Cu Ft (CP)",
-    itemWeight: "0",
+    itemWeight: "42",
     itemVolume: "6"
   },
   {
     itemName: "Carton 6 Cu Ft (PBO)",
-    itemWeight: "0",
+    itemWeight: "42",
     itemVolume: "6"
   },
   {
     itemName: "Carton Dishpack (CP)",
-    itemWeight: "0",
+    itemWeight: "42",
     itemVolume: "6"
   },
   {
     itemName: "Carton Dishpack (PBO)",
-    itemWeight: "0",
+    itemWeight: "42",
     itemVolume: "6"
   },
   {
     itemName: "Carton Lamp (CP)",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Carton Lamp (PBO)",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Carton Miror/Picture (CP)",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
     itemName: "Carton Miror/Picture (PBO)",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
     itemName: "Carton Wardrobe (CP)",
-    itemWeight: "0",
+    itemWeight: "98",
     itemVolume: "14"
   },
   {
     itemName: "Carton Wardrobe (PBO)",
-    itemWeight: "0",
+    itemWeight: "98",
     itemVolume: "14"
   },
   {
     itemName: "Chair",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
@@ -111,7 +111,7 @@ export const kitchen = [
   },
   {
     itemName: "Currio Cabinet",
-    itemWeight: "0",
+    itemWeight: "105",
     itemVolume: "15"
   },
   {
@@ -121,7 +121,7 @@ export const kitchen = [
   },
   {
     itemName: "Footstool",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
@@ -141,22 +141,22 @@ export const kitchen = [
   },
   {
     itemName: "Garbage Can",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
     itemName: "Glass Top",
-    itemWeight: "0",
+    itemWeight: "175",
     itemVolume: "25"
   },
   {
     itemName: "Humidifier",
-    itemWeight: "0",
+    itemWeight: "105",
     itemVolume: "15"
   },
   {
     itemName: "Ironing Board",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
@@ -186,12 +186,12 @@ export const kitchen = [
   },
   {
     itemName: "Plastic Bin (large)",
-    itemWeight: "0",
+    itemWeight: "42",
     itemVolume: "6"
   },
   {
     itemName: "Plastic Bin (medium/small)",
-    itemWeight: "0",
+    itemWeight: "21",
     itemVolume: "3"
   },
   {
@@ -201,12 +201,12 @@ export const kitchen = [
   },
   {
     itemName: "Spoon",
-    itemWeight: "0",
+    itemWeight: "385",
     itemVolume: "55"
   },
   {
     itemName: "Stool",
-    itemWeight: "0",
+    itemWeight: "28",
     itemVolume: "4"
   },
   {
@@ -226,12 +226,12 @@ export const kitchen = [
   },
   {
     itemName: "Tv",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Water Cooler",
-    itemWeight: "0",
+    itemWeight: "35",
     itemVolume: "5"
   }
 ];

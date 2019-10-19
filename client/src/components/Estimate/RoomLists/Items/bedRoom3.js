@@ -1,43 +1,73 @@
-export const familyRoom = [
+export const bedRoom3 = [
   {
     itemName: "Air Conditioner",
     itemWeight: "105",
     itemVolume: "15"
   },
   {
-    itemName: "Bar - Wood / Brass",
+    itemName: "Armoire",
     itemWeight: "210",
     itemVolume: "30"
   },
   {
-    itemName: "Bar Stool",
-    itemWeight: "35",
-    itemVolume: "5"
+    itemName: "Armoire/Wardrobe",
+    itemWeight: "350",
+    itemVolume: "50"
   },
   {
-    itemName: "Bean Bag Chair",
-    itemWeight: "35",
-    itemVolume: "5"
+    itemName: "Bed - Bunk",
+    itemWeight: "490",
+    itemVolume: "70"
+  },
+  {
+    itemName: "Bed - Double (no matt)",
+    itemWeight: "175",
+    itemVolume: "25"
+  },
+  {
+    itemName: "Bed - Double (complete)",
+    itemWeight: "420",
+    itemVolume: "60"
+  },
+  {
+    itemName: "Bed - King (no matt)",
+    itemWeight: "245",
+    itemVolume: "35"
+  },
+  {
+    itemName: "Bed - King (complete)",
+    itemWeight: "490",
+    itemVolume: "70"
+  },
+  {
+    itemName: "Bed - Queen (no matt)",
+    itemWeight: "189",
+    itemVolume: "27"
+  },
+  {
+    itemName: "Bed - Queen (complete)",
+    itemWeight: "455",
+    itemVolume: "65"
+  },
+  {
+    itemName: "Bed - Single (no matt)",
+    itemWeight: "140",
+    itemVolume: "20"
+  },
+  {
+    itemName: "Bed - Single (complete)",
+    itemWeight: "280",
+    itemVolume: "40"
   },
   {
     itemName: "Bench",
-    itemWeight: "49",
-    itemVolume: "7"
-  },
-  {
-    itemName: "Bookcase (large)",
-    itemWeight: "140",
-    itemVolume: "20"
+    itemWeight: "35",
+    itemVolume: "5"
   },
   {
     itemName: "Bookshelves (section)",
     itemWeight: "35",
     itemVolume: "5"
-  },
-  {
-    itemName: "Buffet (base)",
-    itemWeight: "245",
-    itemVolume: "35"
   },
   {
     itemName: "Carton 1.5 Cu Ft (CP)",
@@ -120,9 +150,9 @@ export const familyRoom = [
     itemVolume: "14"
   },
   {
-    itemName: "Cat Tree",
-    itemWeight: "21",
-    itemVolume: "3"
+    itemName: "Chair",
+    itemWeight: "14",
+    itemVolume: "2"
   },
   {
     itemName: "Chair - Chaise/Lounge",
@@ -140,29 +170,39 @@ export const familyRoom = [
     itemVolume: "5"
   },
   {
-    itemName: "Chair - Folding",
-    itemWeight: "21",
-    itemVolume: "3"
+    itemName: "Chest - Bachelor",
+    itemWeight: "84",
+    itemVolume: "12"
   },
   {
-    itemName: "Church Pew",
-    itemWeight: "140",
-    itemVolume: "20"
+    itemName: "Chest - Cedar",
+    itemWeight: "105",
+    itemVolume: "15"
   },
   {
-    itemName: "Copper Pot",
-    itemWeight: "21",
-    itemVolume: "3"
-  },
-  {
-    itemName: "Currio Cabinet",
-    itemWeight: "140",
-    itemVolume: "20"
-  },
-  {
-    itemName: "Curtains / Draperies",
+    itemName: "Chest Of Drawers",
     itemWeight: "35",
     itemVolume: "5"
+  },
+  {
+    itemName: "Crib (baby)",
+    itemWeight: "70",
+    itemVolume: "10"
+  },
+  {
+    itemName: "Curio Cabinet",
+    itemWeight: "175",
+    itemVolume: "25"
+  },
+  {
+    itemName: "Curtains/Draperies",
+    itemWeight: "35",
+    itemVolume: "5"
+  },
+  {
+    itemName: "Desk (large)",
+    itemWeight: "245",
+    itemVolume: "35"
   },
   {
     itemName: "Desk (medium)",
@@ -170,22 +210,47 @@ export const familyRoom = [
     itemVolume: "22"
   },
   {
-    itemName: "Divider / Screen",
-    itemWeight: "105",
-    itemVolume: "15"
+    itemName: "Desk (small)",
+    itemWeight: "70",
+    itemVolume: "10"
   },
   {
-    itemName: "Entertainment Center",
+    itemName: "Dresser - Triple",
+    itemWeight: "350",
+    itemVolume: "50"
+  },
+  {
+    itemName: "Dresser - Double",
     itemWeight: "280",
     itemVolume: "40"
   },
   {
-    itemName: "Floor Speakers (pair)",
-    itemWeight: "84",
-    itemVolume: "12"
+    itemName: "Dresser - Single",
+    itemWeight: "210",
+    itemVolume: "30"
   },
   {
-    itemName: "Footstool / Ottoman",
+    itemName: "Dresser - Vanity",
+    itemWeight: "140",
+    itemVolume: "20"
+  },
+  {
+    itemName: "Exercise Equipment",
+    itemWeight: "70",
+    itemVolume: "10"
+  },
+  {
+    itemName: "Fan",
+    itemWeight: "21",
+    itemVolume: "3"
+  },
+  {
+    itemName: "File Cabinet",
+    itemWeight: "105",
+    itemVolume: "15"
+  },
+  {
+    itemName: "Footstool/Ottoman",
     itemWeight: "28",
     itemVolume: "4"
   },
@@ -195,44 +260,19 @@ export const familyRoom = [
     itemVolume: "30"
   },
   {
-    itemName: "Game Table (video game)",
-    itemWeight: "175",
-    itemVolume: "25"
+    itemName: "Gun Safe",
+    itemWeight: "350",
+    itemVolume: "50"
   },
   {
-    itemName: "Gas Pump",
-    itemWeight: "140",
-    itemVolume: "20"
+    itemName: "Ironing Board",
+    itemWeight: "28",
+    itemVolume: "4"
   },
   {
-    itemName: "Glass Top",
-    itemWeight: "84",
-    itemVolume: "12"
-  },
-  {
-    itemName: "Heater",
-    itemWeight: "35",
-    itemVolume: "5"
-  },
-  {
-    itemName: "House Plant",
+    itemName: "Floor Lamp",
     itemWeight: "21",
     itemVolume: "3"
-  },
-  {
-    itemName: "Juke Box",
-    itemWeight: "175",
-    itemVolume: "25"
-  },
-  {
-    itemName: "Lamp (floor)",
-    itemWeight: "21",
-    itemVolume: "3"
-  },
-  {
-    itemName: "Large Statue",
-    itemWeight: "140",
-    itemVolume: "20"
   },
   {
     itemName: "Mirror",
@@ -245,9 +285,14 @@ export const familyRoom = [
     itemVolume: "3"
   },
   {
-    itemName: "Plant Stand",
-    itemWeight: "35",
-    itemVolume: "5"
+    itemName: "Picture Frame (medium)",
+    itemWeight: "14",
+    itemVolume: "2"
+  },
+  {
+    itemName: "Picture Frame (small)",
+    itemWeight: "7",
+    itemVolume: "1"
   },
   {
     itemName: "Plastic Bin (large)",
@@ -260,49 +305,19 @@ export const familyRoom = [
     itemVolume: "3"
   },
   {
-    itemName: "Rug",
-    itemWeight: "84",
-    itemVolume: "12"
-  },
-  {
     itemName: "Rug - Roll/Pad (large)",
     itemWeight: "70",
     itemVolume: "10"
   },
   {
-    itemName: "Rug - Roll/Pad (small)",
-    itemWeight: "21",
-    itemVolume: "3"
+    itemName: "Safe (small)",
+    itemWeight: "140",
+    itemVolume: "20"
   },
   {
-    itemName: "Safe",
-    itemWeight: "385",
-    itemVolume: "55"
-  },
-  {
-    itemName: "Sowing Machine Stand",
+    itemName: "Sewing Machine",
     itemWeight: "70",
     itemVolume: "10"
-  },
-  {
-    itemName: "Shelf Speakers (pair)",
-    itemWeight: "28",
-    itemVolume: "4"
-  },
-  {
-    itemName: "Small Cabinet",
-    itemWeight: "14",
-    itemVolume: "2"
-  },
-  {
-    itemName: "Sofa (3 seater)",
-    itemWeight: "350",
-    itemVolume: "50"
-  },
-  {
-    itemName: "Sofa Sectional(per Pc)",
-    itemWeight: "210",
-    itemVolume: "30"
   },
   {
     itemName: "Sofa (love seat)",
@@ -310,39 +325,9 @@ export const familyRoom = [
     itemVolume: "35"
   },
   {
-    itemName: "Speakers",
+    itemName: "Suitecase",
     itemWeight: "28",
     itemVolume: "4"
-  },
-  {
-    itemName: "Statue",
-    itemWeight: "70",
-    itemVolume: "10"
-  },
-  {
-    itemName: "Step Ladder",
-    itemWeight: "35",
-    itemVolume: "5"
-  },
-  {
-    itemName: "Stereo System",
-    itemWeight: "105",
-    itemVolume: "15"
-  },
-  {
-    itemName: "Stool",
-    itemWeight: "35",
-    itemVolume: "5"
-  },
-  {
-    itemName: "Stool (high / bar)",
-    itemWeight: "35",
-    itemVolume: "5"
-  },
-  {
-    itemName: "Stroller",
-    itemWeight: "14",
-    itemVolume: "2"
   },
   {
     itemName: "Coffee Table",
@@ -360,14 +345,24 @@ export const familyRoom = [
     itemVolume: "10"
   },
   {
-    itemName: "Side Table (small)",
+    itemName: "Massage Table",
+    itemWeight: "70",
+    itemVolume: "10"
+  },
+  {
+    itemName: "Night/Side Table (large)",
+    itemWeight: "70",
+    itemVolume: "10"
+  },
+  {
+    itemName: "Night/Side Table (small)",
     itemWeight: "35",
     itemVolume: "5"
   },
   {
-    itemName: "Folding Table (small)",
-    itemWeight: "35",
-    itemVolume: "5"
+    itemName: "Folding Table",
+    itemWeight: "21",
+    itemVolume: "3"
   },
   {
     itemName: "Table Lamp",
@@ -390,43 +385,18 @@ export const familyRoom = [
     itemVolume: "5"
   },
   {
-    itemName: "Treadmill",
-    itemWeight: "175",
-    itemVolume: "25"
-  },
-  {
     itemName: "Tree",
     itemWeight: "35",
     itemVolume: "5"
   },
   {
     itemName: "Trunk",
-    itemWeight: "35",
-    itemVolume: "5"
+    itemWeight: "70",
+    itemVolume: "10"
   },
   {
     itemName: "Tv Stand",
     itemWeight: "105",
     itemVolume: "15"
-  },
-  {
-    itemName: "Vacuum",
-    itemWeight: "35",
-    itemVolume: "5"
-  },
-  {
-    itemName: "Vase (large)",
-    itemWeight: "35",
-    itemVolume: "5"
-  },
-  {
-    itemName: "Victrola",
-    itemWeight: "70",
-    itemVolume: "10"
-  },
-  {
-    itemName: "Wine Fridge",
-    itemWeight: "35",
-    itemVolume: "5"
   }
 ];

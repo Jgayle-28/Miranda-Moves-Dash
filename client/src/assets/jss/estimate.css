@@ -28,13 +28,41 @@
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
   max-width: 1100px;
   min-width: 700px;
-  margin: 0 auto;
+  margin-left: 0.7rem;
+  /* margin: 0 auto; */
+}
+/* For packing services in estimate */
+.dashboard-table-packing,
+.dashboard-table-header-packing {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  max-width: 1100px;
+  min-width: 700px;
+}
+/* For Storage services in estimate */
+.dashboard-table-storage,
+.dashboard-table-header-storage {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  max-width: 1100px;
+  min-width: 700px;
+}
+/* For additional services in estimate */
+.dashboard-table-additional,
+.dashboard-table-header-additional {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  max-width: 1100px;
+  min-width: 500px;
 }
 .dashboard-table-header p {
   margin-bottom: 0;
   color: #fff;
 }
-.dashboard-table-header {
+.dashboard-table-header,
+.dashboard-table-header-packing,
+.dashboard-table-header-additional,
+.dashboard-table-header-storage {
   color: #fff;
   background: #37474f;
 }

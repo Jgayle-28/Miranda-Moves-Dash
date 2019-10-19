@@ -1,34 +1,4 @@
-export const diningRoom = [
-  {
-    itemName: "Bakers Rack",
-    itemWeight: "105",
-    itemVolume: "15"
-  },
-  {
-    itemName: "Bar Stool",
-    itemWeight: "35",
-    itemVolume: "5"
-  },
-  {
-    itemName: "Bench Harvest",
-    itemWeight: "70",
-    itemVolume: "10"
-  },
-  {
-    itemName: "Bookcase",
-    itemWeight: "35",
-    itemVolume: "5"
-  },
-  {
-    itemName: "Buffet (base)",
-    itemWeight: "245",
-    itemVolume: "35"
-  },
-  {
-    itemName: "Buffet (base)",
-    itemWeight: "245",
-    itemVolume: "35"
-  },
+export const laundryRoom = [
   {
     itemName: "Carton 1.5 Cu Ft (CP)",
     itemWeight: "14",
@@ -110,54 +80,34 @@ export const diningRoom = [
     itemVolume: "14"
   },
   {
-    itemName: "Dining Chair",
+    itemName: "Dryer",
+    itemWeight: "175",
+    itemVolume: "25"
+  },
+  {
+    itemName: "Drying Rack",
     itemWeight: "35",
     itemVolume: "5"
   },
   {
-    itemName: "Currio Cabinet",
-    itemWeight: "140",
-    itemVolume: "20"
+    itemName: "Freezer",
+    itemWeight: "210",
+    itemVolume: "30"
   },
   {
-    itemName: "Dog Crate",
-    itemWeight: "49",
-    itemVolume: "7"
+    itemName: "Ironing Board",
+    itemWeight: "28",
+    itemVolume: "4"
   },
   {
-    itemName: "Hutch (top)",
-    itemWeight: "140",
-    itemVolume: "20"
+    itemName: "Laundry Basket",
+    itemWeight: "14",
+    itemVolume: "2"
   },
   {
-    itemName: "Hutch (top)",
-    itemWeight: "140",
-    itemVolume: "20"
-  },
-  {
-    itemName: "Lamp (floor)",
-    itemWeight: "21",
-    itemVolume: "3"
-  },
-  {
-    itemName: "Mirror",
-    itemWeight: "21",
-    itemVolume: "3"
-  },
-  {
-    itemName: "Picture Frame (large)",
-    itemWeight: "21",
-    itemVolume: "3"
-  },
-  {
-    itemName: "Picture Frame (small)",
-    itemWeight: "7",
-    itemVolume: "1"
-  },
-  {
-    itemName: "Plant (large)",
-    itemWeight: "35",
-    itemVolume: "5"
+    itemName: "Laundry Basket",
+    itemWeight: "14",
+    itemVolume: "2"
   },
   {
     itemName: "Plastic Bin (large)",
@@ -170,19 +120,19 @@ export const diningRoom = [
     itemVolume: "3"
   },
   {
-    itemName: "Rug - Roll/Pad (large)",
-    itemWeight: "70",
-    itemVolume: "10"
+    itemName: "Storage Bin (large)",
+    itemWeight: "42",
+    itemVolume: "6"
   },
   {
-    itemName: "Rug - Roll/Pad (small)",
+    itemName: "Storage Bin (med/sm)",
     itemWeight: "21",
     itemVolume: "3"
   },
   {
-    itemName: "Server",
-    itemWeight: "140",
-    itemVolume: "20"
+    itemName: "Storage Shelf",
+    itemWeight: "175",
+    itemVolume: "25"
   },
   {
     itemName: "Console Table (large)",
@@ -195,23 +145,18 @@ export const diningRoom = [
     itemVolume: "10"
   },
   {
-    itemName: "Dining Table",
-    itemWeight: "210",
-    itemVolume: "30"
-  },
-  {
-    itemName: "Night/Side Table (small)",
-    itemWeight: "35",
-    itemVolume: "5"
-  },
-  {
-    itemName: "Table Lamp",
-    itemWeight: "28",
-    itemVolume: "4"
-  },
-  {
-    itemName: "Tree",
+    itemName: "Utility Cabinet",
     itemWeight: "70",
     itemVolume: "10"
+  },
+  {
+    itemName: "Vacuum",
+    itemWeight: "21",
+    itemVolume: "3"
+  },
+  {
+    itemName: "Washing Machine",
+    itemWeight: "175",
+    itemVolume: "25"
   }
 ];
