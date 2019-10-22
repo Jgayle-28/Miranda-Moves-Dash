@@ -66,6 +66,7 @@ const ContactState = props => {
     };
     try {
       const res = await axios.post("/api/contacts", contact, config);
+      // console.log("res:", res);
       dispatch({
         type: ADD_CONTACT,
         payload: res.data

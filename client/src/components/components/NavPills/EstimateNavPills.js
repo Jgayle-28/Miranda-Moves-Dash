@@ -152,7 +152,8 @@ NavPills.propTypes = {
     "danger",
     "success",
     "info",
-    "rose"
+    "rose",
+    "grey"
   ]),
   direction: PropTypes.string,
   horizontal: PropTypes.shape({

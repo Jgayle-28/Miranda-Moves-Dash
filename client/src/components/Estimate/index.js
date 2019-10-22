@@ -15,6 +15,7 @@ import Supplies from "./SuppliesServices/index.js";
 
 const Estimate = props => {
   const { user } = props.location.state;
+  // console.log("user:", user);
   const contactContext = useContext(ContactContext);
   const [inventory, setInventory] = useState([]);
 
@@ -53,7 +54,7 @@ const Estimate = props => {
         <GridItem xs={12} sm={12} md={11}>
           <EstimateNavPills
             user={user}
-            color="info"
+            color="grey"
             alignCenter
             tabs={[
               // {/***** INVENTORY COMPONENT ******/}

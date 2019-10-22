@@ -96,7 +96,7 @@ const SubmitForm = props => {
 
       contactContext.addContact(contact);
       toggleModal(false);
-      console.log(contact);
+      // console.log(contact);
     } else {
       const contact = {
         _id: opportunity_details._id,

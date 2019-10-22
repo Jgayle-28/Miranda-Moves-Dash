@@ -85,7 +85,8 @@ router.post(
       alt_phone,
       payment_type,
       bill_to,
-      inventory
+      inventory,
+      moveServices
     } = req.body; //destructure from the body of the request
 
     try {
@@ -112,11 +113,13 @@ router.post(
         payment_type,
         bill_to,
         inventory,
+        moveServices,
         user: req.user.id
       });
 
       // Save the new contact in the data base
       const contact = await newContact.save();
+      // console.log("contact:", contact);
 
       // return the new contact
       res.json(contact);
@@ -152,7 +155,8 @@ router.put("/:id", auth, async (req, res) => {
     alt_phone,
     payment_type,
     bill_to,
-    inventory
+    inventory,
+    moveServices
   } = req.body; //destructure from the body of the request
 
   // Build a contact object
@@ -178,6 +182,7 @@ router.put("/:id", auth, async (req, res) => {
   if (payment_type) contactFields.payment_type = payment_type;
   if (bill_to) contactFields.bill_to = bill_to;
   if (inventory) contactFields.inventory = inventory;
+  if (moveServices) contactFields.moveServices = moveServices;
 
   try {
     // find the contact by id

@@ -6,6 +6,7 @@ import Button from "../../components/CustomButtons/Button.jsx";
 import CustomInput from "../../components/CustomInput/CustomInput.jsx";
 import CustomSelect from "../../../components/components/Selects/CustomSelect.jsx";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
+import CloudUpload from "@material-ui/icons/CloudUpload";
 import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
 import Collapse from "@material-ui/core/Collapse";
@@ -32,39 +33,41 @@ class Supplies extends Component {
       totalWeight: 0,
       totalVolume: 0,
       totalItemCount: 0,
+      allTotal: 0,
       // Move Costs
       totalMoveCost: 0,
-      totalMen: 2,
-      totalTrucks: 1,
-      ratePerHour: 120,
-      driveTime: 0,
-      stairHrs: 0,
-      longCarryHrs: 0,
+      totalMen: "",
+      totalTrucks: "",
+      ratePerHour: "",
+      driveTime: "",
+      stairHrs: "",
+      longCarryHrs: "",
       moveHrs: 0,
       totalHrs: 0,
       // Packing
       packingItem: "",
-      packingItemQty: 0,
-      packingItemRate: 0,
-      packingItemAmt: 0,
+      packingItemQty: "",
+      packingItemRate: "",
+      packingItemAmt: "",
+      packingItemTotal: "",
       packingTotal: 0,
       packingItems: [],
       // Additional Services
       addServiceName: "",
-      addServiceAmt: 0,
-      addServiceTotal: 0,
+      addServiceAmt: "",
+      addServiceTotal: "",
       additionalServices: [],
       // Fees
-      tripFee: 50,
-      receivingFee: 37.5,
-      storageFee: 0,
+      tripFee: "",
+      receivingFee: "",
+      storageFee: "",
       totalFees: 0,
       // Storage Costs
       itemName: "",
-      itemQty: 0,
-      itemRate: 0.25,
-      daysInStorage: 0,
-      itemAmt: 0,
+      itemQty: "",
+      itemRate: "", //0.25
+      daysInStorage: "",
+      itemAmt: "",
       storageTotal: 0,
       storageItems: [],
       // Toggle Controls
@@ -86,7 +89,6 @@ class Supplies extends Component {
       this.generateTotalItems(this.props.inventory);
       this.generateTotalVolume(this.props.inventory);
       this.generateTotalWeight(this.props.inventory);
-      this.generateTotalhrs();
       this.generateTotalMoveCost();
     }
 
@@ -96,15 +98,67 @@ class Supplies extends Component {
     // this.generateTotalMoveCost();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
+    // ***** FOR LOADING USER INFO (IF ANY) *****
     if (this.props.inventory !== prevProps.inventory) {
       this.setState({ inventory: this.props.inventory });
       // Generate New Totals
       this.generateTotalItems(this.props.inventory);
       this.generateTotalVolume(this.props.inventory);
       this.generateTotalWeight(this.props.inventory);
-      this.generateTotalhrs();
       this.generateTotalMoveCost();
+    }
+    // ***** FOR LOGIC *****
+    // Calculate TOTAL move cost (this.state.allTotal)
+    if (
+      this.state.totalMoveCost !== prevState.totalMoveCost ||
+      this.state.packingTotal !== prevState.packingTotal ||
+      this.state.totalFees !== prevState.totalFees ||
+      this.state.storageTotal !== prevState.storageTotal
+    ) {
+      this.calculateTotalMoveCost();
+    }
+    if (this.state.ratePerHour !== prevState.ratePerHour) {
+      this.calculateMoveCost();
+    }
+    if (
+      this.state.totalMen !== prevState.totalMen ||
+      this.state.totalTrucks !== prevState.totalTrucks
+    ) {
+      // Calculate moving Hours
+      this.calculateMoveHrs();
+    }
+    // Calculate total move hours (movehurs,drivetime, longcarry, starihrs)
+    if (
+      this.state.moveHrs !== prevState.moveHrs ||
+      this.state.driveTime !== prevState.driveTime ||
+      this.state.stairHrs !== prevState.stairHrs ||
+      this.state.longCarryHrs !== prevState.longCarryHrs
+    ) {
+      this.calculateTotalhrs();
+    }
+    // Calulate packing item total amt
+    if (
+      this.state.packingItemQty !== prevState.packingItemQty ||
+      this.state.packingItemRate !== prevState.packingItemRate
+    ) {
+      this.calculatePackingItemTotal();
+    }
+    // Calculate trip fees
+    if (
+      this.state.tripFee !== prevState.tripFee ||
+      this.state.receivingFee !== prevState.receivingFee ||
+      this.state.additionalServices !== prevState.additionalServices
+    ) {
+      this.calculateFees();
+    }
+    // Storage Fees
+    if (
+      this.state.itemQty !== prevState.itemQty ||
+      this.state.itemRate !== prevState.itemRate ||
+      this.state.daysInStorage !== prevState.daysInStorage
+    ) {
+      this.calculateStorageItemTotal();
     }
 
     // const { user } = this.props;
@@ -119,6 +173,276 @@ class Supplies extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+  };
+
+  // Total Functions
+  // For complete move cost
+  calculateTotalMoveCost = () => {
+    const { totalMoveCost, packingTotal, totalFees, storageTotal } = this.state;
+    console.log("storageTotal:", storageTotal);
+    console.log("totalFees:", totalFees);
+    console.log("packingTotal:", packingTotal);
+    console.log("totalMoveCost:", totalMoveCost);
+    let total = 0;
+    total =
+      parseFloat(totalMoveCost) +
+      parseFloat(packingTotal) +
+      parseFloat(totalFees) +
+      parseFloat(storageTotal);
+    this.setState({ allTotal: parseFloat(total).toFixed(2) });
+  };
+  // Only move section
+  generateTotalMoveCost = () => {
+    const { totalHrs, ratePerHour } = this.state;
+    let totalCost = totalHrs * ratePerHour;
+    // console.log("totalCost:", totalCost);
+    this.setState({ totalMoveCost: totalCost });
+  };
+
+  calculateMoveHrs = () => {
+    let hours =
+      parseFloat(this.state.totalWeight) /
+      parseFloat(this.state.totalMen * 500);
+    hours = (Math.round(hours * 4) / 4).toFixed(2);
+    if (isNaN(hours)) {
+      hours = "";
+    }
+    if (this.state.totalMen === "") {
+      hours = 0;
+    }
+    this.setState({ moveHrs: hours });
+  };
+
+  calculateTotalhrs = () => {
+    const { moveHrs, driveTime, stairHrs, longCarryHrs } = this.state;
+    let totalHrs = 0;
+    // move
+    if (moveHrs.length !== 0) {
+      totalHrs = parseFloat(moveHrs);
+    }
+    // move , drive time
+    if (moveHrs.length !== 0 && driveTime.length !== 0) {
+      totalHrs = parseFloat(moveHrs) + parseFloat(driveTime);
+    }
+    // move , drive time, stairs
+    if (
+      moveHrs.length !== 0 &&
+      driveTime.length !== 0 &&
+      stairHrs.length !== 0
+    ) {
+      totalHrs =
+        parseFloat(moveHrs) + parseFloat(driveTime) + parseFloat(stairHrs);
+    }
+    // move , drive time, longcarry
+    if (
+      moveHrs.length !== 0 &&
+      driveTime.length !== 0 &&
+      longCarryHrs.length !== 0
+    ) {
+      totalHrs =
+        parseFloat(moveHrs) +
+        parseFloat(driveTime) +
+        parseFloat(stairHrs) +
+        parseFloat(longCarryHrs);
+    }
+    // all hours
+    if (
+      moveHrs.length !== 0 &&
+      driveTime.length !== 0 &&
+      stairHrs.length !== 0 &&
+      longCarryHrs.length !== 0
+    ) {
+      totalHrs =
+        parseFloat(moveHrs) +
+        parseFloat(driveTime) +
+        parseFloat(stairHrs) +
+        parseFloat(longCarryHrs);
+    }
+    // reset total hours to 0
+    if (
+      moveHrs.length === 0 &&
+      driveTime.length === 0 &&
+      stairHrs.length === 0 &&
+      longCarryHrs.length === 0
+    ) {
+      totalHrs = 0;
+    }
+    this.setState({ totalHrs: totalHrs }, () => this.calculateMoveCost());
+  };
+
+  calculateMoveCost = () => {
+    const { totalHrs, ratePerHour } = this.state;
+    let total = 0;
+    total = parseFloat(totalHrs) * parseFloat(ratePerHour);
+    if (ratePerHour.length === 0) {
+      this.setState({ totalMoveCost: 0 });
+    } else {
+      this.setState({ totalMoveCost: parseFloat(total).toFixed(2) });
+    }
+  };
+
+  calculatePackingItemTotal = () => {
+    let total = 0;
+    total =
+      parseFloat(this.state.packingItemQty) *
+      parseFloat(this.state.packingItemRate);
+    // check if total is a number to stop NaN display
+    if (isNaN(total)) {
+      total = "";
+    }
+    this.setState({ packingItemAmt: total });
+  };
+
+  calculateTotalPackingFees = () => {
+    let total = 0;
+    if (this.state.packingItems.length === 0) {
+      // if no items set total to 0
+      this.setState({ packingTotal: total });
+    } else {
+      // if items calculate total
+      this.state.packingItems.forEach(item => {
+        total = total + parseFloat(item.packingItemAmt);
+      });
+      this.setState({ packingTotal: parseFloat(total).toFixed(2) });
+    }
+  };
+
+  calculateStorageItemTotal = () => {
+    // quantity * rate * days
+    let total = 0;
+    total =
+      parseFloat(this.state.itemQty) *
+      parseFloat(this.state.itemRate) *
+      parseFloat(this.state.daysInStorage);
+    // check if total is a number to stop NaN display
+    if (isNaN(total)) {
+      total = "";
+    }
+    this.setState({
+      itemAmt: total
+      // itemAmt: parseFloat(total).toFixed(2)
+    });
+  };
+
+  calculateStorageFees = () => {
+    let total = 0;
+    if (this.state.storageItems.length === 0) {
+      // if no items set total to 0
+      this.setState({ storageTotal: total });
+    } else {
+      // if items calculate total
+      this.state.storageItems.forEach(item => {
+        total = total + parseFloat(item.itemAmt);
+      });
+      this.setState({ storageTotal: parseFloat(total).toFixed(2) });
+    }
+  };
+
+  calculateAddServiceTotal = () => {
+    let total = 0;
+    if (this.state.additionalServices.length === 0) {
+      // if no items set total to 0
+      this.setState({ storageTotal: total });
+    } else {
+      // if items calculate total
+      this.state.additionalServices.forEach(item => {
+        total = total + parseFloat(item.serviceAmt);
+      });
+      this.setState({ addServiceTotal: parseFloat(total).toFixed(2) });
+    }
+  };
+
+  calculateFees = () => {
+    // Just Recieving Fee
+    if (this.state.receivingFee.length !== 0) {
+      this.setState({
+        totalFees: this.state.receivingFee
+      });
+    }
+
+    // Just Trip Fee
+    if (this.state.tripFee.length !== 0) {
+      this.setState({ totalFees: this.state.tripFee });
+    }
+
+    // Trip Fee & Receiving Fee
+    if (
+      this.state.tripFee.length !== 0 &&
+      this.state.receivingFee.length !== 0
+    ) {
+      let total =
+        parseFloat(this.state.tripFee) + parseFloat(this.state.receivingFee);
+      this.setState({ totalFees: total.toFixed(2) });
+    }
+
+    // Additional Setvices
+    if (this.state.additionalServices.length !== 0) {
+      let total = 0;
+      this.state.additionalServices.forEach(service => {
+        total = total + parseFloat(service.serviceAmt);
+      });
+      this.setState({ totalFees: total.toFixed(2) });
+    }
+
+    // Addtional Services and Trip Fee
+    if (
+      this.state.tripFee.length !== 0 &&
+      this.state.additionalServices.length !== 0
+    ) {
+      let total = 0;
+      // Add up additional services
+      this.state.additionalServices.forEach(service => {
+        total = total + parseFloat(service.serviceAmt);
+      });
+      console.log("total after addtional:", total);
+      // add fees
+      total = total + parseFloat(this.state.tripFee);
+      this.setState({ totalFees: total.toFixed(2) });
+    }
+
+    // Addtional Services and Receiving Fee
+    if (
+      this.state.receivingFee.length !== 0 &&
+      this.state.additionalServices.length !== 0
+    ) {
+      let total = 0;
+      // Add up additional services
+      this.state.additionalServices.forEach(service => {
+        total = total + parseFloat(service.serviceAmt);
+      });
+      console.log("total after addtional:", total);
+      // add fees
+      total = total + parseFloat(this.state.receivingFee);
+      this.setState({ totalFees: total.toFixed(2) });
+    }
+
+    // Trip Fee & Receiving Fee & Additional services
+    if (
+      this.state.tripFee.length !== 0 &&
+      this.state.receivingFee.length !== 0 &&
+      this.state.additionalServices.length !== 0
+    ) {
+      let total = 0;
+      // Add up additional services
+      this.state.additionalServices.forEach(service => {
+        total = total + parseFloat(service.serviceAmt);
+      });
+      // add fees
+      total =
+        total +
+        parseFloat(this.state.tripFee) +
+        parseFloat(this.state.receivingFee);
+      this.setState({ totalFees: total.toFixed(2) });
+    }
+
+    // Reset total fees if none
+    if (
+      this.state.tripFee.length === 0 &&
+      this.state.receivingFee.length === 0 &&
+      this.state.additionalServices.length === 0
+    ) {
+      this.setState({ totalFees: 0 });
+    }
   };
 
   generateTotalWeight = inventory => {
@@ -153,77 +477,52 @@ class Supplies extends Component {
     );
     this.setState({ totalItems: totalItems });
   };
-
-  generateTotalhrs = () => {
-    const { totalWeight, totalMen } = this.state;
-    // 500lbs Per man "totalMen"
-    let weightPerHr = 500 * totalMen;
-    let totalHrs = totalWeight / weightPerHr;
-    // console.log("totalHrs:", totalHrs);
-    this.setState({ totalHrs: totalHrs });
-  };
-
-  generateTotalMoveCost = () => {
-    const { totalHrs, ratePerHour } = this.state;
-    let totalCost = totalHrs * ratePerHour;
-    // console.log("totalCost:", totalCost);
-    this.setState({ totalMoveCost: totalCost });
-  };
-
-  // TODO reset form after adding items to array - storage
-
-  // TODO Total Move costs = move cost+ packing + fees + add services + storage fees
-
-  // TODO calculateRate function based off of men
-
-  // onPackingChange = e => {
-  //   this.setState({
-  //     [e.target.name]: e.target.value
-  //   });
-  // };
-
-  // changePackingItem = e => {
-  //   this.setState({
-  //     [e.target.name]: e.target.value
-  //   });
-  //   // Only create this function if he wants static item amount
-  //   // this.setItemAmt();
-  // };
-
+  // Create Functions
   createAddService = () => {
     let newArr = [...this.state.additionalServices];
     // console.log("newArr:", newArr);
     const serviceObj = {
       serviceName: this.state.addServiceName,
-      serviceAmt: this.state.addServiceAmt
+      serviceAmt: parseFloat(this.state.addServiceAmt).toFixed(2)
     };
     // console.log("serviceObj:", serviceObj);
     newArr.push(serviceObj);
     // console.log("newArr:", newArr);
-    this.setState({
-      additionalServices: newArr,
-      addServiceName: "",
-      addServiceAmt: 0
-    });
+    this.setState(
+      {
+        additionalServices: newArr,
+        addServiceName: "",
+        addServiceAmt: ""
+      },
+      () => {
+        this.calculateAddServiceTotal();
+      }
+    );
   };
 
   createPackingService = () => {
     let newArr = [...this.state.packingItems];
     const packingItemObj = {
       packingItem: this.state.packingItem,
-      packingItemQty: this.state.packingItemQty,
-      packingItemRate: this.state.packingItemRate,
-      packingItemAmt: this.state.packingItemAmt
+      packingItemQty: parseFloat(this.state.packingItemQty),
+      packingItemRate: parseFloat(this.state.packingItemRate).toFixed(2),
+      packingItemAmt: parseFloat(this.state.packingItemAmt).toFixed(2)
     };
     newArr.push(packingItemObj);
-    // console.log("newArr:", newArr);
-    this.setState({
-      packingItems: newArr,
-      packingItem: "",
-      packingItemQty: 0,
-      packingItemRate: 0,
-      packingItemAmt: 0
-    });
+    console.log("newArr:", newArr);
+    this.setState(
+      {
+        packingItems: newArr,
+        packingItem: "",
+        packingItemQty: "",
+        packingItemRate: "",
+        packingItemAmt: ""
+      },
+      () => {
+        // Calculate totals for packing
+        this.calculateTotalPackingFees();
+      }
+    );
   };
 
   createStorageItem = () => {
@@ -237,31 +536,38 @@ class Supplies extends Component {
     };
     newArr.push(storageItemObj);
     // console.log("newArr:", newArr);
-    this.setState({
-      storageItems: newArr,
-      itemName: "",
-      itemQty: 0,
-      itemRate: 0.25,
-      daysInStorage: 0,
-      itemAmt: 0
-    });
+    this.setState(
+      {
+        storageItems: newArr,
+        itemName: "",
+        itemQty: "",
+        itemRate: "",
+        daysInStorage: "",
+        itemAmt: ""
+      },
+      () => {
+        // Calculate totals for storage
+        this.calculateStorageFees();
+      }
+    );
   };
-
+  // Delete Functions
   deletePackingItem = itemName => {
     let itemArr = [...this.state.packingItems];
     // get the index of item in the array
     var removeIndex = itemArr.map(item => item.packingItem).indexOf(itemName);
     // Remove from array
     ~removeIndex && itemArr.splice(removeIndex, 1);
-    this.setState({ packingItems: itemArr });
+    this.setState({ packingItems: itemArr }, () => {
+      // Recalculate packing fees
+      this.calculateTotalPackingFees();
+    });
   };
 
   deleteServiceItem = itemName => {
     let itemArr = [...this.state.additionalServices];
     // get the index of item in the array
-    var removeIndex = itemArr
-      .map(item => item.addServiceName)
-      .indexOf(itemName);
+    var removeIndex = itemArr.map(item => item.serviceName).indexOf(itemName);
     // Remove from array
     ~removeIndex && itemArr.splice(removeIndex, 1);
     this.setState({ additionalServices: itemArr });
@@ -273,7 +579,9 @@ class Supplies extends Component {
     var removeIndex = itemArr.map(item => item.itemName).indexOf(item_name);
     // Remove from array
     ~removeIndex && itemArr.splice(removeIndex, 1);
-    this.setState({ storageItems: itemArr });
+    this.setState({ storageItems: itemArr }, () => {
+      this.calculateStorageFees();
+    });
   };
 
   // Universal form toggle function
@@ -291,17 +599,63 @@ class Supplies extends Component {
       this.setState({ storageFormOpen: !this.state.storageFormOpen });
     }
   };
+  // Submit Services
+  submitServices = () => {
+    const { user } = this.props;
+    const contacts = this.context;
+    console.log("contacts:", contacts);
+    const serviceObj = {
+      moveCost: {
+        totalMen: this.state.totalMen,
+        totalTrucks: this.state.totalTrucks,
+        totalHours: this.state.totalHrs,
+        moveHours: this.state.moveHrs,
+        stairHours: this.state.stairHrs,
+        longCarryHours: this.state.longCarryHrs,
+        driveTime: this.state.driveTime,
+        tripFee: this.state.tripFee,
+        totalMoveCost: this.state.totalMoveCost
+      },
+      packing: {
+        packingItems: this.state.packingItems,
+        packingTotal: this.state.packingTotal
+      },
+      fees: {
+        receivingFee: this.state.receivingFee,
+        totalFees: this.state.totalFees
+      },
+      additionalServices: {
+        addservices: this.state.additionalServices,
+        addServicesTotal: this.state.addServiceTotal
+      },
+      storage: {
+        storageItems: this.state.storageItems,
+        storageTotal: this.state.storageTotal
+      },
+      totalWeight: this.state.totalWeight,
+      totalVolume: this.state.totalVolume,
+      totalItemCount: this.state.totalItems
+    };
+    const contact = {
+      _id: user._id,
+      moveServices: serviceObj
+    };
+    contacts.updateContact(contact);
+    contacts.getContact(user._id);
+    //  this.showInventoryNotification();
+  };
   // TODO Break out forms into seperate components
   render() {
-    // console.log("PROPS", this.props);
+    console.log("PROPS", this.props);
     // console.log("PROPS INVENTORY", this.props.inventory);
     return (
       <>
         <div
           style={{
             display: "flex",
-            justifyContent: "space-around",
-            marginBottom: "1rem"
+            justifyContent: "flex-end",
+            marginBottom: "1rem",
+            paddingRight: "9.5rem"
           }}
         >
           <Chip
@@ -328,7 +682,7 @@ class Supplies extends Component {
           <Chip
             size="large"
             avatar={<Avatar>TMC</Avatar>}
-            label={`Total Move Cost: ${this.state.totalMoveCost}`}
+            label={`Total Move Cost: ${this.state.allTotal}`}
             clickable
             // className={classes.chip}
             color="secondary"
@@ -353,25 +707,16 @@ class Supplies extends Component {
                 Move Charges
                 <ArrowDropDown />
               </Button>
-              {/* <div style={{ display: "flex" }}>
-                <h4
-                  style={{ margin: "0 1rem 0 0", padding: 0, color: "#9E9E9E" }}
-                >
-                  Move Hours: {this.state.totalMoveCost}
-                </h4>
-                <h4
-                  style={{ margin: "0 1rem 0 0", padding: 0, color: "#9E9E9E" }}
-                >
-                  Total Hours: {this.state.totalMoveCost}
-                </h4> */}
               <h4
                 style={{ margin: "0 1rem 0 0", padding: 0, color: "#9E9E9E" }}
               >
                 Total Charges: $ {this.state.totalMoveCost}
               </h4>
-              {/* </div> */}
             </div>
-            <Collapse in={this.state.moveFormOpen}>
+            <Collapse
+              in={this.state.moveFormOpen}
+              style={{ marginBottom: "1.5rem" }}
+            >
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={2}>
                   {/* ROW 1 */}
@@ -476,6 +821,31 @@ class Supplies extends Component {
                   />
                 </GridItem>
               </GridContainer>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end"
+                }}
+              >
+                <h4
+                  style={{
+                    margin: "0 1rem 0 0",
+                    padding: 0,
+                    color: "#3F51B5"
+                  }}
+                >
+                  Move Hours: {this.state.moveHrs}
+                </h4>
+                <h4
+                  style={{
+                    margin: "0 1rem 0 0",
+                    padding: 0,
+                    color: "#3F51B5"
+                  }}
+                >
+                  Total Move Hours: {this.state.totalHrs}
+                </h4>
+              </div>
             </Collapse>
           </GridItem>
           {/***** PACKING ******/}
@@ -499,10 +869,13 @@ class Supplies extends Component {
               <h4
                 style={{ margin: "0 1rem 0 0", padding: 0, color: "#9E9E9E" }}
               >
-                Total Charges: $ {this.state.totalMoveCost}
+                Total Charges: $ {this.state.packingTotal}
               </h4>
             </div>
-            <Collapse in={this.state.packingFormOpen}>
+            <Collapse
+              in={this.state.packingFormOpen}
+              style={{ marginBottom: "1.5rem" }}
+            >
               <GridContainer>
                 <GridItem xs={12} sm={12} md={2}>
                   <CustomSelect
@@ -569,6 +942,11 @@ class Supplies extends Component {
                     color="navy"
                     size="sm"
                     onClick={this.createPackingService}
+                    disabled={
+                      this.state.packingItem.length === 0 ||
+                      this.state.packingItemQty.length === 0 ||
+                      this.state.packingItemRate.length === 0
+                    }
                   >
                     Add Packing Item
                   </Button>
@@ -606,10 +984,13 @@ class Supplies extends Component {
               <h4
                 style={{ margin: "0 1rem 0 0", padding: 0, color: "#9E9E9E" }}
               >
-                Total Charges: $ {this.state.totalMoveCost}
+                Total Charges: $ {this.state.totalFees}
               </h4>
             </div>
-            <Collapse in={this.state.additionalFormOpen}>
+            <Collapse
+              in={this.state.additionalFormOpen}
+              style={{ marginBottom: "1.5rem" }}
+            >
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   <h4>Additional Fees</h4>
@@ -691,6 +1072,10 @@ class Supplies extends Component {
                     color="navy"
                     size="sm"
                     onClick={this.createAddService}
+                    disabled={
+                      this.state.addServiceName.length === 0 ||
+                      this.state.addServiceAmt.length === 0
+                    }
                   >
                     Add Service
                   </Button>
@@ -741,10 +1126,13 @@ class Supplies extends Component {
               <h4
                 style={{ margin: "0 1rem 0 0", padding: 0, color: "#9E9E9E" }}
               >
-                Total Charges: $ {this.state.totalMoveCost}
+                Total Charges: $ {this.state.storageTotal}
               </h4>
             </div>
-            <Collapse in={this.state.storageFormOpen}>
+            <Collapse
+              in={this.state.storageFormOpen}
+              style={{ marginBottom: "1.5rem" }}
+            >
               <GridContainer>
                 <GridItem xs={12} sm={12} md={2}>
                   <CustomInput
@@ -832,6 +1220,12 @@ class Supplies extends Component {
                     color="navy"
                     size="sm"
                     onClick={this.createStorageItem}
+                    disabled={
+                      this.state.itemName.length === 0 ||
+                      this.state.itemQty.length === 0 ||
+                      this.state.itemRate.length === 0 ||
+                      this.state.daysInStorage.length === 0
+                    }
                   >
                     Add Storage Item
                   </Button>
@@ -848,71 +1242,24 @@ class Supplies extends Component {
               </GridContainer>
             </Collapse>
           </GridItem>
-
-          {/***** TRIP FEE ******/}
-          {/* <GridItem xs={12} sm={12} md={10}>
-            <div style={{ display: "flex" }}>
-              <h4>Trip Fee</h4>
-              <CustomInput
-                navy
-                // labelText={<span>Trip Fee</span>}
-                id="item"
-                formControlProps={{
-                  fullWidth: false
-                }}
-                inputProps={{
-                  onChange: this.onChange,
-                  type: "text",
-                  name: "tripFee",
-                  value: this.state.tripFee
-                }}
-              />
-            </div>
-            <Collapse in={this.state.storageFormOpen}>
-              <h1>Storage charges form</h1>
-            </Collapse>
-          </GridItem> */}
-          {/***** RECIEVING FEE ******/}
-          {/* <GridItem xs={12} sm={12} md={10}>
-            <div style={{ display: "flex" }}>
-              <h4>Receiving Fee</h4>
-              <CustomInput
-                navy
-                labelText={<span>Receiving Fee</span>}
-                id="item"
-                formControlProps={{
-                  fullWidth: false
-                }}
-                inputProps={{
-                  onChange: this.onChange,
-                  type: "text",
-                  name: "receivingFee",
-                  value: this.state.receivingFee
-                }}
-              />
-            </div>
-            <Collapse in={this.state.storageFormOpen}>
-              <h1>Storage charges form</h1>
-            </Collapse>
-          </GridItem> */}
         </GridContainer>
-
-        {/* <br />
-        <br />
-        <br />
-        <br />
-        <ul>
-          {this.state.inventory.map(room => (
-            <li>
-              {room.items.map((item, i) => (
-                <p>
-                  {i}
-                  {item.name}
-                </p>
-              ))}
-            </li>
-          ))}
-        </ul> */}
+        {/***** SAVE BUTTON ******/}
+        <div
+          style={{ display: "flex", justifyContent: "center", width: "100%" }}
+        >
+          <Button
+            color="success"
+            size="sm"
+            onClick={this.submitServices}
+            // disabled={this.state.inventory.length === 0}
+          >
+            <CloudUpload />
+            {/* {this.props.user.moveServices.length === 0
+              ? "Save Services"
+              : "Update Services"} */}
+            Save Services
+          </Button>
+        </div>
       </>
     );
   }
