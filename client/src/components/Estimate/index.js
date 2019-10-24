@@ -12,6 +12,7 @@ import EstimateNavPills from "../components/NavPills/EstimateNavPills";
 // Panel components
 import Inventory from "./Inventory";
 import Supplies from "./SuppliesServices/index.js";
+import Finalize from "./Finalize";
 
 const Estimate = props => {
   const { user } = props.location.state;
@@ -75,20 +76,7 @@ const Estimate = props => {
               {
                 tabButton: "Finalize",
                 tabIcon: AssignmentTurnedIn,
-                tabContent: (
-                  <span>
-                    <p>
-                      Completely synergize resource taxing relationships via
-                      premier niche markets. Professionally cultivate one-to-one
-                      customer service with robust ideas.{" "}
-                    </p>
-                    <br />
-                    <p>
-                      Dynamically innovate resource-leveling customer service
-                      for state of the art customer service.
-                    </p>
-                  </span>
-                )
+                tabContent: <Finalize user={user} />
               },
               // {/***** Actions COMPONENT ******/}
               {

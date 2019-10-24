@@ -74,7 +74,9 @@ class Supplies extends Component {
       moveFormOpen: false,
       packingFormOpen: false,
       additionalFormOpen: false,
-      storageFormOpen: false
+      storageFormOpen: false,
+      // Alert
+      saveAlert: false
     };
   }
   static contextType = ContactContext;
@@ -613,6 +615,7 @@ class Supplies extends Component {
         stairHours: this.state.stairHrs,
         longCarryHours: this.state.longCarryHrs,
         driveTime: this.state.driveTime,
+        ratePerHour: this.state.ratePerHour,
         tripFee: this.state.tripFee,
         totalMoveCost: this.state.totalMoveCost
       },
@@ -634,7 +637,8 @@ class Supplies extends Component {
       },
       totalWeight: this.state.totalWeight,
       totalVolume: this.state.totalVolume,
-      totalItemCount: this.state.totalItems
+      totalItemCount: this.state.totalItems,
+      allTotal: this.state.allTotal
     };
     const contact = {
       _id: user._id,

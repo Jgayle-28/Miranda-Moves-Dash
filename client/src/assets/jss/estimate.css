@@ -88,3 +88,120 @@
 .table-item:first-child {
   border-left: 1px solid #37474f;
 }
+
+/******* FINALIZE TABLE STYLES  ***************/
+/* #finalize-tables {
+  max-height: 1000px;
+  overflow: auto;
+} */
+/* #finalize-tables table {
+
+} */
+
+/* .finalize-header table,
+th,
+td {
+  padding: 0;
+  border: 1px solid black;
+} */
+#info-table,
+#move-detail-table,
+#move-total-table,
+#move-packing-table,
+#move-storage-table,
+#move-fees-table,
+#move-addService-table,
+#move-items-table,
+#move-finalTotals-table {
+  font-size: 12px;
+  border-spacing: 0;
+  padding: 0;
+  width: 100%;
+  /* border: 1px solid black; */
+}
+#move-finalTotals-table {
+  font-size: 12px;
+  border-spacing: 0;
+  padding: 0;
+  width: 50%;
+  /* margin-right: 0px;
+  margin-left: auto; */
+}
+.t-head {
+  border: 1px solid black;
+  padding: 4px;
+  text-align: center;
+}
+
+.td-half {
+  width: 50%;
+  padding: 4px;
+  /* border: 1px solid black; */
+}
+
+.td-half-br {
+  width: 50%;
+  padding: 4px;
+  /* border: 1px solid black;
+  border-style: none solid none none; */
+}
+
+.td-half-brl {
+  width: 50%;
+  padding: 4px;
+  /* border: 1px solid black;
+  border-style: none solid none solid; */
+
+  /*  border-left: 1px solid black; */
+}
+
+.ta-right {
+  text-align: right;
+  padding: 4px 20px 4px 4px;
+}
+
+.td-tq {
+  width: 70%;
+  padding: 4px;
+}
+
+.td-q {
+  width: 30%;
+  padding: 4px;
+}
+
+.td-40 {
+  width: 60%;
+  padding: 4px;
+  /* border: 1px solid black; */
+}
+
+.td-20 {
+  width: 33.333%;
+  padding: 4px;
+  /* border: 1px solid black; */
+}
+
+.td-21 {
+  width: 20%;
+  padding: 4px;
+  /* border: 1px solid black; */
+}
+
+/* Helper classes */
+.padding-0 {
+  padding: 0px;
+}
+
+.move-estimate-header {
+  text-align: center;
+}
+.text-bold {
+  font-weight: 700;
+}
+.w-100 {
+  width: 100%;
+}
+.ta-center {
+  text-align: center;
+}

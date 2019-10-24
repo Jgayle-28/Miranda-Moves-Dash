@@ -155,7 +155,8 @@ const ContactSchema = mongoose.Schema(
       },
       totalWeight: { type: Number },
       totalVolume: { type: Number },
-      totalItemCount: { type: Number }
+      totalItemCount: { type: Number },
+      allTotal: { type: Number }
     },
     date: {
       type: Date,
