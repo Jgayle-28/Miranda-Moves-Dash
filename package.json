@@ -1,6 +1,9 @@
 {
   "name": "miranda-dash",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.13.0"
+  },
   "description": "Keeps track of moves and allows user to create move estimates",
   "main": "server.js",
   "scripts": {
