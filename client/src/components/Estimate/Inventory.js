@@ -902,8 +902,6 @@ class Estimate extends Component {
                               onClick={this.addNewItem}
                               disabled={
                                 this.state.addItemName.length === 0 ||
-                                this.state.addItemWeight.length === 0 ||
-                                this.state.addItemVolume.length === 0 ||
                                 this.state.addItemAmt.length === 0 ||
                                 this.state.addItemRoomName.length === 0
                               }

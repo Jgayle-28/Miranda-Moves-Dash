@@ -115,23 +115,20 @@ class AllRoomsTable extends React.Component {
           {/* {this.getInitialState()} */}
           <Chip
             size="large"
-            avatar={<Avatar>LBS</Avatar>}
-            label={`Total Weight: ${generateTotalWeight(inventory)}`}
+            label={`Total Weight (lbs): ${generateTotalWeight(inventory)}`}
             clickable
             className={classes.chip}
             color="primary"
           />
           <Chip
             size="large"
-            avatar={<Avatar>CFT</Avatar>}
-            label={`Total Volume: ${generateTotalVolume(inventory)}`}
+            label={`Total Volume (cft): ${generateTotalVolume(inventory)}`}
             clickable
             className={classes.chip}
             color="primary"
           />
           <Chip
             size="large"
-            avatar={<Avatar>TIC</Avatar>}
             label={`Total Item Count: ${generateTotalItems(inventory)}`}
             clickable
             className={classes.chip}

@@ -61,23 +61,20 @@ const EstimateItemTable = ({ roomName, items, deleteItem, updateItem }) => {
       <div className={classes.root}>
         <Chip
           size="large"
-          avatar={<Avatar>LBS</Avatar>}
-          label={`Total Weight: ${generateTotalWeight(items)}`}
+          label={`Total Weight (lbs): ${generateTotalWeight(items)}`}
           clickable
           className={classes.chip}
           color="primary"
         />
         <Chip
           size="large"
-          avatar={<Avatar>CFT</Avatar>}
-          label={`Total Volume: ${generateTotalVolume(items)}`}
+          label={`Total Volume (cft): ${generateTotalVolume(items)}`}
           clickable
           className={classes.chip}
           color="primary"
         />
         <Chip
           size="large"
-          avatar={<Avatar>TIC</Avatar>}
           label={`Total Item Count: ${generateTotalItems(items)}`}
           clickable
           className={classes.chip}

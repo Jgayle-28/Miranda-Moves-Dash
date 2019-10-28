@@ -829,8 +829,8 @@ class Supplies extends Component {
           <div style={{ marginRight: ".5rem" }}>
             <Chip
               size="large"
-              avatar={<Avatar>LBS</Avatar>}
-              label={`Total Weight: ${this.state.totalWeight}`}
+              // avatar={<Avatar>LBS</Avatar>}
+              label={`Total Weight (lbs): ${this.state.totalWeight}`}
               clickable
               color="primary"
             />
@@ -838,8 +838,8 @@ class Supplies extends Component {
           <div style={{ marginRight: ".5rem" }}>
             <Chip
               size="large"
-              avatar={<Avatar>CFT</Avatar>}
-              label={`Total Volume: ${this.state.totalVolume}`}
+              // avatar={<Avatar>CFT</Avatar>}
+              label={`Total Volume (cft): ${this.state.totalVolume}`}
               clickable
               color="primary"
             />
@@ -847,7 +847,7 @@ class Supplies extends Component {
           <div style={{ marginRight: ".5rem" }}>
             <Chip
               size="large"
-              avatar={<Avatar>TIC</Avatar>}
+              // avatar={<Avatar>TIC</Avatar>}
               label={`Total Item Count: ${this.state.totalItems}`}
               clickable
               color="primary"
@@ -856,7 +856,7 @@ class Supplies extends Component {
 
           <Chip
             size="large"
-            avatar={<Avatar>TMC</Avatar>}
+            // avatar={<Avatar>TMC</Avatar>}
             label={`Total Move Cost: ${this.state.allTotal}`}
             clickable
             // className={classes.chip}
