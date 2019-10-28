@@ -78,6 +78,12 @@ const ContactSchema = mongoose.Schema(
     bill_to: {
       type: String
     },
+    pack_date: {
+      type: String
+    },
+    pack_time: {
+      type: String
+    },
     // begin estimate info
     inventory: [
       {

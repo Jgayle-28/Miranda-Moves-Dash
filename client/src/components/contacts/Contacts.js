@@ -167,30 +167,6 @@ const Contacts = props => {
       doc.text("Phone: (899) 480-4117", 137, 8);
       doc.text("Email: customerservice@mirandadelivery.com", 137, 13);
 
-      // doc.autoTable({
-      //   body: [
-      //     [
-      //       {
-      //         content: `Delivery Date: ${
-      //           rowData.estimate_date !== null
-      //             ? rowData.estimate_date
-      //             : ''
-      //         }`,
-      //         styles: { halign: 'left' }
-      //       },
-      //       {
-      //         content: `Delivery Time: ${
-      //           rowData.estimate_time !== null
-      //             ? rowData.estimate_time
-      //             : ''
-      //         }`,
-      //         styles: { halign: 'center' }
-      //       }
-      //     ]
-      //   ],
-      //   startY: 25
-      // });
-
       doc.autoTable({
         headStyles: { fillColor: [5, 48, 83] },
 
@@ -286,8 +262,9 @@ const Contacts = props => {
     });
   };
 
-  // console.log('contacts: ', contacts);
+  // console.log("contacts: ", contacts);
   // console.log('props.history', props.history);
+  console.log("contactConext:", contactConext);
   return (
     <>
       {contacts !== null && !loading ? (

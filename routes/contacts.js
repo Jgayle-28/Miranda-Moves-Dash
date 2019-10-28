@@ -85,6 +85,8 @@ router.post(
       alt_phone,
       payment_type,
       bill_to,
+      pack_date,
+      pack_time,
       inventory,
       moveServices
     } = req.body; //destructure from the body of the request
@@ -112,6 +114,8 @@ router.post(
         alt_phone,
         payment_type,
         bill_to,
+        pack_date,
+        pack_time,
         inventory,
         moveServices,
         user: req.user.id
@@ -155,6 +159,8 @@ router.put("/:id", auth, async (req, res) => {
     alt_phone,
     payment_type,
     bill_to,
+    pack_date,
+    pack_time,
     inventory,
     moveServices
   } = req.body; //destructure from the body of the request
@@ -181,6 +187,8 @@ router.put("/:id", auth, async (req, res) => {
   if (alt_phone) contactFields.alt_phone = alt_phone;
   if (payment_type) contactFields.payment_type = payment_type;
   if (bill_to) contactFields.bill_to = bill_to;
+  if (pack_date) contactFields.pack_date = pack_date;
+  if (pack_time) contactFields.pack_time = pack_time;
   if (inventory) contactFields.inventory = inventory;
   if (moveServices) contactFields.moveServices = moveServices;
 

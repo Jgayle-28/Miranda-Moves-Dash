@@ -27,9 +27,9 @@ class NavPills extends React.Component {
   }
   static contextType = ContactContext;
   componentDidMount() {
-    const { user } = this.props;
-    const contacts = this.context;
-    contacts.getContact(user._id);
+    // const { user } = this.props;
+    // const contacts = this.context;
+    // contacts.getContact(user._id);
   }
   componentDidUpdate() {
     // const { user } = this.props;

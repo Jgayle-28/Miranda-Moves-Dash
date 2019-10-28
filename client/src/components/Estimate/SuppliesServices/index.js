@@ -5,14 +5,24 @@ import GridItem from "../../components/Grid/GridItem.jsx";
 import Button from "../../components/CustomButtons/Button.jsx";
 import CustomInput from "../../components/CustomInput/CustomInput.jsx";
 import CustomSelect from "../../../components/components/Selects/CustomSelect.jsx";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+  KeyboardTimePicker
+} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import "date-fns";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import CloudUpload from "@material-ui/icons/CloudUpload";
+import AddAlert from "@material-ui/icons/AddAlert";
 import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
 import Collapse from "@material-ui/core/Collapse";
+import Snackbars from "../../components/Snackbar/Snackbar.jsx";
 import PackingTable from "./PackingTable";
 import AdditionalServiceTable from "./addServicesTable";
 import StorageListTable from "./storageTable";
+import moment from "moment";
 
 const packingItemList = [
   { label: "Carton 1.5 Cu Ft", value: "Carton 1.5 Cu Ft" },
@@ -45,6 +55,8 @@ class Supplies extends Component {
       moveHrs: 0,
       totalHrs: 0,
       // Packing
+      pack_date: null,
+      pack_time: null,
       packingItem: "",
       packingItemQty: "",
       packingItemRate: "",
@@ -82,7 +94,7 @@ class Supplies extends Component {
   static contextType = ContactContext;
 
   componentDidMount() {
-    // const { user } = this.props;
+    const { user } = this.props;
     // const contacts = this.context;
 
     if (this.props.inventory !== this.setState.inventory) {
@@ -93,7 +105,93 @@ class Supplies extends Component {
       this.generateTotalWeight(this.props.inventory);
       this.generateTotalMoveCost();
     }
-
+    // Move Charges - Loading service info if any
+    if (user !== null) {
+      if (user.moveServices !== null) {
+        if (
+          user.moveServices.moveCost.totalMen &&
+          user.moveServices.moveCost.totalMen.length !== 0
+        ) {
+          this.setState({ totalMen: user.moveServices.moveCost.totalMen });
+        }
+        if (
+          user.moveServices.moveCost.totalTrucks &&
+          user.moveServices.moveCost.totalTrucks.length !== 0
+        ) {
+          this.setState({
+            totalTrucks: user.moveServices.moveCost.totalTrucks
+          });
+        }
+        if (
+          user.moveServices.moveCost.ratePerHour &&
+          user.moveServices.moveCost.ratePerHour.length !== 0
+        ) {
+          this.setState({
+            ratePerHour: user.moveServices.moveCost.ratePerHour
+          });
+        }
+        if (
+          user.moveServices.moveCost.driveTime &&
+          user.moveServices.moveCost.driveTime.length !== 0
+        ) {
+          this.setState({ driveTime: user.moveServices.moveCost.driveTime });
+        }
+        if (
+          user.moveServices.moveCost.stairHours &&
+          user.moveServices.moveCost.stairHours.length !== 0
+        ) {
+          this.setState({ stairHrs: user.moveServices.moveCost.stairHours });
+        }
+        if (
+          user.moveServices.moveCost.longCarryHours &&
+          user.moveServices.moveCost.longCarryHours.length !== 0
+        ) {
+          this.setState({
+            longCarryHrs: user.moveServices.moveCost.longCarryHours
+          });
+        }
+        // Packing services
+        if (user.moveServices.packing.packingItems.length !== 0) {
+          this.setState(
+            { packingItems: user.moveServices.packing.packingItems },
+            () => this.calculateTotalPackingFees()
+          );
+        }
+        // Additional Services & Fees
+        if (user.moveServices.additionalServices.addservices.length !== 0) {
+          this.setState(
+            {
+              additionalServices:
+                user.moveServices.additionalServices.addservices
+            },
+            () => this.calculateAddServiceTotal()
+          );
+        }
+        if (
+          user.moveServices.fees.receivingFee &&
+          user.moveServices.fees.receivingFee.length !== 0
+        ) {
+          this.setState({
+            receivingFee: user.moveServices.fees.receivingFee
+          });
+        }
+        if (
+          user.moveServices.moveCost.tripFee &&
+          user.moveServices.moveCost.tripFee.length !== 0
+        ) {
+          this.setState({
+            tripFee: user.moveServices.moveCost.tripFee
+          });
+        }
+        // Storage
+        if (user.moveServices.storage.storageItems.length !== 0) {
+          this.setState(
+            { storageItems: user.moveServices.storage.storageItems },
+            () => this.calculateStorageFees()
+          );
+        }
+      }
+    }
     // contacts.getContact(user._id);
     // if (contacts.focusContact !== null) {
     //   this.setState({ inventory: contacts.focusContact.inventory });
@@ -101,15 +199,36 @@ class Supplies extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // ***** FOR LOADING USER INFO (IF ANY) *****
+    const { user } = this.props;
+    // ***** FOR LOADING INVENTORY INFO (IF ANY) *****
     if (this.props.inventory !== prevProps.inventory) {
+      // console.log("UPDATED INVENTORY IN SUPPLIES");
       this.setState({ inventory: this.props.inventory });
       // Generate New Totals
       this.generateTotalItems(this.props.inventory);
       this.generateTotalVolume(this.props.inventory);
       this.generateTotalWeight(this.props.inventory);
+      // TODO Maybe need to check if men and rateperhour is there to avoid error
+      // this.calculateMoveHrs();
+      this.calculateTotalhrs();
+      this.calculateMoveCost();
+      this.calculateTotalMoveCost();
       this.generateTotalMoveCost();
     }
+    // Updating move as inventory updates
+    if (this.state.totalWeight !== prevState.totalWeight) {
+      if (
+        this.state.totalMen.length !== 0 &&
+        this.state.ratePerHour.length !== 0
+      ) {
+        this.calculateMoveHrs();
+        // Saves to update user for finalize
+        // this.submitServices();
+      }
+    }
+
+    // ***** FOR LOADING MOVE SERVICE INFO (IF ANY) *****
+
     // ***** FOR LOGIC *****
     // Calculate TOTAL move cost (this.state.allTotal)
     if (
@@ -177,14 +296,21 @@ class Supplies extends Component {
     });
   };
 
+  handleDateChange = date => {
+    this.setState({ pack_date: date });
+  };
+
+  handleTimeChange = time => {
+    this.setState({ pack_time: time });
+  };
   // Total Functions
   // For complete move cost
   calculateTotalMoveCost = () => {
     const { totalMoveCost, packingTotal, totalFees, storageTotal } = this.state;
-    console.log("storageTotal:", storageTotal);
-    console.log("totalFees:", totalFees);
-    console.log("packingTotal:", packingTotal);
-    console.log("totalMoveCost:", totalMoveCost);
+    // console.log("storageTotal:", storageTotal);
+    // console.log("totalFees:", totalFees);
+    // console.log("packingTotal:", packingTotal);
+    // console.log("totalMoveCost:", totalMoveCost);
     let total = 0;
     total =
       parseFloat(totalMoveCost) +
@@ -342,6 +468,7 @@ class Supplies extends Component {
 
   calculateAddServiceTotal = () => {
     let total = 0;
+
     if (this.state.additionalServices.length === 0) {
       // if no items set total to 0
       this.setState({ storageTotal: total });
@@ -350,6 +477,7 @@ class Supplies extends Component {
       this.state.additionalServices.forEach(item => {
         total = total + parseFloat(item.serviceAmt);
       });
+      console.log(" add service total:", total);
       this.setState({ addServiceTotal: parseFloat(total).toFixed(2) });
     }
   };
@@ -396,7 +524,7 @@ class Supplies extends Component {
       this.state.additionalServices.forEach(service => {
         total = total + parseFloat(service.serviceAmt);
       });
-      console.log("total after addtional:", total);
+      // console.log("total after addtional:", total);
       // add fees
       total = total + parseFloat(this.state.tripFee);
       this.setState({ totalFees: total.toFixed(2) });
@@ -412,7 +540,7 @@ class Supplies extends Component {
       this.state.additionalServices.forEach(service => {
         total = total + parseFloat(service.serviceAmt);
       });
-      console.log("total after addtional:", total);
+      // console.log("total after addtional:", total);
       // add fees
       total = total + parseFloat(this.state.receivingFee);
       this.setState({ totalFees: total.toFixed(2) });
@@ -586,6 +714,17 @@ class Supplies extends Component {
     });
   };
 
+  showSaveNotification = () => {
+    if (!this.saveAlert) {
+      this.setState({ saveAlert: !this.state.saveAlert });
+      // use this to make the notification autoclose
+      setTimeout(
+        () => this.setState({ saveAlert: !this.state.saveAlert }),
+        1000
+      );
+    }
+  };
+
   // Universal form toggle function
   handleFormToggle = name => {
     if (name === "moveFormOpen") {
@@ -605,7 +744,6 @@ class Supplies extends Component {
   submitServices = () => {
     const { user } = this.props;
     const contacts = this.context;
-    console.log("contacts:", contacts);
     const serviceObj = {
       moveCost: {
         totalMen: this.state.totalMen,
@@ -640,20 +778,46 @@ class Supplies extends Component {
       totalItemCount: this.state.totalItems,
       allTotal: this.state.allTotal
     };
-    const contact = {
-      _id: user._id,
-      moveServices: serviceObj
-    };
+
+    let contact = {};
+    if (this.state.pack_date !== null || this.state.pack_time !== null) {
+      contact = {
+        _id: user._id,
+        moveServices: serviceObj,
+        pack_date: this.state.pack_date,
+        pack_time: this.state.pack_time
+      };
+    } else {
+      contact = {
+        _id: user._id,
+        moveServices: serviceObj
+      };
+    }
+
     contacts.updateContact(contact);
-    contacts.getContact(user._id);
-    //  this.showInventoryNotification();
+    // Called to update the focusContact for other components
+    this.props.updateUser(user._id);
+    // console.log("Called focus contact:");
+    this.showSaveNotification();
+    this.setState({ pack_date: null, pack_time: null });
   };
   // TODO Break out forms into seperate components
   render() {
-    console.log("PROPS", this.props);
+    // console.log("PROPS", this.props);
+    // console.log("USER", this.props.user);
+    // console.log("inventory:", this.state.inventory);
     // console.log("PROPS INVENTORY", this.props.inventory);
     return (
       <>
+        <Snackbars
+          place="tr"
+          color="info"
+          icon={AddAlert}
+          message="Save Successful"
+          open={this.state.saveAlert}
+          closeNotification={() => this.setState({ saveAlert: false })}
+          close
+        />
         <div
           style={{
             display: "flex",
@@ -662,27 +826,34 @@ class Supplies extends Component {
             paddingRight: "9.5rem"
           }}
         >
-          <Chip
-            size="large"
-            avatar={<Avatar>LBS</Avatar>}
-            label={`Total Weight: ${this.state.totalWeight}`}
-            clickable
-            color="primary"
-          />
-          <Chip
-            size="large"
-            avatar={<Avatar>CFT</Avatar>}
-            label={`Total Volume: ${this.state.totalVolume}`}
-            clickable
-            color="primary"
-          />
-          <Chip
-            size="large"
-            avatar={<Avatar>TIC</Avatar>}
-            label={`Total Item Count: ${this.state.totalItems}`}
-            clickable
-            color="primary"
-          />
+          <div style={{ marginRight: ".5rem" }}>
+            <Chip
+              size="large"
+              avatar={<Avatar>LBS</Avatar>}
+              label={`Total Weight: ${this.state.totalWeight}`}
+              clickable
+              color="primary"
+            />
+          </div>
+          <div style={{ marginRight: ".5rem" }}>
+            <Chip
+              size="large"
+              avatar={<Avatar>CFT</Avatar>}
+              label={`Total Volume: ${this.state.totalVolume}`}
+              clickable
+              color="primary"
+            />
+          </div>
+          <div style={{ marginRight: ".5rem" }}>
+            <Chip
+              size="large"
+              avatar={<Avatar>TIC</Avatar>}
+              label={`Total Item Count: ${this.state.totalItems}`}
+              clickable
+              color="primary"
+            />
+          </div>
+
           <Chip
             size="large"
             avatar={<Avatar>TMC</Avatar>}
@@ -880,6 +1051,38 @@ class Supplies extends Component {
               in={this.state.packingFormOpen}
               style={{ marginBottom: "1.5rem" }}
             >
+              <GridContainer>
+                <GridItem xs={12} sm={3}>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                      margin="normal"
+                      clearable
+                      label="Pack Date"
+                      value={this.state.pack_date}
+                      onChange={date =>
+                        this.handleDateChange(moment(date).format("MM/DD/YYYY"))
+                      }
+                      minDate={new Date()}
+                      format="MM/dd/yyyy"
+                    />
+                  </MuiPickersUtilsProvider>
+                </GridItem>
+                <GridItem xs={12} sm={3}>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardTimePicker
+                      autoOk={true}
+                      margin="normal"
+                      label="Pack Time"
+                      mask="__:__ _M"
+                      inputValue={this.state.pack_time}
+                      value={this.state.pack_time}
+                      onChange={time =>
+                        this.handleTimeChange(moment(time).format("hh:mm A"))
+                      }
+                    />
+                  </MuiPickersUtilsProvider>
+                </GridItem>
+              </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={2}>
                   <CustomSelect

@@ -13,7 +13,8 @@ import {
   CONTACT_ERROR,
   GET_CONTACTS,
   GET_CONTACT,
-  CLEAR_CONTACTS
+  CLEAR_CONTACTS,
+  CLEAR_FOCUS
 } from "../types";
 
 const ContactState = props => {
@@ -81,7 +82,7 @@ const ContactState = props => {
 
   // Update contact
   const updateContact = async contact => {
-    console.log("contact:", contact);
+    // console.log("contact:", contact);
     const config = {
       headers: {
         "Content-Type": "application/json"
@@ -93,7 +94,7 @@ const ContactState = props => {
         contact,
         config
       );
-      console.log("res:", res);
+      // console.log("res:", res);
       dispatch({
         type: UPDATE_CONTACT,
         payload: res.data
@@ -144,6 +145,13 @@ const ContactState = props => {
     });
   };
 
+  // Clear focus contact
+  const clearFocus = () => {
+    dispatch({
+      type: CLEAR_FOCUS
+    });
+  };
+
   // filter contacts
   const filterContacts = text => {
     dispatch({
@@ -174,6 +182,7 @@ const ContactState = props => {
         clearContacts,
         setCurrent,
         clearCurrent,
+        clearFocus,
         updateContact,
         filterContacts,
         clearFilter

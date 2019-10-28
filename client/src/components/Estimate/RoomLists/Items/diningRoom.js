@@ -25,11 +25,6 @@ export const diningRoom = [
     itemVolume: "35"
   },
   {
-    itemName: "Buffet (base)",
-    itemWeight: "245",
-    itemVolume: "35"
-  },
-  {
     itemName: "Carton 1.5 Cu Ft (CP)",
     itemWeight: "14",
     itemVolume: "2"

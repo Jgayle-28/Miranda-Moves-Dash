@@ -2,7 +2,7 @@ import React from "react";
 import Delete from "@material-ui/icons/Delete";
 
 const AdditionalServiceTable = ({ serviceList, deleteItem }) => {
-  console.log("serviceList:", serviceList);
+  // console.log("serviceList:", serviceList);
   return (
     <>
       {/* Header */}

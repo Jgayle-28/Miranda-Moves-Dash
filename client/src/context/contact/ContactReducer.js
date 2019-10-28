@@ -9,7 +9,8 @@ import {
   CONTACT_ERROR,
   GET_CONTACTS,
   GET_CONTACT,
-  CLEAR_CONTACTS
+  CLEAR_CONTACTS,
+  CLEAR_FOCUS
 } from "../types";
 
 export default (state, action) => {
@@ -90,6 +91,11 @@ export default (state, action) => {
       return {
         ...state,
         current: null
+      };
+    case CLEAR_FOCUS:
+      return {
+        ...state,
+        focusContact: null
       };
 
     case CONTACT_ERROR:
