@@ -43,7 +43,7 @@ class Estimate extends React.Component {
   }
   componentDidUpdate() {
     const contacts = this.context;
-    console.log("contacts:", contacts);
+    // console.log("contacts:", contacts);
     // Sets focus contact to load in other components
     if (contacts.focusContact !== null) {
       if (contacts.focusContact !== this.state.user) {

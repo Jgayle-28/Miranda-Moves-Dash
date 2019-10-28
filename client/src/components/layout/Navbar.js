@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 // import { Link } from 'react-router-dom';
-import AuthContext from '../../context/auth/AuthContext';
-import ContactContext from '../../context/contact/ContactContext';
-import logo_white from '../../assets/img/logos/logo_white.png';
+import AuthContext from "../../context/auth/AuthContext";
+import ContactContext from "../../context/contact/ContactContext";
+import logo_white from "../../assets/img/logos/logo_white.png";
 
 const Navbar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
@@ -22,13 +23,13 @@ const Navbar = ({ title, icon }) => {
       {/* <li style={{ marginRight: '.5rem' }}>
         <Link to="/altlayout">Alternate Layout</Link>
       </li> */}
-      {/*
-      <li>
+
+      {/* <li>
         <Link to="/">
           <i className="fas fa-home" /> Home
         </Link>
-      </li>
-*/}
+      </li> */}
+
       <li>
         <a onClick={onLogout} href="#!">
           <i className="fas fa-sign-out-alt" />
@@ -59,7 +60,7 @@ const Navbar = ({ title, icon }) => {
           <img
             src={logo_white}
             alt="Miranda Delivery Service"
-            style={{ height: '50px', width: '185px' }}
+            style={{ height: "50px", width: "185px" }}
           />
           {/* <i className={icon} /> 
           {title} */}
@@ -74,8 +75,8 @@ Navbar.propTypes = {
   icon: PropTypes.string
 };
 Navbar.defaultProps = {
-  title: 'Opportunity keeper',
-  icon: 'fas fa-address-card'
+  title: "Opportunity keeper",
+  icon: "fas fa-address-card"
 };
 
 export default Navbar;

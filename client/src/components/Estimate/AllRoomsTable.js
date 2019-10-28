@@ -80,7 +80,7 @@ class AllRoomsTable extends React.Component {
   }
   componentDidUpdate(prevProps) {
     // Generates dynamic state
-    console.log("inventory changed");
+    // console.log("inventory changed");
     getInitialState(this.props.inventory);
   }
   // getInitialState = () => {
@@ -107,7 +107,7 @@ class AllRoomsTable extends React.Component {
   };
   render() {
     const { inventory, deleteItem, updateItem, classes } = this.props;
-    console.log("STATE", this.state);
+    // console.log("STATE", this.state);
     return (
       <>
         {/* Total Chips */}

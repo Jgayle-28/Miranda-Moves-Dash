@@ -264,7 +264,7 @@ const Contacts = props => {
 
   // console.log("contacts: ", contacts);
   // console.log('props.history', props.history);
-  console.log("contactConext:", contactConext);
+  // console.log("contactConext:", contactConext);
   return (
     <>
       {contacts !== null && !loading ? (
