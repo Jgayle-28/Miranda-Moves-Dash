@@ -1,12 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
-import AuthContext from '../../context/auth/AuthContext';
-import AlertContext from '../../context/alert/AlertContext';
-import CustomInput from '../../components/components/CustomInput/CustomInput.jsx';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Email from '@material-ui/icons/Email';
-import Lock from '@material-ui/icons/Lock';
-import loginPageStyle from '../../assets/jss/material-dashboard-pro-react/views/loginPageStyle.jsx';
+import React, { useState, useContext, useEffect } from "react";
+import AuthContext from "../../context/auth/AuthContext";
+import AlertContext from "../../context/alert/AlertContext";
+import CustomInput from "../../components/components/CustomInput/CustomInput.jsx";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import withStyles from "@material-ui/core/styles/withStyles";
+import Email from "@material-ui/icons/Email";
+import Lock from "@material-ui/icons/Lock";
+import loginPageStyle from "../../assets/jss/material-dashboard-pro-react/views/loginPageStyle.jsx";
 
 const Login = props => {
   // bring in the context
@@ -20,11 +20,11 @@ const Login = props => {
   // Use for updates in state/context
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push('/');
+      props.history.push("/");
     }
 
-    if (error === 'Invalid credentials') {
-      setAlert(error, 'danger');
+    if (error === "Invalid credentials") {
+      setAlert(error, "danger");
       clearErrors();
     }
     // eslint-disable-next-line
@@ -32,8 +32,8 @@ const Login = props => {
 
   // set the component state
   const [user, setUser] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: ""
   });
 
   const { email, password } = user;
@@ -44,8 +44,8 @@ const Login = props => {
 
   const onSubmit = e => {
     e.preventDefault();
-    if (email === '' || password === '') {
-      setAlert('Please fill in all fields', 'danger');
+    if (email === "" || password === "") {
+      setAlert("Please fill in all fields", "danger");
     } else {
       loginUser({ email, password });
     }
@@ -55,7 +55,7 @@ const Login = props => {
     <>
       <div className="form-container">
         <h1>
-          Account <span style={{ color: '#3F729B' }}>Login</span>
+          Account <span style={{ color: "#3F729B" }}>Login</span>
         </h1>
         <form onSubmit={onSubmit}>
           <div className="form-group">
@@ -63,7 +63,7 @@ const Login = props => {
               navy
               // error={this.state.emailBool}
               // helpText={errors.email}
-              labelText="First Name"
+              labelText="Email"
               id="firstname"
               onChange={onChange}
               formControlProps={{
@@ -75,9 +75,9 @@ const Login = props => {
                     <Email className={props.classes.inputAdornmentIcon} />
                   </InputAdornment>
                 ),
-                type: 'email',
+                type: "email",
                 // placeholder: 'First Name',
-                name: 'email',
+                name: "email",
                 value: email,
                 onChange: onChange
               }}
@@ -100,16 +100,16 @@ const Login = props => {
                     <Lock className={props.classes.inputAdornmentIcon} />
                   </InputAdornment>
                 ),
-                type: 'password',
-                placeholder: 'Password...',
-                name: 'password',
+                type: "password",
+                placeholder: "Password...",
+                name: "password",
                 value: password,
                 onChange: onChange
               }}
             />
           </div>
           <input
-            style={{ backgroundColor: '#78909c' }}
+            style={{ backgroundColor: "#78909c" }}
             type="submit"
             value="Login"
             className="btn  btn-block"

@@ -79,11 +79,6 @@ export const conferenceRoom = [
     itemWeight: "98",
     itemVolume: "14"
   },
-  //  {
-  //    itemName: "Tv Flat Screen",
-  //    itemWeight: "105",
-  //    itemVolume: "15"
-  //  },
   {
     itemName: 'Television (60" +)',
     itemWeight: "140",

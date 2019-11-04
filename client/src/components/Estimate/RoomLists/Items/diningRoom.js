@@ -180,22 +180,32 @@ export const diningRoom = [
     itemVolume: "20"
   },
   {
-    itemName: "Console Table (large)",
+    itemName: "Table - Coffee",
+    itemWeight: "105",
+    itemVolume: "15"
+  },
+  {
+    itemName: "Table - Console (large)",
     itemWeight: "175",
     itemVolume: "25"
   },
   {
-    itemName: "Console Table (medium/small)",
+    itemName: "Table - Console (medium/small)",
     itemWeight: "70",
     itemVolume: "10"
   },
   {
-    itemName: "Dining Table",
+    itemName: "Table - Dining",
     itemWeight: "210",
     itemVolume: "30"
   },
   {
-    itemName: "Night/Side Table (small)",
+    itemName: "Table - Side (small)",
+    itemWeight: "35",
+    itemVolume: "5"
+  },
+  {
+    itemName: "Table - Folding ",
     itemWeight: "35",
     itemVolume: "5"
   },

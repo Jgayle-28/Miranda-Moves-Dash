@@ -120,6 +120,7 @@ td {
   /* border: 1px solid black; */
 }
 
+#move-comments-table,
 #move-understand-table {
   font-size: 12px;
   border-spacing: 0;

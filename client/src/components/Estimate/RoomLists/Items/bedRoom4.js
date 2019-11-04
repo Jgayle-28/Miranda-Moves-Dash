@@ -285,6 +285,11 @@ export const bedRoom4 = [
     itemVolume: "3"
   },
   {
+    itemName: "Picture Frame (medium)",
+    itemWeight: "14",
+    itemVolume: "2"
+  },
+  {
     itemName: "Picture Frame (small)",
     itemWeight: "7",
     itemVolume: "1"
@@ -325,54 +330,39 @@ export const bedRoom4 = [
     itemVolume: "4"
   },
   {
-    itemName: "Coffee Table",
+    itemName: "Table - Coffee",
     itemWeight: "105",
     itemVolume: "15"
   },
   {
-    itemName: "Console Table (large)",
+    itemName: "Table - Console (large)",
     itemWeight: "175",
     itemVolume: "25"
   },
   {
-    itemName: "Console Table (medium/small)",
+    itemName: "Table - Console (medium/small)",
     itemWeight: "70",
     itemVolume: "10"
   },
   {
-    itemName: "Massage Table",
+    itemName: "Table - Massage",
     itemWeight: "70",
     itemVolume: "10"
   },
   {
-    itemName: "Night/Side Table (large)",
+    itemName: "Table - Side (large)",
     itemWeight: "70",
     itemVolume: "10"
   },
   {
-    itemName: "Night/Side Table (small)",
+    itemName: "Table - Side (small)",
     itemWeight: "35",
     itemVolume: "5"
   },
   {
-    itemName: "Picture Frame (large)",
-    itemWeight: "21",
-    itemVolume: "3"
-  },
-  {
-    itemName: "Picture Frame (medium)",
-    itemWeight: "14",
-    itemVolume: "2"
-  },
-  {
-    itemName: "Picture Frame (small)",
-    itemWeight: "7",
-    itemVolume: "1"
-  },
-  {
-    itemName: "Folding Table",
-    itemWeight: "21",
-    itemVolume: "3"
+    itemName: "Table - Folding ",
+    itemWeight: "35",
+    itemVolume: "5"
   },
   {
     itemName: "Table Lamp",

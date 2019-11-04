@@ -5,6 +5,7 @@ import LocalShipping from "@material-ui/icons/LocalShipping";
 import Assignment from "@material-ui/icons/Assignment";
 import AssignmentInd from "@material-ui/icons/AssignmentInd";
 import AssignmentTurnedIn from "@material-ui/icons/AssignmentTurnedIn";
+import AssignmentReturned from "@material-ui/icons/AssignmentReturned";
 import GridContainer from "../components/Grid/GridContainer.jsx";
 import GridItem from "../components/Grid/GridItem.jsx";
 import EstimateHeader from "./EstimateHeader";
@@ -139,7 +140,7 @@ class Estimate extends React.Component {
                 // {/***** Actions COMPONENT ******/}
                 {
                   tabButton: "Actions",
-                  tabIcon: LocalShipping,
+                  tabIcon: AssignmentReturned,
                   tabContent: (
                     <h1 style={{ textAlign: "center" }}>
                       Dispatch Track and other actions will go here

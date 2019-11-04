@@ -265,17 +265,22 @@ export const yardPatio = [
     itemVolume: "40"
   },
   {
-    itemName: "Console Table (large)",
+    itemName: "Table - Console (large)",
     itemWeight: "175",
     itemVolume: "25"
   },
   {
-    itemName: "Console Table (medium/small)",
+    itemName: "Table Console - (medium/small)",
     itemWeight: "70",
     itemVolume: "10"
   },
   {
-    itemName: "Folding Table",
+    itemName: "Table - Patio",
+    itemWeight: "70",
+    itemVolume: "10"
+  },
+  {
+    itemName: "Table - Folding",
     itemWeight: "28",
     itemVolume: "4"
   },

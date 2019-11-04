@@ -135,14 +135,34 @@ export const laundryRoom = [
     itemVolume: "25"
   },
   {
-    itemName: "Console Table (large)",
+    itemName: "Table - Coffee",
+    itemWeight: "105",
+    itemVolume: "15"
+  },
+  {
+    itemName: "Table - Console (large)",
     itemWeight: "175",
     itemVolume: "25"
   },
   {
-    itemName: "Console Table (medium/small)",
+    itemName: "Table - Console (medium/small)",
     itemWeight: "70",
     itemVolume: "10"
+  },
+  {
+    itemName: "Table - Side (large)",
+    itemWeight: "70",
+    itemVolume: "10"
+  },
+  {
+    itemName: "Table - Side (small)",
+    itemWeight: "35",
+    itemVolume: "5"
+  },
+  {
+    itemName: "Table - Folding ",
+    itemWeight: "35",
+    itemVolume: "5"
   },
   {
     itemName: "Utility Cabinet",

@@ -495,28 +495,38 @@ export const basement = [
            itemVolume: "5"
          },
          {
-           itemName: "Coffee Table",
+           itemName: "Table - Coffee",
            itemWeight: "105",
            itemVolume: "15"
          },
          {
-           itemName: "Console Table (large)",
+           itemName: "Table - Console (large)",
            itemWeight: "175",
            itemVolume: "25"
          },
          {
-           itemName: "Console Table (medium/small)",
+           itemName: "Table - Console (medium/small)",
            itemWeight: "70",
            itemVolume: "10"
          },
          {
-           itemName: "Side Table (small)",
+           itemName: "Table - Massage",
+           itemWeight: "70",
+           itemVolume: "10"
+         },
+         {
+           itemName: "Table - Side (large)",
+           itemWeight: "70",
+           itemVolume: "10"
+         },
+         {
+           itemName: "Table - Side (small)",
            itemWeight: "35",
            itemVolume: "5"
          },
          {
-           itemName: "Folding Table (small)",
-           itemWeight: "0",
+           itemName: "Table - Folding ",
+           itemWeight: "35",
            itemVolume: "5"
          },
          {
@@ -593,5 +603,5 @@ export const basement = [
            itemName: "Work Bench",
            itemWeight: "175",
            itemVolume: "25"
-         },
+         }
        ];

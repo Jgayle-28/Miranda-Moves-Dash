@@ -59,7 +59,7 @@ const Contacts = props => {
       const logo = MirandaLogo;
       doc.addImage(logo, "JPEG", 15, 6, 38, 12);
       doc.setFontSize(8);
-      doc.text("Phone: (899) 480-4117", 137, 8);
+      doc.text("Phone: (480) 899-4117", 137, 8);
       doc.text("Email: customerservice@mirandadelivery.com", 137, 13);
 
       doc.autoTable({
