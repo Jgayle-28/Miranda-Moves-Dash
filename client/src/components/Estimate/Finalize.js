@@ -111,20 +111,20 @@ class Finalize extends Component {
       html: "#move-understand-table",
       useCss: true
     });
-    finalY = doc.previousAutoTable.finalY;
-
-    // Signature line
-    doc.addImage(Signature, "JPEG", 15, finalY + 7);
 
     finalY = doc.previousAutoTable.finalY;
     if (user.inventory.length !== 0) {
       doc.autoTable({
-        startY: finalY + 20,
+        startY: finalY + 3,
         // pageBreak: "avoid",
         html: "#move-items-table",
         useCss: true
       });
     }
+    finalY = doc.previousAutoTable.finalY;
+
+    // Signature line
+    doc.addImage(Signature, "JPEG", 15, finalY + 10);
 
     doc.save(`${user.first_name} ${user.last_name}-move-estimate.pdf`);
   };
