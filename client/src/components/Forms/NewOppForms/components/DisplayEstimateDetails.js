@@ -1,34 +1,38 @@
-import React from 'react';
+import React from "react";
 
 const DisplayEstimateDetail = ({ type, estimate_details }) => {
-  if (type === 'Residential Move') {
+  if (type === "Residential Move") {
     return (
       <>
         <h3
           style={{
-            margin: '1rem 0',
-            color: '#37474F',
-            borderBottom: '1px solid #37474F'
+            margin: "1rem 0",
+            color: "#37474F",
+            borderBottom: "1px solid #37474F"
           }}
         >
           Estimate Details
         </h3>
 
         {estimate_details.estimate_date && (
-          <p>
-            <b>Estimate Date: </b>{' '}
-            <small> {estimate_details.estimate_date}</small>
-          </p>
+          <>
+            <p>
+              <b>Estimate Date: </b>{" "}
+              <small> {estimate_details.estimate_date}</small>
+            </p>
+            <br />
+          </>
         )}
-        <br />
 
         {estimate_details.estimate_time && (
-          <p>
-            <b>Estimate Time: </b>{' '}
-            <small> {estimate_details.estimate_time}</small>
-          </p>
+          <>
+            <p>
+              <b>Estimate Time: </b>{" "}
+              <small> {estimate_details.estimate_time}</small>
+            </p>
+            <br />
+          </>
         )}
-        <br />
       </>
     );
   } else {
@@ -36,9 +40,9 @@ const DisplayEstimateDetail = ({ type, estimate_details }) => {
       <>
         <h3
           style={{
-            margin: '1rem 0',
-            color: '#37474F',
-            borderBottom: '1px solid #37474F'
+            margin: "1rem 0",
+            color: "#37474F",
+            borderBottom: "1px solid #37474F"
           }}
         >
           Item(s) Detail

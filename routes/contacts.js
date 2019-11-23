@@ -80,6 +80,7 @@ router.post(
       estimate_date,
       target_movedate,
       pu_address,
+      address2,
       do_address,
       items,
       alt_phone,
@@ -109,6 +110,7 @@ router.post(
         estimate_date,
         target_movedate,
         pu_address,
+        address2,
         do_address,
         items,
         alt_phone,
@@ -154,6 +156,7 @@ router.put("/:id", auth, async (req, res) => {
     estimate_date,
     target_movedate,
     pu_address,
+    address2,
     do_address,
     items,
     alt_phone,
@@ -182,6 +185,7 @@ router.put("/:id", auth, async (req, res) => {
   if (estimate_date) contactFields.estimate_date = estimate_date;
   if (target_movedate) contactFields.target_movedate = target_movedate;
   if (pu_address) contactFields.pu_address = pu_address;
+  if (address2) contactFields.address2 = address2;
   if (do_address) contactFields.do_address = do_address;
   if (items) contactFields.items = items;
   if (alt_phone) contactFields.alt_phone = alt_phone;

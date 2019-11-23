@@ -53,6 +53,9 @@ const ContactSchema = mongoose.Schema(
     pu_address: {
       type: String
     },
+    address2: {
+      type: String
+    },
     do_address: {
       type: String
     },

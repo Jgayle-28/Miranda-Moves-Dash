@@ -240,6 +240,7 @@ class Finalize extends Component {
                     <tr className="padding-0">
                       <td className="td-half">
                         {user.pu_address && user.pu_address}
+                        {user.address2 && <>, {user.address2}</>}
                       </td>
                       <td className="td-half">
                         {user.do_address && user.do_address}
@@ -683,7 +684,7 @@ class Finalize extends Component {
                         <tbody className="padding-0">
                           <tr className="padding-0">
                             <td className="td-20">
-                              - Please be advised this is just an estiamate. The
+                              - Please be advised this is just an estimate. The
                               total charges for your move are based on actual
                               moving time plus <br /> the travel. Packing
                               materials are billed for an additional cost. All

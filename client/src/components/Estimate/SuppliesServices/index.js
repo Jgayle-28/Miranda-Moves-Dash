@@ -52,6 +52,7 @@ class Supplies extends Component {
       driveTime: "",
       stairHrs: "",
       longCarryHrs: "",
+      adjustmentTime: "",
       moveHrs: 0,
       totalHrs: 0,
       // Packing
@@ -254,7 +255,8 @@ class Supplies extends Component {
       this.state.moveHrs !== prevState.moveHrs ||
       this.state.driveTime !== prevState.driveTime ||
       this.state.stairHrs !== prevState.stairHrs ||
-      this.state.longCarryHrs !== prevState.longCarryHrs
+      this.state.longCarryHrs !== prevState.longCarryHrs ||
+      this.state.adjustmentTime !== prevState.adjustmentTime
     ) {
       this.calculateTotalhrs();
     }
@@ -342,7 +344,13 @@ class Supplies extends Component {
   };
 
   calculateTotalhrs = () => {
-    const { moveHrs, driveTime, stairHrs, longCarryHrs } = this.state;
+    const {
+      moveHrs,
+      driveTime,
+      stairHrs,
+      longCarryHrs,
+      adjustmentTime
+    } = this.state;
     let totalHrs = 0;
     // move
     if (moveHrs.length !== 0) {
@@ -351,6 +359,18 @@ class Supplies extends Component {
     // move , drive time
     if (moveHrs.length !== 0 && driveTime.length !== 0) {
       totalHrs = parseFloat(moveHrs) + parseFloat(driveTime);
+    }
+    // move , stair hours
+    if (moveHrs.length !== 0 && stairHrs.length !== 0) {
+      totalHrs = parseFloat(moveHrs) + parseFloat(stairHrs);
+    }
+    // move , long carry hours
+    if (moveHrs.length !== 0 && longCarryHrs.length !== 0) {
+      totalHrs = parseFloat(moveHrs) + parseFloat(longCarryHrs);
+    }
+    // move , adjustment time
+    if (moveHrs.length !== 0 && adjustmentTime.length !== 0) {
+      totalHrs = parseFloat(moveHrs) + parseFloat(adjustmentTime);
     }
     // move , drive time, stairs
     if (
@@ -368,23 +388,75 @@ class Supplies extends Component {
       longCarryHrs.length !== 0
     ) {
       totalHrs =
+        parseFloat(moveHrs) + parseFloat(driveTime) + parseFloat(longCarryHrs);
+    }
+    // move , drive time, adjustment time
+    if (
+      moveHrs.length !== 0 &&
+      driveTime.length !== 0 &&
+      adjustmentTime.length !== 0
+    ) {
+      totalHrs =
         parseFloat(moveHrs) +
         parseFloat(driveTime) +
+        parseFloat(adjustmentTime);
+    }
+    // move, stairs, longcarry hours
+    if (
+      moveHrs.length !== 0 &&
+      stairHrs.length !== 0 &&
+      longCarryHrs.length !== 0
+    ) {
+      totalHrs =
+        parseFloat(moveHrs) + parseFloat(stairHrs) + parseFloat(longCarryHrs);
+    }
+    // move, stairs, adjustment time
+    if (
+      moveHrs.length !== 0 &&
+      stairHrs.length !== 0 &&
+      adjustmentTime.length !== 0
+    ) {
+      totalHrs =
+        parseFloat(moveHrs) + parseFloat(stairHrs) + parseFloat(adjustmentTime);
+    }
+    // move, stairs, longcarry, adjustment time
+    if (
+      moveHrs.length !== 0 &&
+      stairHrs.length !== 0 &&
+      longCarryHrs.length !== 0 &&
+      adjustmentTime.length !== 0
+    ) {
+      totalHrs =
+        parseFloat(moveHrs) +
         parseFloat(stairHrs) +
-        parseFloat(longCarryHrs);
+        parseFloat(longCarryHrs) +
+        parseFloat(adjustmentTime);
+    }
+    // move, longcarry, adjustment time
+    if (
+      moveHrs.length !== 0 &&
+      longCarryHrs.length !== 0 &&
+      adjustmentTime.length !== 0
+    ) {
+      totalHrs =
+        parseFloat(moveHrs) +
+        parseFloat(longCarryHrs) +
+        parseFloat(adjustmentTime);
     }
     // all hours
     if (
       moveHrs.length !== 0 &&
       driveTime.length !== 0 &&
       stairHrs.length !== 0 &&
-      longCarryHrs.length !== 0
+      longCarryHrs.length !== 0 &&
+      adjustmentTime.length !== 0
     ) {
       totalHrs =
         parseFloat(moveHrs) +
         parseFloat(driveTime) +
         parseFloat(stairHrs) +
-        parseFloat(longCarryHrs);
+        parseFloat(longCarryHrs) +
+        parseFloat(adjustmentTime);
     }
     // reset total hours to 0
     if (
@@ -607,7 +679,7 @@ class Supplies extends Component {
     );
     this.setState({ totalItems: totalItems });
   };
-  // Create Functions
+  // **** Create Functions ****
   createAddService = () => {
     let newArr = [...this.state.additionalServices];
     // console.log("newArr:", newArr);
@@ -681,7 +753,7 @@ class Supplies extends Component {
       }
     );
   };
-  // Delete Functions
+  // **** Delete Functions ****
   deletePackingItem = itemName => {
     let itemArr = [...this.state.packingItems];
     // get the index of item in the array
@@ -725,7 +797,7 @@ class Supplies extends Component {
     }
   };
 
-  // Universal form toggle function
+  // **** Universal form toggle function ****
   handleFormToggle = name => {
     if (name === "moveFormOpen") {
       this.setState({ moveFormOpen: !this.state.moveFormOpen });
@@ -740,7 +812,7 @@ class Supplies extends Component {
       this.setState({ storageFormOpen: !this.state.storageFormOpen });
     }
   };
-  // Submit Services
+  // **** Submit Services ****
   submitServices = () => {
     const { user } = this.props;
     const contacts = this.context;
@@ -892,15 +964,15 @@ class Supplies extends Component {
               in={this.state.moveFormOpen}
               style={{ marginBottom: "1.5rem" }}
             >
-              <GridContainer justify="center">
-                <GridItem xs={12} sm={12} md={2}>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={3}>
                   {/* ROW 1 */}
                   <CustomInput
                     navy
                     labelText={<span>Number Of Men</span>}
                     id="item"
                     formControlProps={{
-                      fullWidth: false
+                      fullWidth: true
                     }}
                     inputProps={{
                       onChange: this.onChange,
@@ -911,13 +983,13 @@ class Supplies extends Component {
                   />
                 </GridItem>
                 {/* ROW 2 */}
-                <GridItem xs={12} sm={12} md={2}>
+                <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     navy
                     labelText={<span>Number Of Trucks</span>}
                     id="item"
                     formControlProps={{
-                      fullWidth: false
+                      fullWidth: true
                     }}
                     inputProps={{
                       onChange: this.onChange,
@@ -928,13 +1000,13 @@ class Supplies extends Component {
                   />
                 </GridItem>
                 {/* ROW 3 */}
-                <GridItem xs={12} sm={12} md={2}>
+                <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     navy
                     labelText={<span>Rate Per Hour</span>}
                     id="item"
                     formControlProps={{
-                      fullWidth: false
+                      fullWidth: true
                     }}
                     inputProps={{
                       onChange: this.onChange,
@@ -945,13 +1017,13 @@ class Supplies extends Component {
                   />
                 </GridItem>
                 {/* ROW 4 */}
-                <GridItem xs={12} sm={12} md={2}>
+                <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     navy
                     labelText={<span>Drive Time</span>}
                     id="item"
                     formControlProps={{
-                      fullWidth: false
+                      fullWidth: true
                     }}
                     inputProps={{
                       onChange: this.onChange,
@@ -962,13 +1034,13 @@ class Supplies extends Component {
                   />
                 </GridItem>
                 {/* ROW 5 */}
-                <GridItem xs={12} sm={12} md={2}>
+                <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     navy
                     labelText={<span>Stair Hours</span>}
                     id="item"
                     formControlProps={{
-                      fullWidth: false
+                      fullWidth: true
                     }}
                     inputProps={{
                       onChange: this.onChange,
@@ -979,19 +1051,35 @@ class Supplies extends Component {
                   />
                 </GridItem>
                 {/* ROW 6 */}
-                <GridItem xs={12} sm={12} md={2}>
+                <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     navy
                     labelText={<span>Long Carry Hours</span>}
                     id="item"
                     formControlProps={{
-                      fullWidth: false
+                      fullWidth: true
                     }}
                     inputProps={{
                       onChange: this.onChange,
                       type: "text",
                       name: "longCarryHrs",
                       value: this.state.longCarryHrs
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    navy
+                    labelText={<span>Adjustment Time</span>}
+                    id="item"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: this.onChange,
+                      type: "text",
+                      name: "adjustmentTime",
+                      value: this.state.adjustmentTime
                     }}
                   />
                 </GridItem>

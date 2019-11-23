@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import ContactContext from "../../context/contact/ContactContext";
 import { makeStyles } from "@material-ui/core/styles";
-import LocalShipping from "@material-ui/icons/LocalShipping";
 import Assignment from "@material-ui/icons/Assignment";
 import AssignmentInd from "@material-ui/icons/AssignmentInd";
 import AssignmentTurnedIn from "@material-ui/icons/AssignmentTurnedIn";
@@ -14,6 +13,7 @@ import EstimateNavPills from "../components/NavPills/EstimateNavPills";
 import Inventory from "./Inventory";
 import Supplies from "./SuppliesServices/index.js";
 import Finalize from "./Finalize";
+import Actions from "./UserActions/Actions";
 
 class Estimate extends React.Component {
   constructor(props) {
@@ -141,11 +141,7 @@ class Estimate extends React.Component {
                 {
                   tabButton: "Actions",
                   tabIcon: AssignmentReturned,
-                  tabContent: (
-                    <h1 style={{ textAlign: "center" }}>
-                      Dispatch Track and other actions will go here
-                    </h1>
-                  )
+                  tabContent: <Actions user={this.state.user} />
                 }
               ]}
             />

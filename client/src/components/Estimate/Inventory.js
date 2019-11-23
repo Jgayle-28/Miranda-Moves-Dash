@@ -15,12 +15,6 @@ import Button from "../components/CustomButtons/Button.jsx";
 import CloudUpload from "@material-ui/icons/CloudUpload";
 import LibraryAdd from "@material-ui/icons/LibraryAdd";
 import Card from "../components/Card/Card.jsx";
-import CardHeader from "../components/Card/CardHeader.jsx";
-import CardBody from "../components/Card/CardBody.jsx";
-import KeyboardBackspace from "@material-ui/icons/KeyboardBackspace";
-import Fab from "@material-ui/core/Fab";
-// Created Components
-import EstimateHeader from "./EstimateHeader";
 import InventoryNavPills from "../components/NavPills/InventoryNavPills.jsx";
 import DisplayEstimateTotals from "./DisplayEstimateTotals.js";
 import ContactContext from "../../context/contact/ContactContext";
@@ -52,6 +46,7 @@ import { waitingRoom } from "./RoomLists/Items/waitingRoom.js";
 import { breakRoom } from "./RoomLists/Items/breakRoom.js";
 import { bathRooms } from "./RoomLists/Items/bathRooms.js";
 import { entryWay } from "./RoomLists/Items/entryWay.js";
+import { isFuture } from "date-fns/esm";
 
 const packingItemList = [
   { label: "Entryway", value: "Entryway" },
@@ -126,32 +121,23 @@ class Estimate extends Component {
     //   }
     // }
   }
-  componentDidUpdate(prevState) {
-    // Calculates volume based on weight
-    // if (
-    //   this.state.addItemWeight.length !== 0 &&
-    //   this.state.addItemWeight !== prevState.addItemWeight
-    // ) {
-    //   this.calculateAddItemVolume();
-    //   // this.setState({ addItemVolume: this.state.addItemWeight / 7 });
-    // }
-    // if (this.state.addItemWeight !== prevState.addItemWeight) {
-    //   this.setState({ addItemVolume: this.state.addItemWeight / 7 });
-    // }
-    // TODO if addItemVolume not empty but weight is volume*7
-    // if (
-    //   this.state.addItemVolume.length !== 0 &&
-    //   this.state.addItemWeight.length === 0
-    // ) {
-    //   this.setState({ addItemWeight: this.state.addItemVolume * 7 });
-    // }
-    // TODO add conditional rendering here
-    // this.props.updateInventory(this.state.inventory);
-    // Called to get the ivnentory for other components - necessary here to update other components on render
-  }
+
   calculateAddItemVolume = () => {
     let newWeight = this.state.addItemWeight / 7;
-    this.setState({ addItemVolume: newWeight });
+    this.setState({ addItemVolume: parseInt(newWeight) });
+  };
+
+  calculateAddItemWeight = () => {
+    let newWeight = this.state.addItemVolume * 7;
+    this.setState({ addItemWeight: parseInt(newWeight) }, () => {
+      console.log(this.state.addItemWeight);
+    });
+  };
+  setItemWeight = e => {
+    this.setState(
+      { addItemWeight: e.target.value },
+      this.calculateAddItemVolume
+    );
   };
 
   onChange = e => {
@@ -837,13 +823,14 @@ class Estimate extends Component {
                                 fullWidth: false
                               }}
                               inputProps={{
-                                onChange: this.onChange,
+                                onChange: this.setItemWeight,
+                                // onChange: this.onChange,
                                 type: "text",
                                 name: "addItemWeight",
-                                value:
-                                  this.state.addItemVolume.length === 0
-                                    ? this.state.addItemWeight
-                                    : (this.state.addItemVolume * 7).toFixed(2)
+                                value: this.state.addItemWeight
+                                // this.state.addItemVolume.length === 0
+                                //   ? this.state.addItemWeight
+                                //   : (this.state.addItemVolume * 7).toFixed(2)
                               }}
                             />
                           </div>
@@ -860,9 +847,10 @@ class Estimate extends Component {
                                 type: "text",
                                 name: "addItemVolume",
                                 value:
+                                  // this.state.addItemVolume
                                   this.state.addItemWeight.length === 0
-                                    ? this.state.addItemVolume
-                                    : (this.state.addItemWeight / 7).toFixed(2)
+                                    ? ""
+                                    : parseInt(this.state.addItemWeight / 7)
                               }}
                             />
                           </div>
