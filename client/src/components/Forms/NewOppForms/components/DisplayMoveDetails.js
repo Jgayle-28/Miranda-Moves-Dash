@@ -17,29 +17,53 @@ const DisplayMoveDetail = ({ type, move_details }) => {
         {move_details.pu_address && (
           <>
             <p>
-              <b>Pickup Address: </b> <small> {move_details.pu_address}</small>
+              <b>Pickup Address: </b>
+              <small>
+                {" "}
+                {move_details.pu_address}
+                <> {move_details.address2 && <>, {move_details.address2}</>}</>
+              </small>
             </p>
             <br />
           </>
         )}
 
-        {move_details.address2 && (
+        {/* {move_details.address2 && (
           <>
             <p>
               <b>Address Line 2: </b> <small> {move_details.address2}</small>
             </p>
             <br />
           </>
-        )}
+        )} */}
 
         {move_details.do_address && (
           <>
             <p>
-              <b>Dropoff Address: </b> <small> {move_details.pu_address}</small>
+              <b>Dropoff Address: </b>{" "}
+              <small>
+                {" "}
+                {move_details.do_address}
+                <>
+                  {move_details.do_address2 && (
+                    <>, {move_details.do_address2}</>
+                  )}
+                </>
+              </small>
             </p>
             <br />
           </>
         )}
+
+        {/* {move_details.do_address2 && (
+          <>
+            <p>
+              <b>Dropoff Address Line 2: </b>{" "}
+              <small> {move_details.do_address2}</small>
+            </p>
+            <br />
+          </>
+        )} */}
 
         {move_details.move_date && (
           <>

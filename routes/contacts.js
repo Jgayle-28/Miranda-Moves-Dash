@@ -82,6 +82,7 @@ router.post(
       pu_address,
       address2,
       do_address,
+      do_address2,
       items,
       alt_phone,
       payment_type,
@@ -112,6 +113,7 @@ router.post(
         pu_address,
         address2,
         do_address,
+        do_address2,
         items,
         alt_phone,
         payment_type,
@@ -158,6 +160,7 @@ router.put("/:id", auth, async (req, res) => {
     pu_address,
     address2,
     do_address,
+    do_address2,
     items,
     alt_phone,
     payment_type,
@@ -187,6 +190,7 @@ router.put("/:id", auth, async (req, res) => {
   if (pu_address) contactFields.pu_address = pu_address;
   if (address2) contactFields.address2 = address2;
   if (do_address) contactFields.do_address = do_address;
+  if (do_address2) contactFields.do_address = do_address2;
   if (items) contactFields.items = items;
   if (alt_phone) contactFields.alt_phone = alt_phone;
   if (payment_type) contactFields.payment_type = payment_type;

@@ -825,6 +825,7 @@ class Supplies extends Component {
         stairHours: this.state.stairHrs,
         longCarryHours: this.state.longCarryHrs,
         driveTime: this.state.driveTime,
+        adjustmentTime: this.state.adjustmentTime,
         ratePerHour: this.state.ratePerHour,
         tripFee: this.state.tripFee,
         totalMoveCost: this.state.totalMoveCost
@@ -869,7 +870,6 @@ class Supplies extends Component {
     contacts.updateContact(contact);
     // Called to update the focusContact for other components
     this.props.updateUser(user._id);
-    // console.log("Called focus contact:");
     this.showSaveNotification();
     this.setState({ pack_date: null, pack_time: null });
   };

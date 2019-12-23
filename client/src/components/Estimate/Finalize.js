@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import GridContainer from "../components/Grid/GridContainer.jsx";
 import GridItem from "../components/Grid/GridItem.jsx";
 import Button from "../components/CustomButtons/Button.jsx";
+import Send from "@material-ui/icons/Send";
 import CloudDownload from "@material-ui/icons/CloudDownload";
+import Print from "@material-ui/icons/Print";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import MirandaLogo from "../../assets/img/logos/newPdf_log.jpg";
@@ -128,6 +130,246 @@ class Finalize extends Component {
 
     doc.save(`${user.first_name} ${user.last_name}-move-estimate.pdf`);
   };
+  printPdf = () => {
+    const { user } = this.props;
+
+    const Signature = signature;
+    var doc = new jsPDF();
+    // LOGO & INFO
+    const logo = MirandaLogo;
+    doc.addImage(logo, "JPEG", 15, 6, 38, 12);
+    doc.setFontSize(8);
+    doc.text("Phone: (480) 899-4117", 137, 8);
+    doc.text("Email: customerservice@mirandadelivery.com", 137, 13);
+
+    // doc.fromHTML(document.getElementById("info-table"), 5, 90);
+
+    doc.autoTable({
+      startY: 23,
+      html: "#info-table",
+      useCss: true
+    });
+    let finalY = doc.previousAutoTable.finalY;
+    doc.autoTable({
+      // startY: 63,
+      startY: finalY + 3,
+      html: "#move-detail-table",
+      useCss: true
+    });
+    finalY = doc.previousAutoTable.finalY;
+    doc.autoTable({
+      startY: finalY + 3,
+      html: "#move-total-table",
+      useCss: true
+    });
+    finalY = doc.previousAutoTable.finalY;
+    if (user.moveServices.packing.packingItems.length !== 0) {
+      doc.autoTable({
+        startY: finalY + 3,
+        html: "#move-packing-table",
+        useCss: true
+      });
+    }
+    finalY = doc.previousAutoTable.finalY;
+    if (user.moveServices.fees.length !== 0) {
+      doc.autoTable({
+        startY: finalY + 3,
+        html: "#move-fees-table",
+        useCss: true
+      });
+    }
+    finalY = doc.previousAutoTable.finalY;
+    if (user.moveServices.storage.storageItems.length !== 0) {
+      doc.autoTable({
+        startY: finalY + 3,
+        html: "#move-storage-table",
+        useCss: true
+      });
+    }
+    finalY = doc.previousAutoTable.finalY;
+    if (user.moveServices.additionalServices.addservices.length !== 0) {
+      doc.autoTable({
+        startY: finalY + 3,
+        html: "#move-addService-table",
+        useCss: true
+      });
+    }
+    finalY = doc.previousAutoTable.finalY;
+    doc.autoTable({
+      startY: finalY + 3,
+      pageBreak: "avoid",
+      tableWidth: 100,
+      html: "#move-finalTotals-table",
+      useCss: true
+    });
+    finalY = doc.previousAutoTable.finalY;
+    if (user.contact_comments.length !== 0) {
+      doc.autoTable({
+        startY: finalY + 3,
+        pageBreak: "avoid",
+        html: "#move-comments-table",
+        useCss: true
+      });
+    }
+    finalY = doc.previousAutoTable.finalY;
+    doc.autoTable({
+      startY: finalY + 3,
+      pageBreak: "avoid",
+      html: "#move-understand-table",
+      useCss: true
+    });
+
+    finalY = doc.previousAutoTable.finalY;
+    if (user.inventory.length !== 0) {
+      doc.autoTable({
+        startY: finalY + 3,
+        // pageBreak: "avoid",
+        html: "#move-items-table",
+        useCss: true
+      });
+    }
+    finalY = doc.previousAutoTable.finalY;
+
+    // Signature line
+    doc.addImage(Signature, "JPEG", 15, finalY + 10);
+
+    doc.autoPrint();
+    //This is a key for printing
+    doc.output("dataurlnewwindow");
+
+    // doc.save(`${user.first_name} ${user.last_name}-move-estimate.pdf`);
+  };
+  emailPdf = () => {
+    const { user } = this.props;
+
+    const Signature = signature;
+    var doc = new jsPDF();
+    // LOGO & INFO
+    const logo = MirandaLogo;
+    doc.addImage(logo, "JPEG", 15, 6, 38, 12);
+    doc.setFontSize(8);
+    doc.text("Phone: (480) 899-4117", 137, 8);
+    doc.text("Email: customerservice@mirandadelivery.com", 137, 13);
+
+    // doc.fromHTML(document.getElementById("info-table"), 5, 90);
+
+    doc.autoTable({
+      startY: 23,
+      html: "#info-table",
+      useCss: true
+    });
+    let finalY = doc.previousAutoTable.finalY;
+    doc.autoTable({
+      // startY: 63,
+      startY: finalY + 3,
+      html: "#move-detail-table",
+      useCss: true
+    });
+    finalY = doc.previousAutoTable.finalY;
+    doc.autoTable({
+      startY: finalY + 3,
+      html: "#move-total-table",
+      useCss: true
+    });
+    finalY = doc.previousAutoTable.finalY;
+    if (user.moveServices.packing.packingItems.length !== 0) {
+      doc.autoTable({
+        startY: finalY + 3,
+        html: "#move-packing-table",
+        useCss: true
+      });
+    }
+    finalY = doc.previousAutoTable.finalY;
+    if (user.moveServices.fees.length !== 0) {
+      doc.autoTable({
+        startY: finalY + 3,
+        html: "#move-fees-table",
+        useCss: true
+      });
+    }
+    finalY = doc.previousAutoTable.finalY;
+    if (user.moveServices.storage.storageItems.length !== 0) {
+      doc.autoTable({
+        startY: finalY + 3,
+        html: "#move-storage-table",
+        useCss: true
+      });
+    }
+    finalY = doc.previousAutoTable.finalY;
+    if (user.moveServices.additionalServices.addservices.length !== 0) {
+      doc.autoTable({
+        startY: finalY + 3,
+        html: "#move-addService-table",
+        useCss: true
+      });
+    }
+    finalY = doc.previousAutoTable.finalY;
+    doc.autoTable({
+      startY: finalY + 3,
+      pageBreak: "avoid",
+      tableWidth: 100,
+      html: "#move-finalTotals-table",
+      useCss: true
+    });
+    finalY = doc.previousAutoTable.finalY;
+    if (user.contact_comments.length !== 0) {
+      doc.autoTable({
+        startY: finalY + 3,
+        pageBreak: "avoid",
+        html: "#move-comments-table",
+        useCss: true
+      });
+    }
+    finalY = doc.previousAutoTable.finalY;
+    doc.autoTable({
+      startY: finalY + 3,
+      pageBreak: "avoid",
+      html: "#move-understand-table",
+      useCss: true
+    });
+
+    finalY = doc.previousAutoTable.finalY;
+    if (user.inventory.length !== 0) {
+      doc.autoTable({
+        startY: finalY + 3,
+        // pageBreak: "avoid",
+        html: "#move-items-table",
+        useCss: true
+      });
+    }
+    finalY = doc.previousAutoTable.finalY;
+
+    // Signature line
+    doc.addImage(Signature, "JPEG", 15, finalY + 10);
+
+    // var theApp = new ActiveXObject("Outlook.Application");
+    // var objNS = theApp.GetNameSpace("MAPI");
+    // var theMailItem = theApp.CreateItem(0); // value 0 = MailItem
+    // theMailItem.to = `${user.email}`;
+    // theMailItem.Subject = "test";
+    // theMailItem.Body = "test";
+    // theMailItem.Attachments.Add("C\\file.txt");
+    // theMailItem.display();
+
+    // TODO create hyper link with the the pdf as the href
+
+    // window.open(
+    //   `mailto:test@example.com?subject=Move estimate from Miranda Delivery&body=Here we can create a prescripted email template that can be customized! For example this email is being sent to ${user.first_name} ${user.last_name} <a>${doc}</a>&attachments=${doc}`
+    // );
+
+    window.open(
+      `mailto:test@example.com?subject=Move estimate from Miranda Delivery&body=Here we can create a prescripted email template that can be customized! For example this email is being sent to ${user.first_name} ${user.last_name} ${doc}&attachments=${doc}`
+    );
+
+    // var pdfBase64 = doc.output("datauristring");
+    // window.email({
+    //   to: ["to@email.com"],
+    //   subject: "New PDF!",
+    //   body: "Hi there, here is that new PDF you wanted!",
+    //   isHTML: false,
+    //   attachments: [pdfBase64]
+    // });
+  };
   render() {
     // console.log("USER", this.props.user);
     const { user } = this.state;
@@ -142,9 +384,30 @@ class Finalize extends Component {
             marginBottom: "1rem"
           }}
         >
-          <Button color="navy" size="sm" onClick={this.generatePdf}>
+          <Button
+            size="sm"
+            onClick={this.emailPdf}
+            style={{ marginRight: "1rem", background: "#455A64" }}
+          >
+            <Send />
+            Email PDF
+          </Button>
+          <Button
+            color="navy"
+            size="sm"
+            onClick={this.generatePdf}
+            style={{ marginRight: "1rem", marginLeft: "1rem" }}
+          >
             <CloudDownload />
             Download PDF
+          </Button>
+          <Button
+            size="sm"
+            onClick={this.printPdf}
+            style={{ marginLeft: "1rem", background: "#455A64" }}
+          >
+            <Print />
+            Print PDF
           </Button>
         </div>
         {/*** Checks for user and only display once user loads ***/}
@@ -244,6 +507,7 @@ class Finalize extends Component {
                       </td>
                       <td className="td-half">
                         {user.do_address && user.do_address}
+                        {user.do_address2 && <>, {user.do_address2}</>}
                       </td>
                     </tr>
                   </tbody>
@@ -269,7 +533,16 @@ class Finalize extends Component {
                               <tr className="padding-0">
                                 <td className="td-half">Move hours</td>
                                 <td className="td-half">
-                                  {user.moveServices.moveCost.moveHours} hr(s)
+                                  <>
+                                    {user.moveServices.moveCost
+                                      .adjustmentTime !== null
+                                      ? user.moveServices.moveCost.moveHours +
+                                        user.moveServices.moveCost
+                                          .adjustmentTime
+                                      : user.moveServices.moveCost.moveHours}
+                                  </>
+                                  {/* {user.moveServices.moveCost.moveHours} */}
+                                  hr(s)
                                 </td>
                               </tr>
                               {user.moveServices.moveCost.driveTime && (
@@ -317,6 +590,7 @@ class Finalize extends Component {
                                     truck(s) for{" "}
                                     {(
                                       user.moveServices.moveCost.moveHours +
+                                      user.moveServices.moveCost.adjustmentTime +
                                       user.moveServices.moveCost.driveTime +
                                       user.moveServices.moveCost.stairHours +
                                       user.moveServices.moveCost.longCarryHours

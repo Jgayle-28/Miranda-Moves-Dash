@@ -25,7 +25,6 @@ class Estimate extends React.Component {
   }
   static contextType = ContactContext;
 
-  // TODO convert to rcc, call getContact on mount, set user to state, on update of child compoents call getContact through passed in prop and update contact thus updating user in all children components
   componentDidMount() {
     const contacts = this.context;
     // console.log("contacts:", contacts);
@@ -50,6 +49,13 @@ class Estimate extends React.Component {
       if (contacts.focusContact !== this.state.user) {
         this.setState({ user: contacts.focusContact });
       }
+      // Left off here
+      // if (contacts.focusContact.inventory !== this.state.inventory) {
+      //   this.setState({ user: contacts.focusContact });
+      // }
+      // if (contacts.focusContact.inventory !== this.state.inventory) {
+      //   this.setState({ inventory: contacts.focusContact.inventory });
+      // }
     }
   }
   componentWillUnmount() {
@@ -69,6 +75,8 @@ class Estimate extends React.Component {
   };
 
   render() {
+    // const contacts = this.context;
+    // console.log("focus contact:", contacts.focusContact);
     const { user } = this.props.location.state;
     // console.log("USER", this.state.user);
     // console.log("INVENTORY FROM ESTIMATE CONTAINER", inventory);
@@ -141,7 +149,12 @@ class Estimate extends React.Component {
                 {
                   tabButton: "Actions",
                   tabIcon: AssignmentReturned,
-                  tabContent: <Actions user={this.state.user} />
+                  tabContent: (
+                    <Actions
+                      user={this.state.user}
+                      updateUser={this.updateUser}
+                    />
+                  )
                 }
               ]}
             />
@@ -152,113 +165,3 @@ class Estimate extends React.Component {
   }
 }
 export default Estimate;
-
-// OLD LAYOUT
-// import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-// import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-// import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-// import Typography from "@material-ui/core/Typography";
-// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-// import KeyboardBackspace from "@material-ui/icons/KeyboardBackspace";
-// import Fab from "@material-ui/core/Fab";
-
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     width: "100%",
-//     marginTop: "1rem"
-//   },
-//   heading: {
-//     fontSize: theme.typography.pxToRem(15),
-//     flexBasis: "33.33%",
-//     flexShrink: 0
-//   },
-//   secondaryHeading: {
-//     fontSize: theme.typography.pxToRem(15),
-//     color: theme.palette.text.secondary
-//   }
-// }));
-
-// const classes = useStyles();
-// const [expanded, setExpanded] = React.useState(false);
-
-// const handleChange = panel => (event, isExpanded) => {
-//   setExpanded(isExpanded ? panel : false);
-// };
-
-//  <div className={classes.root}>
-//    <ExpansionPanel
-//      expanded={expanded === "panel1"}
-//      onChange={handleChange("panel1")}
-//    >
-//      <ExpansionPanelSummary
-//        expandIcon={<ExpandMoreIcon />}
-//        aria-controls="panel1bh-content"
-//        id="panel1bh-header"
-//      >
-//        <Typography className={classes.heading}>Inventory</Typography>
-//        <Typography className={classes.secondaryHeading}>
-//          Create {user.first_name} {user.last_name}'s Inventory
-//        </Typography>
-//      </ExpansionPanelSummary>
-//      <ExpansionPanelDetails>
-//        {/***** INVENTORY COMPONENT ******/}
-//        <Inventory user={user} />
-//      </ExpansionPanelDetails>
-//    </ExpansionPanel>
-//    <ExpansionPanel
-//      expanded={expanded === "panel2"}
-//      onChange={handleChange("panel2")}
-//    >
-//      <ExpansionPanelSummary
-//        expandIcon={<ExpandMoreIcon />}
-//        aria-controls="panel2bh-content"
-//        id="panel2bh-header"
-//      >
-//        <Typography className={classes.heading}>Supplies / Services</Typography>
-//        <Typography className={classes.secondaryHeading}>
-//          Add {user.first_name} {user.last_name}'s Supplies & services rendered
-//        </Typography>
-//      </ExpansionPanelSummary>
-//      <ExpansionPanelDetails>
-//        {/***** SUPPLIES & SERVICES COMPONENT ******/}
-//        <Supplies user={user} />
-//      </ExpansionPanelDetails>
-//    </ExpansionPanel>
-//    <ExpansionPanel
-//      expanded={expanded === "panel3"}
-//      onChange={handleChange("panel3")}
-//    >
-//      <ExpansionPanelSummary
-//        expandIcon={<ExpandMoreIcon />}
-//        aria-controls="panel3bh-content"
-//        id="panel3bh-header"
-//      >
-//        <Typography className={classes.heading}>Finalize</Typography>
-//        <Typography className={classes.secondaryHeading}>
-//          Please Confirms {user.first_name} {user.last_name}'s estimate
-//        </Typography>
-//      </ExpansionPanelSummary>
-//      <ExpansionPanelDetails>
-//        <Typography>
-//          <h1>Display pdf and confirmation details here</h1>
-//        </Typography>
-//      </ExpansionPanelDetails>
-//    </ExpansionPanel>
-//    <ExpansionPanel
-//      expanded={expanded === "panel4"}
-//      onChange={handleChange("panel4")}
-//    >
-//      <ExpansionPanelSummary
-//        expandIcon={<ExpandMoreIcon />}
-//        aria-controls="panel4bh-content"
-//        id="panel4bh-header"
-//      >
-//        <Typography className={classes.heading}>Actions</Typography>
-//      </ExpansionPanelSummary>
-//      <ExpansionPanelDetails>
-//        <Typography>
-//          <h1>Add actions here?</h1>
-//        </Typography>
-//      </ExpansionPanelDetails>
-//    </ExpansionPanel>
-//  </div>;

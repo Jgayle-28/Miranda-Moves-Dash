@@ -59,6 +59,9 @@ const ContactSchema = mongoose.Schema(
     do_address: {
       type: String
     },
+    do_address2: {
+      type: String
+    },
     items: [
       {
         item_id: {
@@ -118,7 +121,6 @@ const ContactSchema = mongoose.Schema(
       }
     ],
     moveServices: {
-      // type: Object,
       moveCost: {
         totalMen: { type: Number },
         totalTrucks: { type: Number },
@@ -127,6 +129,7 @@ const ContactSchema = mongoose.Schema(
         stairHours: { type: Number },
         longCarryHours: { type: Number },
         driveTime: { type: Number },
+        adjustmentTime: { type: Number },
         ratePerHour: { type: Number },
         tripFee: { type: Number },
         totalMoveCost: { type: Number }

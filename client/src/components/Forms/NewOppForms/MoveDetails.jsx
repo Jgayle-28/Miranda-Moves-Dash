@@ -55,6 +55,7 @@ class MoveDetailForm extends React.Component {
       pu_address: "",
       address2: "",
       do_address: "",
+      do_address2: "",
       contact_comments: "",
       payment_type: "",
       bill_to: ""
@@ -72,6 +73,7 @@ class MoveDetailForm extends React.Component {
         pu_address: contacts.current.pu_address,
         address2: contacts.current.address2,
         do_address: contacts.current.do_address,
+        do_address2: contacts.current.do_address2,
         contact_comments: contacts.current.contact_comments,
         payment_type: contacts.current.payment_type,
         bill_to: contacts.current.bill_to
@@ -112,6 +114,7 @@ class MoveDetailForm extends React.Component {
       pu_address,
       address2,
       do_address,
+      do_address2,
       contact_comments,
       payment_type,
       bill_to
@@ -154,6 +157,25 @@ class MoveDetailForm extends React.Component {
                     type: "text",
                     name: "address2",
                     value: address2,
+                    onChange: this.onChange
+                  }}
+                />
+              </div>
+            </GridItem>
+            <GridItem xs={12} sm={6}>
+              <div style={{ marginTop: "-.7rem" }}>
+                <CustomInput
+                  navy
+                  id="address2"
+                  labelText={<span>Dropoff Address Line 2</span>}
+                  onChange={this.onChange}
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                  inputProps={{
+                    type: "text",
+                    name: "do_address2",
+                    value: do_address2,
                     onChange: this.onChange
                   }}
                 />

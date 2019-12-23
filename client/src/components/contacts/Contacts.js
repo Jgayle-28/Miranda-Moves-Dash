@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import GridContainer from "../../components/components/Grid/GridContainer.jsx";
 import GridItem from "../../components/components/Grid/GridItem.jsx";
@@ -9,12 +8,10 @@ import ContactContext from "../../context/contact/ContactContext";
 import AuthContext from "../../context/auth/AuthContext";
 import MaterialTable from "material-table";
 import Spinner from "../utils/Spinner";
-import ListAlt from "@material-ui/icons/ListAlt";
 import { cardTitle } from "../../assets/jss/material-dashboard-pro-react.jsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import MirandaLogo from "../../assets/img/logos/newPdf_log.jpg";
-import moment from "moment";
 
 const styles = {
   cardIconTitle: {
@@ -24,7 +21,6 @@ const styles = {
   }
 };
 
-// const Contacts = ({ props }) => {
 const Contacts = props => {
   const contactConext = useContext(ContactContext);
   const authContext = useContext(AuthContext);
@@ -43,7 +39,7 @@ const Contacts = props => {
 
   const onEditClick = rowData => {
     setCurrent(rowData);
-    console.log("setCurrent from Table", rowData);
+    // console.log("setCurrent from Table", rowData);
     toggleModal(true);
   };
   const onDelete = rowData => {
@@ -103,8 +99,8 @@ const Contacts = props => {
           ["Email:", `${rowData.email}`],
           ["Payment Type:", `${rowData.payment_type}`],
           ["Bill To:", `${rowData.bill_to}`],
-          ["Pickup Address:", `${rowData.pu_address}`],
-          ["Dropoff Address:", `${rowData.do_address}`],
+          ["Pickup Address:", `${rowData.pu_address} ${rowData.address2}`],
+          ["Dropoff Address:", `${rowData.do_address} ${rowData.do_address2}`],
           [
             "Target Move Date:",
             `${rowData.move_date !== null ? rowData.move_date : ""}`
