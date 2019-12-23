@@ -151,6 +151,14 @@ class Supplies extends Component {
             longCarryHrs: user.moveServices.moveCost.longCarryHours
           });
         }
+        if (
+          user.moveServices.moveCost.adjustmentTime &&
+          user.moveServices.moveCost.adjustmentTime.length !== 0
+        ) {
+          this.setState({
+            adjustmentTime: user.moveServices.moveCost.adjustmentTime
+          });
+        }
         // Packing services
         if (user.moveServices.packing.packingItems.length !== 0) {
           this.setState(
