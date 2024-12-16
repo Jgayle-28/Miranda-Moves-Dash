@@ -21,10 +21,15 @@
     "express-validator": "^6.1.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.6",
-    "react-awesome-modal": "^2.0.5"
+    "react-awesome-modal": "^2.0.5",
+    "sass": "^1.83.0"
   },
   "devDependencies": {
     "concurrently": "^4.1.1",
     "nodemon": "^1.19.1"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "11.x"
   }
 }
