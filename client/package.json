@@ -46,12 +46,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "compile-sass": "node-sass src/assets/scss/material-dashboard-pro-react.scss src/assets/css/material-dashboard-pro-react.css",
-    "minify-sass": "node-sass src/assets/scss/material-dashboard-pro-react.scss src/assets/css/material-dashboard-pro-react.min.css --output-style compressed",
-    "map-sass": "node-sass src/assets/scss/material-dashboard-pro-react.scss src/assets/css/material-dashboard-pro-react.css --source-map true"
+    "compile-sass": "sass src/assets/scss/material-dashboard-pro-react.scss src/assets/css/material-dashboard-pro-react.css",
+    "minify-sass": "sass src/assets/scss/material-dashboard-pro-react.scss src/assets/css/material-dashboard-pro-react.min.css --style=compressed",
+    "map-sass": "sass src/assets/scss/material-dashboard-pro-react.scss src/assets/css/material-dashboard-pro-react.css --embed-source-map"
   },
   "eslintConfig": {
     "extends": "react-app"
